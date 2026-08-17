@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sprite de iconos TalentHub
+  Todos los iconos son trazos originales en formato SVG (sin emojis).
+  Se usan mediante <use href="assets/icons/sprite.svg#nombre-icono">
+  Estilo: lineal, grosor de trazo 1.75, esquinas redondeadas, 24x24.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+
+  <!-- Icono: menú hamburguesa (navbar móvil) -->
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="21" y2="12"/>
+    <line x1="3" y1="18" x2="21" y2="18"/>
+  </symbol>
+
+  <!-- Icono: cerrar (X) -->
+  <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+    <line x1="5" y1="5" x2="19" y2="19"/>
+    <line x1="19" y1="5" x2="5" y2="19"/>
+  </symbol>
+
+  <!-- Icono: flecha derecha (botones de acción) -->
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="4" y1="12" x2="19" y2="12"/>
+    <polyline points="13 6 19 12 13 18"/>
+  </symbol>
+
+  <!-- Icono: chispa / innovación -->
+  <symbol id="icon-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3 L13.6 9.2 20 12 13.6 14.8 12 21 10.4 14.8 4 12 10.4 9.2 Z"/>
+  </symbol>
+
+  <!-- Icono: comunidad / usuarios -->
+  <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="9" cy="8" r="3"/>
+    <path d="M3.5 20c0-3.3 2.7-5.5 5.5-5.5s5.5 2.2 5.5 5.5"/>
+    <circle cx="17" cy="8.5" r="2.3"/>
+    <path d="M15.3 14.7c2.2.2 4.2 2.1 4.2 5.3"/>
+  </symbol>
+
+  <!-- Icono: escudo con check / seguridad y verificación -->
+  <symbol id="icon-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.5 19 6.2v5.6c0 4.6-3 7.9-7 9.2-4-1.3-7-4.6-7-9.2V6.2Z"/>
+    <path d="M9 12.2 11.2 14.4 15.4 9.8"/>
+  </symbol>
+
+  <!-- Icono: círculo con X / problema -->
+  <symbol id="icon-x-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+    <circle cx="12" cy="12" r="9"/>
+    <line x1="9.3" y1="9.3" x2="14.7" y2="14.7"/>
+    <line x1="14.7" y1="9.3" x2="9.3" y2="14.7"/>
+  </symbol>
+
+  <!-- Icono: círculo con check / solución -->
+  <symbol id="icon-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M8.3 12.3 10.8 14.8 15.7 9.5"/>
+  </symbol>
+
+  <!-- Icono: check simple (listas de precios) -->
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12.5 9.5 17 19 6.5"/>
+  </symbol>
+
+  <!-- Icono: persona con signo + / crear cuenta -->
+  <symbol id="icon-user-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="10" cy="8" r="3.3"/>
+    <path d="M4 20c0-3.6 2.9-6 6-6s6 2.4 6 6"/>
+    <line x1="18.5" y1="6" x2="18.5" y2="11.5"/>
+    <line x1="15.75" y1="8.75" x2="21.25" y2="8.75"/>
+  </symbol>
+
+  <!-- Icono: maletín / portafolio -->
+  <symbol id="icon-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="7.5" width="17" height="11.5" rx="1.8"/>
+    <path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5"/>
+    <line x1="3.5" y1="12.5" x2="20.5" y2="12.5"/>
+  </symbol>
+
+  <!-- Icono: cuadrícula / muro de encargos -->
+  <symbol id="icon-layout-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="3.5" width="7.2" height="7.2" rx="1.3"/>
+    <rect x="13.3" y="3.5" width="7.2" height="7.2" rx="1.3"/>
+    <rect x="3.5" y="13.3" width="7.2" height="7.2" rx="1.3"/>
+    <rect x="13.3" y="13.3" width="7.2" height="7.2" rx="1.3"/>
+  </symbol>
+
+  <!-- Icono: enviar / postular -->
+  <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 3 3 10.5l7 2.7L21 3Z"/>
+    <path d="M10 13.2 10 20 12.6 16.6 21 3"/>
+  </symbol>
+
+  <!-- Icono: tarjeta / pagos -->
+  <symbol id="icon-credit-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2.75" y="5.5" width="18.5" height="13" rx="2"/>
+    <line x1="2.75" y1="9.7" x2="21.25" y2="9.7"/>
+    <line x1="6" y1="15" x2="10" y2="15"/>
+  </symbol>
+
+  <!-- Icono: tendencia ascendente / subir de nivel -->
+  <symbol id="icon-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="3.5 17 10 10.3 14 14.3 20.5 6.5"/>
+    <polyline points="14.5 6.5 20.5 6.5 20.5 12.5"/>
+  </symbol>
+
+  <!-- Icono: paleta / portafolio profesional -->
+  <symbol id="icon-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.5c-4.7 0-8.5 3.6-8.5 8 0 3.4 2.8 4.3 4.3 3.6.9-.4 1.9.1 1.9 1.1 0 .8-.6 1.3-.6 2.1 0 1 1.1 1.7 2.9 1.7 4.7 0 8.5-3.9 8.5-8.7 0-4.3-3.9-7.8-8.5-7.8Z"/>
+    <circle cx="8.3" cy="10.2" r="1.1"/>
+    <circle cx="12" cy="7.7" r="1.1"/>
+    <circle cx="15.8" cy="10.2" r="1.1"/>
+  </symbol>
+
+  <!-- Icono: portapapeles con check / postulaciones -->
+  <symbol id="icon-clipboard-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="5.5" y="4.5" width="13" height="16" rx="1.8"/>
+    <path d="M9 4.5V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v.5"/>
+    <path d="M9 13 11 15 15.5 10"/>
+  </symbol>
+
+  <!-- Icono: insignia / niveles y experiencia -->
+  <symbol id="icon-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="9.5" r="6"/>
+    <path d="M12 6.7 13 9.1 15.6 9.4 13.7 11.1 14.2 13.6 12 12.3 9.8 13.6 10.3 11.1 8.4 9.4 11 9.1 Z"/>
+    <path d="M8.7 14.8 7.3 21.5 12 19.3 16.7 21.5 15.3 14.8"/>
+  </symbol>
+
+  <!-- Icono: candado / pagos seguros -->
+  <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4.5" y="10.5" width="15" height="10" rx="2"/>
+    <path d="M7.5 10.5V7.8a4.5 4.5 0 0 1 9 0v2.7"/>
+    <line x1="12" y1="14.3" x2="12" y2="17"/>
+  </symbol>
+
+  <!-- Icono: estrella / reputación -->
+  <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.7 14.5 9.3 20.5 9.9 16 13.9 17.3 20 12 16.8 6.7 20 8 13.9 3.5 9.9 9.5 9.3Z"/>
+  </symbol>
+
+  <!-- Icono: controles / personalización -->
+  <symbol id="icon-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="5" y1="4.5" x2="5" y2="19.5"/>
+    <line x1="12" y1="4.5" x2="12" y2="19.5"/>
+    <line x1="19" y1="4.5" x2="19" y2="19.5"/>
+    <circle cx="5" cy="9" r="2"/>
+    <circle cx="12" cy="15" r="2"/>
+    <circle cx="19" cy="7" r="2"/>
+  </symbol>
+
+  <!-- Icono: mensaje / chat -->
+  <symbol id="icon-message-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 12.3C4 7.7 7.8 4 12.4 4s8.4 3.7 8.4 8.3-3.8 8.3-8.4 8.3c-1.2 0-2.4-.3-3.4-.7L4 21l1.2-4.2A8.1 8.1 0 0 1 4 12.3Z"/>
+  </symbol>
+
+  <!-- Icono: bandera / reportes y moderación -->
+  <symbol id="icon-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="5.5" y1="3.5" x2="5.5" y2="21"/>
+    <path d="M5.5 4.5c2.3-1.4 4.6-1.4 6.9 0s4.6 1.4 6.9 0v9c-2.3 1.4-4.6 1.4-6.9 0s-4.6-1.4-6.9 0Z"/>
+  </symbol>
+
+  <!-- Icono: accesibilidad -->
+  <symbol id="icon-accessibility" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="5" r="1.8"/>
+    <path d="M4.5 9.2c4.9 1.5 10.1 1.5 15 0"/>
+    <path d="M12 9.5v4.2L9 20.5M12 13.7l3 6.8"/>
+    <path d="M12 9.5 9.6 15"/>
+  </symbol>
+
+  <!-- Icono: reproducir / tutorial interactivo -->
+  <symbol id="icon-play-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M10 8.5 15.5 12 10 15.5Z"/>
+  </symbol>
+
+  <!-- Icono: edificio / panel empresas -->
+  <symbol id="icon-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="5" y="3.5" width="10" height="17" rx="1"/>
+    <line x1="8" y1="7" x2="8" y2="7"/>
+    <line x1="12" y1="7" x2="12" y2="7"/>
+    <line x1="8" y1="10.5" x2="8" y2="10.5"/>
+    <line x1="12" y1="10.5" x2="12" y2="10.5"/>
+    <line x1="8" y1="14" x2="8" y2="14"/>
+    <line x1="12" y1="14" x2="12" y2="14"/>
+    <path d="M15 10.5h4v10h-4"/>
+    <line x1="9" y1="20.5" x2="11" y2="20.5"/>
+  </symbol>
+
+  <!-- Icono: lupa / explorador de talentos -->
+  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="10.8" cy="10.8" r="6.3"/>
+    <line x1="15.5" y1="15.5" x2="20.5" y2="20.5"/>
+  </symbol>
+
+  <!-- Icono: reloj / historial -->
+  <symbol id="icon-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12.5" r="8"/>
+    <polyline points="12 8 12 12.5 15.2 14.8"/>
+    <path d="M4.5 5.5 3.8 9 7.2 8.6"/>
+  </symbol>
+
+  <!-- Icono: chevron abajo / acordeón FAQ -->
+  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="5.5 9 12 15.5 18.5 9"/>
+  </symbol>
+
+  <!-- Icono: sobre / correo -->
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="5.5" width="18" height="13" rx="2"/>
+    <path d="M3.5 6.5 12 13 20.5 6.5"/>
+  </symbol>
+
+  <!-- Icono: pin de mapa -->
+  <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 21S4.5 14.4 4.5 9.5a7.5 7.5 0 0 1 15 0C19.5 14.4 12 21 12 21Z"/>
+    <circle cx="12" cy="9.4" r="2.4"/>
+  </symbol>
+
+  <!-- Icono: cohete (logo y elemento de scroll) -->
+  <symbol id="icon-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2.5c2.7 1.4 4.3 4.3 4.3 8.2 0 2.3-.6 4.3-1.5 6l-2.8 2.3-2.8-2.3c-.9-1.7-1.5-3.7-1.5-6 0-3.9 1.6-6.8 4.3-8.2Z"/>
+    <circle cx="12" cy="9.8" r="1.6"/>
+    <path d="M9.2 14.5 6 15.7l.6-3.5"/>
+    <path d="M14.8 14.5 18 15.7l-.6-3.5"/>
+    <path d="M10.3 19 12 21.5 13.7 19"/>
+  </symbol>
+
+  <!-- Iconos de redes sociales -->
+  <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5"/>
+    <circle cx="12" cy="12" r="4.2"/>
+    <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/>
+  </symbol>
+
+  <symbol id="icon-tiktok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 3v10.8a3.4 3.4 0 1 1-2.6-3.3"/>
+    <path d="M14 3c.4 2.3 2 4 4.5 4.3"/>
+  </symbol>
+
+  <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14.5 21v-7.5H17l.5-3.3h-3V8.1c0-1 .3-1.7 1.7-1.7H17.6V3.3C17.3 3.3 16.3 3.2 15.1 3.2c-2.5 0-4.1 1.5-4.1 4.2v2.8H8.5v3.3H11V21"/>
+  </symbol>
+
+  <!-- Icono: casa / inicio -->
+  <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11.5 12 4.5 20 11.5"/>
+    <path d="M6 10v9.5h12V10"/>
+    <path d="M10 19.5v-6h4v6"/>
+  </symbol>
+
+  <!-- Icono: engranaje / configuracion -->
+  <symbol id="icon-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3.2"/>
+    <path d="M19.4 13.8a1.7 1.7 0 0 0 .34 1.88l.06.06a2.1 2.1 0 1 1-2.96 2.96l-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1 1.55V20a2.1 2.1 0 0 1-4.2 0v-.1a1.7 1.7 0 0 0-1.1-1.55 1.7 1.7 0 0 0-1.88.34l-.06.06a2.1 2.1 0 1 1-2.96-2.96l.06-.06a1.7 1.7 0 0 0 .34-1.88 1.7 1.7 0 0 0-1.55-1H4a2.1 2.1 0 0 1 0-4.2h.1a1.7 1.7 0 0 0 1.55-1.1 1.7 1.7 0 0 0-.34-1.88l-.06-.06a2.1 2.1 0 1 1 2.96-2.96l.06.06a1.7 1.7 0 0 0 1.88.34H10a1.7 1.7 0 0 0 1-1.55V4a2.1 2.1 0 0 1 4.2 0v.1a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.88-.34l.06-.06a2.1 2.1 0 1 1 2.96 2.96l-.06.06a1.7 1.7 0 0 0-.34 1.88V10a1.7 1.7 0 0 0 1.55 1H20a2.1 2.1 0 0 1 0 4.2h-.1a1.7 1.7 0 0 0-1.5 1Z"/>
+  </symbol>
+
+  <!-- Icono: cerrar sesion -->
+  <symbol id="icon-log-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 20.5H5.5A1.5 1.5 0 0 1 4 19V5a1.5 1.5 0 0 1 1.5-1.5H9"/>
+    <path d="M16 16.5 21 12l-5-4.5"/>
+    <line x1="21" y1="12" x2="9.5" y2="12"/>
+  </symbol>
+
+  <!-- Icono: campana / notificaciones -->
+  <symbol id="icon-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 10.2c0-4 2.5-6.4 6-6.4s6 2.4 6 6.4c0 4.6 1.4 6 2 6.5H4c.6-.5 2-1.9 2-6.5Z"/>
+    <path d="M10 19.5a2.1 2.1 0 0 0 4 0"/>
+  </symbol>
+
+  <!-- Icono: libro abierto / aprendizaje -->
+  <symbol id="icon-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 6.5c-1.6-1.3-3.6-2-6-2v13c2.4 0 4.4.7 6 2 1.6-1.3 3.6-2 6-2V4.5c-2.4 0-4.4.7-6 2Z"/>
+    <line x1="12" y1="6.5" x2="12" y2="19.5"/>
+  </symbol>
+
+  <!-- Icono: lapiz / editar -->
+  <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16.5 4.5 19.5 7.5 8 19 4 20l1-4Z"/>
+  </symbol>
+
+  <!-- Icono: mas / agregar -->
+  <symbol id="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+    <line x1="12" y1="5" x2="12" y2="19"/>
+    <line x1="5" y1="12" x2="19" y2="12"/>
+  </symbol>
+
+  <!-- Icono: papelera / eliminar -->
+  <symbol id="icon-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4.5 7h15"/>
+    <path d="M9 7V5.2c0-.7.6-1.2 1.3-1.2h3.4c.7 0 1.3.5 1.3 1.2V7"/>
+    <path d="M6.5 7 7.3 19c.1.9.8 1.5 1.7 1.5h6c.9 0 1.6-.6 1.7-1.5L17.5 7"/>
+  </symbol>
+
+  <!-- Icono: ojo / visible -->
+  <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/>
+    <circle cx="12" cy="12" r="3"/>
+  </symbol>
+
+  <!-- Icono: ojo tachado / oculto -->
+  <symbol id="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3.5 3.5l17 17"/>
+    <path d="M10.6 5.7A10.6 10.6 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a15.6 15.6 0 0 1-3.4 4.3M7 6.9C4.2 8.6 2.5 12 2.5 12s3.5 6.5 9.5 6.5c1.3 0 2.5-.3 3.5-.8"/>
+    <path d="M9.9 10.1a3 3 0 0 0 4.1 4.1"/>
+  </symbol>
+
+  <!-- Icono: calendario -->
+  <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="5" width="17" height="15.5" rx="2"/>
+    <line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/>
+    <line x1="8" y1="3" x2="8" y2="6.5"/>
+    <line x1="16" y1="3" x2="16" y2="6.5"/>
+  </symbol>
+
+  <!-- Icono: reloj -->
+  <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="8.5"/>
+    <polyline points="12 7.5 12 12 15.5 14"/>
+  </symbol>
+
+  <!-- Icono: compartir -->
+  <symbol id="icon-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="18" cy="5.5" r="2.3"/>
+    <circle cx="6" cy="12" r="2.3"/>
+    <circle cx="18" cy="18.5" r="2.3"/>
+    <line x1="8.1" y1="10.8" x2="15.9" y2="6.7"/>
+    <line x1="8.1" y1="13.2" x2="15.9" y2="17.3"/>
+  </symbol>
+
+  <!-- Icono: guardar / marcador -->
+  <symbol id="icon-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 4.5h12v15l-6-4-6 4Z"/>
+  </symbol>
+
+  <!-- Icono: flecha izquierda -->
+  <symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="20" y1="12" x2="5" y2="12"/>
+    <polyline points="11 6 5 12 11 18"/>
+  </symbol>
+
+  <!-- Icono: mas opciones (tres puntos) -->
+  <symbol id="icon-more" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <circle cx="5" cy="12" r="1.8"/>
+    <circle cx="12" cy="12" r="1.8"/>
+    <circle cx="19" cy="12" r="1.8"/>
+  </symbol>
+
+  <!-- Icono: corazon / me gusta -->
+  <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 20s-7.5-4.6-9.8-9.3C.8 7.3 2.4 4 5.8 3.4c2-.3 3.7.6 4.9 2.3C11.9 4 13.6 3.1 15.6 3.4 19 4 20.6 7.3 19.2 10.7 16.9 15.4 12 20 12 20Z"/>
+  </symbol>
+
+  <!-- Icono: corazon relleno / me gusta activo -->
+  <symbol id="icon-heart-filled" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M12 20s-7.5-4.6-9.8-9.3C.8 7.3 2.4 4 5.8 3.4c2-.3 3.7.6 4.9 2.3C11.9 4 13.6 3.1 15.6 3.4 19 4 20.6 7.3 19.2 10.7 16.9 15.4 12 20 12 20Z"/>
+  </symbol>
+
+  <!-- Icono: comentario -->
+  <symbol id="icon-comment" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 12.3c0-4.3 3.6-7.8 8-7.8s8 3.5 8 7.8-3.6 7.8-8 7.8c-1 0-1.9-.2-2.8-.5L4.5 20.5l1-3.6A7.6 7.6 0 0 1 4 12.3Z"/>
+  </symbol>
+
+  <!-- Icono: lista -->
+  <symbol id="icon-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="8.5" y1="6" x2="20.5" y2="6"/>
+    <line x1="8.5" y1="12" x2="20.5" y2="12"/>
+    <line x1="8.5" y1="18" x2="20.5" y2="18"/>
+    <line x1="3.5" y1="6" x2="3.5" y2="6"/>
+    <line x1="3.5" y1="12" x2="3.5" y2="12"/>
+    <line x1="3.5" y1="18" x2="3.5" y2="18"/>
+  </symbol>
+
+  <!-- Icono: enlace externo -->
+  <symbol id="icon-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 6.5H5.5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V15"/>
+    <path d="M13.5 4.5h6v6"/>
+    <line x1="19.5" y1="4.5" x2="11" y2="13"/>
+  </symbol>
+
+  <!-- Icono: subir archivo -->
+  <symbol id="icon-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3"/>
+    <polyline points="7.5 8.5 12 4 16.5 8.5"/>
+    <line x1="12" y1="4" x2="12" y2="15.5"/>
+  </symbol>
+
+  <!-- Icono: alerta / advertencia -->
+  <symbol id="icon-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.5 22 20.5H2Z"/>
+    <line x1="12" y1="9.5" x2="12" y2="14"/>
+    <circle cx="12" cy="17" r="0.15" fill="currentColor" stroke="none"/>
+  </symbol>
+
+  <!-- Icono: correo (alias, ya existe icon-mail) -->
+
+  <symbol id="icon-youtube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2.7" y="6.3" width="18.6" height="11.4" rx="3.2"/>
+    <path d="M10.3 9.6 14.8 12 10.3 14.4Z"/>
+  </symbol>
+
+</svg>

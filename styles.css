@@ -1,0 +1,558 @@
+/* =========================================================
+   TALENTHUB - HOJA DE ESTILOS PRINCIPAL
+   Proyecto: Crea y Emprende 2026 - Ministerio de Educacion del Peru
+   Este archivo complementa las utilidades de Tailwind CSS (via CDN)
+   con las variables de marca, la tipografia, las animaciones y los
+   componentes que requieren estilos personalizados.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. VARIABLES DE MARCA
+   Cambiar toda la paleta de colores del sitio implica editar
+   unicamente las variables definidas aqui.
+   --------------------------------------------------------- */
+:root {
+  /* Colores de marca */
+  --color-navy: #0B1E4F;
+  --color-navy-soft: #16296B;
+  --color-purple: #7C5CFF;
+  --color-purple-dark: #6A45F0;
+  --color-gold: #E9E45C;
+  --color-white: #FFFFFF;
+  --color-gray-light: #F6F7FB;
+  --color-gray-text: #4B5563;
+
+  /* Tipografia */
+  --font-display: 'Unbounded', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  /* Sistema de espaciado base 8px */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 48px;
+  --space-8: 64px;
+
+  /* Sombra suave, unica en todo el sitio, sin abusar */
+  --shadow-soft: 0 20px 45px -20px rgba(11, 30, 79, 0.18);
+  --shadow-card: 0 2px 18px rgba(11, 30, 79, 0.08);
+
+  /* Duracion estandar de transiciones */
+  --transition-base: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------------------------------------------------------
+   2. RESET LIGERO Y BASE TIPOGRAFICA
+   --------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px; /* compensa el navbar fijo al hacer scroll a anclas */
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-navy);
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Respeta la preferencia de movimiento reducido del usuario */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Estado de foco visible para accesibilidad (navegacion por teclado) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2.5px solid var(--color-purple);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------------------------------------------------------
+   3. NAVBAR FIJO
+   Se vuelve mas compacto al hacer scroll mediante la clase
+   ".navbar-compacta" que agrega main.js con Intersection/scroll.
+   --------------------------------------------------------- */
+.navbar {
+  background-color: var(--color-navy);
+  transition: padding var(--transition-base), box-shadow var(--transition-base);
+}
+
+.navbar-compacta {
+  box-shadow: 0 8px 30px rgba(11, 30, 79, 0.25);
+}
+
+.enlace-nav {
+  position: relative;
+  color: rgba(255, 255, 255, 0.82);
+  transition: color var(--transition-base);
+}
+
+.enlace-nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-gold);
+  transition: width var(--transition-base);
+}
+
+.enlace-nav:hover {
+  color: var(--color-white);
+}
+
+.enlace-nav:hover::after {
+  width: 100%;
+}
+
+/* Menu movil */
+.menu-movil {
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.menu-movil.activo {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------------------------------------------------------
+   4. TRAYECTORIA DE LANZAMIENTO (elemento de firma visual)
+   Linea orbital fija a la izquierda, visible solo en escritorio,
+   que conecta las secciones como una ruta de despegue. El cohete
+   se desplaza segun el porcentaje de scroll de la pagina.
+   --------------------------------------------------------- */
+.trayectoria {
+  position: fixed;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 46vh;
+  width: 2px;
+  z-index: 40;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .trayectoria {
+    display: block;
+  }
+}
+
+.trayectoria__linea {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background-image: linear-gradient(to bottom, transparent 0, transparent 4px, rgba(124, 92, 255, 0.35) 4px, rgba(124, 92, 255, 0.35) 8px);
+  background-size: 2px 12px;
+}
+
+.trayectoria__cohete {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  transform: translate(-50%, 0) rotate(0deg);
+  color: var(--color-purple);
+  background: var(--color-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
+  transition: top 80ms linear;
+}
+
+/* ---------------------------------------------------------
+   5. ANIMACIONES DE APARICION AL HACER SCROLL
+   Controladas por Intersection Observer en main.js, que agrega
+   la clase "en-vista" al elemento cuando entra en pantalla.
+   --------------------------------------------------------- */
+.al-aparecer {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.al-aparecer.en-vista {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.al-aparecer-izq {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.al-aparecer-izq.en-vista {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.al-aparecer-der {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.al-aparecer-der.en-vista {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Retrasos escalonados para grupos de tarjetas */
+.retraso-1 { transition-delay: 90ms; }
+.retraso-2 { transition-delay: 180ms; }
+.retraso-3 { transition-delay: 270ms; }
+.retraso-4 { transition-delay: 360ms; }
+
+/* ---------------------------------------------------------
+   6. TARJETAS Y COMPONENTES GENERALES
+   --------------------------------------------------------- */
+.tarjeta {
+  background: var(--color-white);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.chip-icono {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------
+   7. PLANES DE PRECIOS
+   --------------------------------------------------------- */
+.tarjeta-plan {
+  border: 1.5px solid #E7E9F2;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.tarjeta-plan:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.tarjeta-plan--destacada {
+  border-color: var(--color-purple);
+  position: relative;
+}
+
+.tarjeta-plan--destacada::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, var(--color-purple), var(--color-gold));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------
+   8. ACORDEON DE PREGUNTAS FRECUENTES
+   --------------------------------------------------------- */
+.acordeon-item {
+  border-bottom: 1px solid #E7E9F2;
+}
+
+.acordeon-boton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  text-align: left;
+  padding: 22px 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+}
+
+.acordeon-boton__icono {
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.acordeon-item.activo .acordeon-boton__icono {
+  transform: rotate(180deg);
+}
+
+.acordeon-contenido {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 320ms ease, padding var(--transition-base);
+}
+
+.acordeon-item.activo .acordeon-contenido {
+  padding-bottom: 22px;
+}
+
+/* ---------------------------------------------------------
+   9. EXPLORADOR DE TALENTOS (filtros)
+   --------------------------------------------------------- */
+.filtro-categoria {
+  transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+}
+
+.filtro-categoria.activo {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  border-color: var(--color-navy);
+}
+
+.tarjeta-talento {
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+.tarjeta-talento[hidden] {
+  display: none;
+}
+
+/* ---------------------------------------------------------
+   10. MARCOS DE DISPOSITIVOS (galeria del producto)
+   --------------------------------------------------------- */
+.marco-laptop {
+  background: var(--color-navy);
+  border-radius: 18px;
+  padding: 16px 16px 34px;
+  box-shadow: var(--shadow-soft);
+}
+
+.marco-laptop__camara {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 0 auto 10px;
+}
+
+.marco-laptop__pantalla {
+  background: var(--color-gray-light);
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.marco-laptop__base {
+  height: 12px;
+  background: linear-gradient(var(--color-navy-soft), var(--color-navy));
+  border-radius: 0 0 10px 10px;
+  margin: 0 -16px -34px;
+}
+
+.marco-movil {
+  background: var(--color-navy);
+  border-radius: 34px;
+  padding: 12px;
+  box-shadow: var(--shadow-soft);
+  width: 200px;
+}
+
+.marco-movil__notch {
+  width: 46px;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 0 auto 8px;
+}
+
+.marco-movil__pantalla {
+  background: var(--color-gray-light);
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 9 / 17.5;
+}
+
+/* Pestanas para cambiar entre pantallas simuladas de la app */
+.pestana-pantalla {
+  transition: color var(--transition-base), border-color var(--transition-base);
+  border-bottom: 2px solid transparent;
+}
+
+.pestana-pantalla.activa {
+  color: var(--color-purple);
+  border-color: var(--color-purple);
+}
+
+.pantalla-app {
+  display: none;
+}
+
+.pantalla-app.activa {
+  display: block;
+}
+
+/* ---------------------------------------------------------
+   11. TESTIMONIOS (carrusel simple)
+   --------------------------------------------------------- */
+.pista-testimonios {
+  transition: transform 420ms ease;
+}
+
+.punto-carrusel {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #D9DCEA;
+  transition: background-color var(--transition-base), width var(--transition-base);
+}
+
+.punto-carrusel.activo {
+  background-color: var(--color-purple);
+  width: 22px;
+  border-radius: 5px;
+}
+
+/* ---------------------------------------------------------
+   12. CONTADORES DE IMPACTO
+   --------------------------------------------------------- */
+.numero-contador {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------
+   13. FORMULARIO DE CONTACTO
+   --------------------------------------------------------- */
+.campo-formulario {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: var(--color-white);
+  transition: border-color var(--transition-base), background-color var(--transition-base);
+}
+
+.campo-formulario::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.campo-formulario:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-gold);
+}
+
+.campo-formulario.campo-error {
+  border-color: #FF8A8A;
+}
+
+.mensaje-error {
+  color: #FFD3D3;
+  display: none;
+}
+
+.campo-formulario.campo-error + .mensaje-error,
+.campo-error-visible {
+  display: block;
+}
+
+/* ---------------------------------------------------------
+   14. MASCOTA (gato espacial) COMO ELEMENTO DE APOYO
+   Aparece de forma sutil y decorativa en distintas secciones.
+   --------------------------------------------------------- */
+.mascota-flotante {
+  animation: flotar 5s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ---------------------------------------------------------
+   15. MAPA INTERACTIVO (Leaflet)
+   --------------------------------------------------------- */
+#mapa-cobertura {
+  height: 360px;
+  border-radius: 16px;
+  z-index: 0;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px;
+  font-family: var(--font-body);
+}
+
+/* ---------------------------------------------------------
+   16. UTILITARIOS PUNTUALES
+   --------------------------------------------------------- */
+.contenedor {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-3);
+  padding-right: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .contenedor {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+}
+
+/* Barra de scroll fina en el navegador de escritorio (detalle de cuidado) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-gray-light);
+}
+::-webkit-scrollbar-thumb {
+  background: #C9CDE0;
+  border-radius: 10px;
+}

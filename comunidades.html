@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidades | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/comunidades.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content th-content--ancho">
+
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+      <div>
+        <h1 class="font-display font-bold text-2xl">Comunidades de talento</h1>
+        <p class="text-graytext text-sm mt-1">Conecta, aprende y colabora con otros jóvenes que comparten tu talento.</p>
+      </div>
+      <button type="button" id="btn-crear-comunidad" class="inline-flex items-center justify-center gap-2 bg-purple text-white font-display text-sm font-semibold px-5 py-3 rounded-full hover:bg-purple-dark transition-colors duration-300 shrink-0">
+        <svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-plus"></use></svg> Crear comunidad
+      </button>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-7" id="comunidades-filtros"></div>
+
+    <div id="comunidades-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<!-- Modal: crear comunidad -->
+<div id="modal-crear-comunidad" class="modal-overlay oculto">
+  <div class="modal-caja modal-caja--ancha">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg">Crear una comunidad</h3>
+      <button type="button" data-cerrar-modal="modal-crear-comunidad" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <form id="form-crear-comunidad">
+      <div class="th-campo mb-4">
+        <label for="cc-nombre">Nombre de la comunidad</label>
+        <input type="text" id="cc-nombre" class="th-input" placeholder="Ej: Animadores del Perú">
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="th-campo mb-4">
+          <label for="cc-categoria">Categoría</label>
+          <select id="cc-categoria" class="th-select">
+            <option>Programación</option><option>Diseño</option><option>Música</option>
+            <option>Fotografía</option><option>Video</option><option>Ilustración</option>
+            <option>Emprendimiento</option><option>Marketing</option><option>Robótica</option><option>Idiomas</option>
+          </select>
+        </div>
+        <div class="th-campo mb-4">
+          <label for="cc-color">Color de identidad</label>
+          <select id="cc-color" class="th-select">
+            <option value="purple">Morado</option>
+            <option value="gold">Dorado</option>
+            <option value="navy">Azul marino</option>
+          </select>
+        </div>
+      </div>
+      <div class="th-campo mb-4">
+        <label for="cc-descripcion">Descripción</label>
+        <textarea id="cc-descripcion" class="th-textarea" placeholder="¿De qué trata esta comunidad?"></textarea>
+      </div>
+      <div class="th-campo mb-6">
+        <label for="cc-reglas">Reglas básicas</label>
+        <textarea id="cc-reglas" class="th-textarea" placeholder="Ej: Respeto ante todo, sin spam, comparte tu proceso..."></textarea>
+      </div>
+      <button type="submit" class="w-full bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Crear comunidad</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/comunidades.js"></script>
+</body>
+</html>

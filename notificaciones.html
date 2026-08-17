@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notificaciones | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content" style="max-width:760px;margin-left:auto;margin-right:auto;">
+
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="font-display font-bold text-2xl">Notificaciones</h1>
+      <button type="button" id="btn-marcar-leidas" class="text-purple text-sm font-semibold">Marcar todas como leídas</button>
+    </div>
+
+    <div id="notificaciones-lista" class="th-tarjeta divide-y divide-[#EEF0F7]"></div>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/notificaciones.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+/* =========================================================
+   TALENTHUB - MURO.CSS
+   Estilos especificos del muro de encargos.
+   ========================================================= */
+
+.encargo-tarjeta {
+  background-color: var(--color-white);
+  border: 1px solid #ECEEF6;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.encargo-tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.encargo-tarjeta__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-graytext);
+  font-size: 12px;
+}
+
+.encargo-tarjeta--fijado {
+  border-color: rgba(233, 228, 92, 0.6);
+  background-color: rgba(233, 228, 92, 0.06);
+}
+
+.encargo-tarjeta__fijado {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}

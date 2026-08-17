@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inicio | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+      fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+    } }
+  };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content th-content--ancho">
+
+    <!-- Saludo y resumen de nivel -->
+    <section class="grid lg:grid-cols-[1.4fr_1fr] gap-5 al-dashboard">
+      <div class="th-tarjeta bg-navy text-white p-6 md:p-8 relative overflow-hidden">
+        <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-purple/25" aria-hidden="true"></div>
+        <div class="relative flex items-start justify-between gap-4 flex-wrap">
+          <div>
+            <p class="text-white/60 text-sm">Bienvenida de nuevo</p>
+            <h1 id="saludo-nombre" class="font-display font-bold text-2xl md:text-3xl mt-1">Hola,</h1>
+          </div>
+          <img id="dash-avatar" src="" alt="" class="w-14 h-14 rounded-full th-avatar-marco">
+        </div>
+
+        <div class="relative mt-7 flex items-center justify-between text-sm mb-2">
+          <span class="th-etiqueta th-etiqueta--gold" id="dash-nivel-etiqueta">Nivel</span>
+          <span class="text-white/70" id="dash-xp-texto">0 XP</span>
+        </div>
+        <div class="relative th-barra-xp">
+          <div class="th-barra-xp__relleno" id="dash-barra-xp" style="width:0%"></div>
+        </div>
+        <p class="relative text-white/60 text-xs mt-2" id="dash-xp-faltante">Cargando progreso…</p>
+
+        <div class="relative flex flex-wrap gap-2 mt-6" id="dash-talentos"></div>
+      </div>
+
+      <div class="th-tarjeta p-6 md:p-8 flex flex-col justify-between">
+        <div>
+          <h2 class="font-display font-semibold text-base mb-4">Accesos rápidos</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <a href="perfil.html" class="dash-acceso"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-palette"></use></svg>Portafolio</a>
+            <a href="muro.html" class="dash-acceso"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-layout-grid"></use></svg>Muro</a>
+            <a href="explorador.html" class="dash-acceso"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-search"></use></svg>Explorar</a>
+            <a href="comunidades.html" class="dash-acceso"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-users"></use></svg>Comunidades</a>
+            <a href="aprendizaje.html" class="dash-acceso"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-book-open"></use></svg>Aprendizaje</a>
+            <a href="planes.html" class="dash-acceso"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-star"></use></svg>Premium</a>
+          </div>
+        </div>
+        <div id="dash-tip-perfil" class="mt-5 flex items-center gap-3 bg-grayxl rounded-xl p-3.5 oculto">
+          <img src="assets/img/mascota-talenthub.png" alt="" class="w-10 shrink-0">
+          <p class="text-xs text-graytext leading-snug">Completa tu biografía en tu perfil y gana <strong class="text-navy">+100 XP</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promocion de Plan Premium (solo si el usuario aun no lo tiene) -->
+    <section id="dash-promo-premium" class="th-tarjeta bg-gold/15 border border-gold/40 p-5 md:p-6 mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 oculto">
+      <div class="flex items-center gap-4 min-w-0">
+        <div class="chip-icono bg-gold/30 text-navy shrink-0"><svg width="22" height="22"><use href="assets/icons/sprite.svg#icon-star"></use></svg></div>
+        <div class="min-w-0">
+          <h3 class="font-display font-semibold text-sm">Desbloquea todo el potencial de tu perfil</h3>
+          <p class="text-graytext text-xs mt-1">Obtén más personalización y destaca entre otros talentos.</p>
+        </div>
+      </div>
+      <a href="planes.html" class="bg-navy text-white font-display text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-navy-soft transition-colors duration-300 shrink-0 text-center">Ver Premium</a>
+    </section>
+
+    <!-- Encargos recomendados -->
+    <section class="mt-10">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-display font-semibold text-lg">Encargos recomendados para ti</h2>
+        <a href="muro.html" class="text-purple text-sm font-semibold">Ver todos</a>
+      </div>
+      <div id="dash-encargos" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <div class="grid lg:grid-cols-2 gap-8 mt-10">
+      <!-- Comunidades recomendadas -->
+      <section>
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-display font-semibold text-lg">Comunidades para ti</h2>
+          <a href="comunidades.html" class="text-purple text-sm font-semibold">Ver todas</a>
+        </div>
+        <div id="dash-comunidades" class="space-y-3"></div>
+      </section>
+
+      <!-- Aprendizaje recomendado -->
+      <section>
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-display font-semibold text-lg">Sigue aprendiendo</h2>
+          <a href="aprendizaje.html" class="text-purple text-sm font-semibold">Ver todo</a>
+        </div>
+        <div id="dash-cursos" class="space-y-3"></div>
+      </section>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 mt-10">
+      <!-- Actividad reciente / notificaciones -->
+      <section>
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-display font-semibold text-lg">Actividad reciente</h2>
+          <a href="notificaciones.html" class="text-purple text-sm font-semibold">Ver todas</a>
+        </div>
+        <div id="dash-actividad" class="th-tarjeta divide-y divide-[#EEF0F7]"></div>
+      </section>
+
+      <!-- Logros recientes -->
+      <section>
+        <h2 class="font-display font-semibold text-lg mb-4">Tus insignias</h2>
+        <div id="dash-insignias" class="th-tarjeta p-5 flex flex-wrap gap-3"></div>
+      </section>
+    </div>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

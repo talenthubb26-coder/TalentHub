@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planes | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content th-content--ancho">
+
+    <!-- Encabezado para cuentas de talento -->
+    <div id="planes-encabezado-talento" class="text-center max-w-xl mx-auto mb-10 oculto">
+      <span class="th-etiqueta th-etiqueta--purple">Suscripción</span>
+      <h1 class="font-display font-bold text-2xl md:text-3xl mt-4">Un plan para cada etapa de tu talento</h1>
+      <p class="text-graytext text-sm mt-3">Empieza gratis. Mejora a Plus cuando tu talento empiece a generar más oportunidades.</p>
+    </div>
+
+    <!-- Encabezado para cuentas de negocio -->
+    <div id="planes-encabezado-negocio" class="text-center max-w-xl mx-auto mb-10 oculto">
+      <span class="th-etiqueta th-etiqueta--purple">Suscripción</span>
+      <h1 class="font-display font-bold text-2xl md:text-3xl mt-4">Un plan para cada etapa de tu negocio</h1>
+      <p class="text-graytext text-sm mt-3">Empieza gratis. Mejora a Plan Empresas cuando necesites publicar sin límites.</p>
+    </div>
+
+    <!-- Planes para cuentas de talento -->
+    <div id="planes-talento" class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto oculto">
+      <div class="th-tarjeta p-7 md:p-8">
+        <h2 class="font-display font-semibold text-xl">Plan Estándar</h2>
+        <p class="text-graytext text-sm mt-1">Para empezar a mostrar tu talento.</p>
+        <p class="mt-6"><span class="font-display font-bold text-4xl">S/ 0</span><span class="text-graytext text-sm"> / mes</span></p>
+        <button type="button" id="btn-plan-estandar" class="mt-6 w-full border-2 border-navy/15 rounded-full py-3 font-display text-sm font-semibold hover:border-navy/40 transition-colors duration-300">Plan actual</button>
+        <ul class="mt-8 space-y-3.5 text-sm">
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Crear perfil y portafolio</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Acceso al muro de encargos</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Explorador de talentos</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Comunidades y centro de aprendizaje</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Sistema de XP y niveles</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Personalización básica</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Ver anuncios para ganar puntos</li>
+        </ul>
+      </div>
+
+      <div class="tarjeta-plan--destacada th-tarjeta p-7 md:p-8 bg-navy text-white relative">
+        <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gold text-navy text-xs font-display font-semibold px-4 py-1.5 rounded-full">Recomendado</span>
+        <h2 class="font-display font-semibold text-xl">Plan Premium</h2>
+        <p class="text-white/70 text-sm mt-1">Para talentos que ya tienen movimiento.</p>
+        <p class="mt-6"><span class="font-display font-bold text-4xl">S/ 20</span><span class="text-white/70 text-sm"> / mes</span></p>
+        <button type="button" id="btn-plan-premium" class="mt-6 w-full bg-gold text-navy rounded-full py-3 font-display text-sm font-semibold hover:bg-white transition-colors duration-300">Mejorar a Premium</button>
+        <ul class="mt-8 space-y-3.5 text-sm text-white/90">
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Sin anuncios</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Todas las decoraciones de perfil</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Mayor personalización de perfil</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Mejor posicionamiento en el explorador</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Etiqueta de perfil Premium</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Acceso prioritario a nuevas funciones</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Planes para cuentas de negocio -->
+    <div id="planes-negocio" class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto oculto">
+      <div class="th-tarjeta p-7 md:p-8">
+        <h2 class="font-display font-semibold text-xl">Plan Estándar</h2>
+        <p class="text-graytext text-sm mt-1">Para negocios que buscan talento joven.</p>
+        <p class="mt-6"><span class="font-display font-bold text-4xl">S/ 0</span><span class="text-graytext text-sm"> / mes</span></p>
+        <button type="button" id="btn-plan-estandar-negocio" class="mt-6 w-full border-2 border-navy/15 rounded-full py-3 font-display text-sm font-semibold hover:border-navy/40 transition-colors duration-300">Elegir Estándar</button>
+        <ul class="mt-8 space-y-3.5 text-sm">
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> 3 encargos activos</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Filtros básicos</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Búsqueda de talentos</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Perfil de empresa</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Gestión de postulantes</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Publicaciones con límite</li>
+        </ul>
+      </div>
+
+      <div class="tarjeta-plan--destacada th-tarjeta p-7 md:p-8 bg-navy text-white relative">
+        <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gold text-navy text-xs font-display font-semibold px-4 py-1.5 rounded-full">Recomendado</span>
+        <h2 class="font-display font-semibold text-xl">Plan Empresas</h2>
+        <p class="text-white/70 text-sm mt-1">Para negocios con más movimiento de encargos.</p>
+        <p class="mt-6"><span class="font-display font-bold text-4xl">S/ 39.90</span><span class="text-white/70 text-sm"> / mes</span></p>
+        <button type="button" id="btn-plan-empresas" class="mt-6 w-full bg-gold text-navy rounded-full py-3 font-display text-sm font-semibold hover:bg-white transition-colors duration-300">Mejorar a Empresas</button>
+        <ul class="mt-8 space-y-3.5 text-sm text-white/90">
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Publicaciones ilimitadas</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Talentos destacados</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Filtros avanzados</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Empresa verificada</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Gestión de postulantes</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Prioridad en soporte</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="text-center text-graytext text-xs mt-8 max-w-md mx-auto">Este es un prototipo de demostración: no se procesan pagos reales. Al "mejorar" tu plan, tu cuenta simplemente se marca como Premium en este navegador.</p>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<!-- Modal: formulario de pago (simulado) -->
+<div id="modal-pago-premium" class="modal-overlay oculto">
+  <div class="modal-caja">
+    <div class="flex items-center justify-between mb-2">
+      <h3 class="font-display font-bold text-lg" id="titulo-pago-premium">Pago del Plan Premium</h3>
+      <button type="button" data-cerrar-modal="modal-pago-premium" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <p class="text-graytext text-sm mb-5" id="descripcion-pago-premium">S/ 20.00 al mes. Puedes cancelar cuando quieras.</p>
+
+    <p class="text-graytext text-xs mb-5 bg-grayxl rounded-lg p-3">Prototipo de demostración: no ingreses datos reales de tarjetas. Esta información no se envía a ningún servidor.</p>
+
+    <form id="form-pago-premium">
+      <div id="pago-metodo-guardado" class="oculto mb-4">
+        <label class="th-campo"><span class="block mb-2">Pagar con</span></label>
+        <select id="pago-select-metodo" class="th-select"></select>
+        <p class="text-center text-graytext text-xs my-3">— o usa una tarjeta nueva —</p>
+      </div>
+
+      <div class="th-campo mb-4">
+        <label for="pago-marca">Marca de la tarjeta</label>
+        <select id="pago-marca" class="th-select">
+          <option>Visa</option><option>Mastercard</option><option>Diners</option><option>American Express</option>
+        </select>
+      </div>
+      <div class="th-campo mb-4">
+        <label for="pago-numero">Número de tarjeta (de prueba)</label>
+        <input type="text" id="pago-numero" class="th-input" placeholder="0000 0000 0000 0000" maxlength="19">
+      </div>
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="th-campo">
+          <label for="pago-vencimiento">Vencimiento</label>
+          <input type="text" id="pago-vencimiento" class="th-input" placeholder="MM/AA" maxlength="5">
+        </div>
+        <div class="th-campo">
+          <label for="pago-cvv">CVV</label>
+          <input type="text" id="pago-cvv" class="th-input" placeholder="123" maxlength="4">
+        </div>
+      </div>
+      <button type="submit" id="btn-pagar-confirmar" class="w-full bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Pagar S/ 20.00 y activar Premium</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: confirmacion premium -->
+<div id="modal-premium-activado" class="modal-overlay oculto">
+  <div class="modal-caja text-center">
+    <img src="assets/img/mascota-talenthub.png" alt="" class="w-20 mx-auto mb-4">
+    <h3 class="font-display font-bold text-xl" id="titulo-premium-activado">¡Ahora eres Premium!</h3>
+    <p class="text-graytext text-sm mt-2" id="descripcion-premium-activado">Desbloqueaste todas las decoraciones y beneficios del Plan Premium en este prototipo.</p>
+    <button type="button" class="w-full mt-6 bg-navy text-white font-display text-sm font-semibold py-3 rounded-full" data-cerrar-modal="modal-premium-activado">Genial</button>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/planes.js"></script>
+</body>
+</html>

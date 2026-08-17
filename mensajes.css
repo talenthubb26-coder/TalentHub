@@ -1,0 +1,123 @@
+/* =========================================================
+   TALENTHUB - MENSAJES.CSS
+   Layout de dos paneles (lista de conversaciones + hilo) para
+   mensajes.html. En escritorio ambos paneles se ven a la vez.
+   En movil se muestra un panel a la vez, alternando con la
+   clase "mostrando-hilo" sobre el contenedor.
+   ========================================================= */
+
+.mensajes-contenedor {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: calc(100vh - 200px);
+  min-height: 460px;
+  max-height: 780px;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .mensajes-contenedor {
+    grid-template-columns: 320px 1fr;
+  }
+}
+
+.mensajes-lista-panel {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ECEEF6;
+  min-height: 0;
+}
+
+.mensajes-hilo-panel {
+  display: none;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* En movil: por defecto se ve la lista. Al elegir una conversacion,
+   el contenedor recibe la clase "mostrando-hilo" y se invierte. */
+@media (max-width: 1023px) {
+  .mostrando-hilo .mensajes-lista-panel {
+    display: none;
+  }
+  .mostrando-hilo .mensajes-hilo-panel {
+    display: flex;
+  }
+}
+
+/* En escritorio ambos paneles conviven siempre */
+@media (min-width: 1024px) {
+  .mensajes-hilo-panel {
+    display: flex;
+  }
+}
+
+#mensajes-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+@media (max-width: 1023px) {
+  #mensajes-vacio {
+    display: none;
+  }
+}
+
+.conversacion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #F4F5FA;
+  transition: background-color var(--transition-base);
+}
+
+.conversacion-item:hover {
+  background-color: var(--color-gray-light);
+}
+
+.conversacion-item.activa {
+  background-color: #F1EEFF;
+}
+
+.conversacion-item__punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-purple);
+  flex-shrink: 0;
+}
+
+.mensaje-burbuja {
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.mensaje-burbuja--propio {
+  background-color: var(--color-purple);
+  color: var(--color-white);
+  border-bottom-right-radius: 4px;
+  margin-left: auto;
+}
+
+.mensaje-burbuja--otro {
+  background-color: var(--color-gray-light);
+  color: var(--color-navy);
+  border-bottom-left-radius: 4px;
+  margin-right: auto;
+}
+
+.mensaje-hora {
+  font-size: 10.5px;
+  color: #9CA3AF;
+  margin-top: 3px;
+}

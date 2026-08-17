@@ -1,0 +1,24 @@
+/* =========================================================
+   TALENTHUB - APRENDIZAJE.CSS
+   Estilos especificos del centro de aprendizaje.
+   ========================================================= */
+
+.curso-tarjeta {
+  background-color: var(--color-white);
+  border: 1px solid #ECEEF6;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.curso-tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.curso-tarjeta.completado {
+  border-color: rgba(34, 172, 108, 0.35);
+  background-color: rgba(34, 172, 108, 0.04);
+}

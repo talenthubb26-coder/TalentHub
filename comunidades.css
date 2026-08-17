@@ -1,0 +1,55 @@
+/* =========================================================
+   TALENTHUB - COMUNIDADES.CSS
+   Estilos para el listado de comunidades y la pagina interna
+   de una comunidad (comunidades.html y comunidad.html).
+   ========================================================= */
+
+.comunidad-tarjeta {
+  background-color: var(--color-white);
+  border: 1px solid #ECEEF6;
+  border-radius: 16px;
+  padding: 22px;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.comunidad-tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.comunidad-icono {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comunidad-icono--purple { background-color: rgba(124, 92, 255, 0.14); color: var(--color-purple); }
+.comunidad-icono--gold { background-color: rgba(233, 228, 92, 0.3); color: #7A6E00; }
+.comunidad-icono--navy { background-color: rgba(11, 30, 79, 0.08); color: var(--color-navy); }
+
+.canal-enlace {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--color-graytext);
+}
+
+.canal-enlace.activo {
+  background-color: rgba(124, 92, 255, 0.1);
+  color: var(--color-purple-dark);
+  font-weight: 600;
+}
+
+.publicacion-tarjeta {
+  background-color: var(--color-white);
+  border: 1px solid #ECEEF6;
+  border-radius: 16px;
+  padding: 20px;
+}

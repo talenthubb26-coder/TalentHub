@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunidad | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/comunidades.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content th-content--ancho">
+
+    <a href="comunidades.html" class="inline-flex items-center gap-2 text-graytext text-sm font-medium mb-5 hover:text-navy transition-colors duration-300">
+      <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-arrow-left"></use></svg> Volver a comunidades
+    </a>
+
+    <div id="comunidad-no-encontrada" class="th-vacio oculto">
+      <h2 class="font-display font-semibold text-lg">No encontramos esta comunidad</h2>
+    </div>
+
+    <div id="comunidad-contenido" class="oculto">
+      <!-- Cabecera -->
+      <section class="th-tarjeta p-6 md:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-4 min-w-0">
+          <div id="comunidad-icono" class="comunidad-icono w-14 h-14 shrink-0"><svg width="26" height="26"><use href="assets/icons/sprite.svg#icon-users"></use></svg></div>
+          <div class="min-w-0">
+            <h1 id="comunidad-nombre" class="font-display font-bold text-xl truncate"></h1>
+            <p id="comunidad-meta" class="text-graytext text-sm mt-1 truncate"></p>
+          </div>
+        </div>
+        <button type="button" id="btn-unirse-comunidad" class="bg-purple text-white font-display text-sm font-semibold px-6 py-3 rounded-full hover:bg-purple-dark transition-colors duration-300 shrink-0"></button>
+      </section>
+
+      <div class="grid lg:grid-cols-[220px_1fr] gap-6 mt-6">
+        <!-- Canales -->
+        <aside class="th-tarjeta p-4 h-fit">
+          <p class="text-xs font-display uppercase tracking-wide text-graytext/70 px-2 mb-2">Canales</p>
+          <nav class="flex flex-wrap lg:flex-col gap-1" id="comunidad-canales">
+            <a href="#" class="canal-enlace activo" data-canal="general"><svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-message-circle"></use></svg> General</a>
+            <a href="#" class="canal-enlace" data-canal="proyectos"><svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-palette"></use></svg> Proyectos</a>
+            <a href="#" class="canal-enlace" data-canal="preguntas"><svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-search"></use></svg> Preguntas</a>
+            <a href="#" class="canal-enlace" data-canal="recursos"><svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-book-open"></use></svg> Recursos</a>
+          </nav>
+          <div class="mt-6 pt-5 border-t border-[#EEF0F7]">
+            <p class="text-xs font-display uppercase tracking-wide text-graytext/70 px-2 mb-2">Reglas de la comunidad</p>
+            <p id="comunidad-reglas" class="text-graytext text-xs px-2 leading-relaxed"></p>
+          </div>
+        </aside>
+
+        <!-- Publicaciones -->
+        <section>
+          <form id="form-publicacion" class="th-tarjeta p-4 mb-5">
+            <textarea id="input-publicacion" class="th-textarea" style="min-height:64px" placeholder="Comparte algo con la comunidad..."></textarea>
+            <div class="flex justify-end mt-3">
+              <button type="submit" class="bg-purple text-white font-display text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Publicar</button>
+            </div>
+          </form>
+
+          <div id="comunidad-publicaciones" class="space-y-4"></div>
+        </section>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<!-- Modal: reportar -->
+<div id="modal-reportar" class="modal-overlay oculto">
+  <div class="modal-caja">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg">Reportar publicación</h3>
+      <button type="button" data-cerrar-modal="modal-reportar" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <form id="form-reportar">
+      <div class="th-campo mb-4">
+        <label for="rep-motivo">Motivo del reporte</label>
+        <select id="rep-motivo" class="th-select">
+          <option>Acoso</option>
+          <option>Incitación al odio</option>
+          <option>Contenido inapropiado</option>
+          <option>Estafa</option>
+          <option>Comportamiento sospechoso</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="th-campo mb-4">
+        <label for="rep-detalle">Cuéntanos más (opcional)</label>
+        <textarea id="rep-detalle" class="th-textarea" placeholder="Agrega cualquier detalle que ayude a nuestro equipo"></textarea>
+      </div>
+      <div class="th-campo mb-6">
+        <label>Adjuntar evidencia (opcional)</label>
+        <div class="border-2 border-dashed border-navy/15 rounded-xl py-6 text-center text-graytext text-xs">
+          <svg width="20" height="20" class="mx-auto mb-2 text-graytext/60"><use href="assets/icons/sprite.svg#icon-upload"></use></svg>
+          Adjuntar una imagen desde tu dispositivo (demostrativo, no se almacena)
+        </div>
+      </div>
+      <button type="submit" class="w-full bg-navy text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-navy-soft transition-colors duration-300">Enviar reporte</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/comunidad.js"></script>
+</body>
+</html>

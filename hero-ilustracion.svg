@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Ilustracion original del hero.
+  Representa a un joven talento peruano trabajando en su portafolio digital,
+  rodeado de iconos que simbolizan las distintas categorias de talento
+  (codigo, musica, fotografia, diseno). Estilo geometrico plano, propio,
+  inspirado libremente en la identidad de marca (no es una copia de referencias).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%" role="img" aria-label="Ilustracion de un joven creando su portafolio en TalentHub">
+  <defs>
+    <clipPath id="blobClip">
+      <path d="M300 60c110 0 190 55 205 150 13 82-30 150-100 200-78 56-190 62-260-10C68 335 40 250 70 170 100 90 190 60 300 60Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Forma organica de fondo -->
+  <path d="M300 60c110 0 190 55 205 150 13 82-30 150-100 200-78 56-190 62-260-10C68 335 40 250 70 170 100 90 190 60 300 60Z" fill="#F1EEFF"/>
+
+  <!-- Puntos orbitales decorativos -->
+  <g fill="none" stroke="#E9E45C" stroke-width="2" stroke-dasharray="1 10" stroke-linecap="round" opacity="0.9">
+    <circle cx="300" cy="300" r="255"/>
+  </g>
+  <circle cx="300" cy="45" r="4" fill="#E9E45C"/>
+  <circle cx="66" cy="420" r="3.5" fill="#7C5CFF"/>
+  <circle cx="540" cy="200" r="3.5" fill="#0B1E4F"/>
+
+  <!-- Escritorio / mesa -->
+  <rect x="140" y="430" width="330" height="14" rx="7" fill="#0B1E4F"/>
+  <rect x="165" y="444" width="14" height="60" fill="#0B1E4F"/>
+  <rect x="430" y="444" width="14" height="60" fill="#0B1E4F"/>
+
+  <!-- Planta decorativa -->
+  <g transform="translate(455,375)">
+    <rect x="-14" y="40" width="28" height="26" rx="4" fill="#7C5CFF"/>
+    <path d="M0 40C-18 30 -22 8 -6 -6 4 -16 6 6 0 40Z" fill="#0B1E4F"/>
+    <path d="M0 40C12 30 20 10 8 -4 0 -12 -4 8 0 40Z" fill="#7C5CFF"/>
+  </g>
+
+  <!-- Laptop -->
+  <g transform="translate(190,300)">
+    <rect x="0" y="0" width="220" height="140" rx="10" fill="#0B1E4F"/>
+    <rect x="10" y="10" width="200" height="120" rx="4" fill="#F6F7FB"/>
+    <!-- pantalla: interfaz de portafolio simplificada -->
+    <rect x="24" y="24" width="70" height="70" rx="6" fill="#7C5CFF"/>
+    <rect x="104" y="24" width="92" height="14" rx="4" fill="#0B1E4F" opacity="0.85"/>
+    <rect x="104" y="46" width="92" height="8" rx="3" fill="#9CA3AF"/>
+    <rect x="104" y="60" width="70" height="8" rx="3" fill="#9CA3AF"/>
+    <rect x="24" y="104" width="46" height="12" rx="5" fill="#E9E45C"/>
+    <rect x="76" y="104" width="46" height="12" rx="5" fill="#0B1E4F" opacity="0.15"/>
+    <!-- base -->
+    <path d="M-14 140 L234 140 L214 158 L6 158 Z" fill="#182B63"/>
+  </g>
+
+  <!-- Personaje: joven creador frente al laptop -->
+  <g transform="translate(300,395)">
+    <!-- sombra -->
+    <ellipse cx="0" cy="118" rx="70" ry="10" fill="#0B1E4F" opacity="0.08"/>
+    <!-- cuerpo / hoodie -->
+    <path d="M-62 115 C-70 55 -46 10 0 10 C46 10 70 55 62 115 Z" fill="#7C5CFF"/>
+    <path d="M-18 18 C-8 28 8 28 18 18 L24 34 C10 46 -10 46 -24 34 Z" fill="#5B3FE0"/>
+    <!-- brazos -->
+    <path d="M-58 60 C-78 70 -84 92 -70 108" fill="none" stroke="#7C5CFF" stroke-width="20" stroke-linecap="round"/>
+    <path d="M58 60 C80 66 90 40 78 24" fill="none" stroke="#7C5CFF" stroke-width="20" stroke-linecap="round"/>
+    <!-- mano saludando -->
+    <circle cx="80" cy="18" r="12" fill="#C98A5E"/>
+    <!-- cabeza -->
+    <circle cx="0" cy="-30" r="42" fill="#C98A5E"/>
+    <!-- cabello -->
+    <path d="M-42 -34 C-46 -70 -10 -84 4 -80 C40 -78 46 -50 40 -32 C34 -50 20 -62 0 -62 C-20 -62 -36 -50 -42 -34Z" fill="#241A14"/>
+    <!-- sonrisa y ojos -->
+    <circle cx="-15" cy="-30" r="3.4" fill="#241A14"/>
+    <circle cx="15" cy="-30" r="3.4" fill="#241A14"/>
+    <path d="M-14 -12 C-6 -3 6 -3 14 -12" fill="none" stroke="#241A14" stroke-width="3.2" stroke-linecap="round"/>
+    <!-- cachetes -->
+    <circle cx="-26" cy="-16" r="5" fill="#E08F63" opacity="0.6"/>
+    <circle cx="26" cy="-16" r="5" fill="#E08F63" opacity="0.6"/>
+  </g>
+
+  <!-- Iconos flotantes de categorias de talento -->
+  <g transform="translate(96,150)">
+    <circle r="30" fill="#FFFFFF" stroke="#0B1E4F" stroke-width="1.5"/>
+    <path d="M-8 -10 L-16 0 L-8 10 M8 -10 L16 0 L8 10" fill="none" stroke="#7C5CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(500,120)">
+    <circle r="28" fill="#FFFFFF" stroke="#0B1E4F" stroke-width="1.5"/>
+    <path d="M-4 10 C-4 13.3 -6.7 16 -10 16 C-13.3 16 -16 13.3 -16 10 C-16 6.7 -13.3 4 -10 4 C-8.6 4 -7.2 4.5 -6 5.3 V-10 L10 -14 V4 M10 4 C10 7.3 7.3 10 4 10 C0.7 10 -2 7.3 -2 4 C-2 0.7 0.7 -2 4 -2 C5.4 -2 6.8 -1.5 8 -0.7" fill="none" stroke="#E9E45C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(6,0)"/>
+  </g>
+  <g transform="translate(520,340)">
+    <circle r="30" fill="#FFFFFF" stroke="#0B1E4F" stroke-width="1.5"/>
+    <rect x="-16" y="-9" width="32" height="22" rx="4" fill="none" stroke="#0B1E4F" stroke-width="2.6"/>
+    <circle cx="0" cy="2" r="7" fill="none" stroke="#0B1E4F" stroke-width="2.6"/>
+    <rect x="4" y="-14" width="8" height="6" rx="1.5" fill="#0B1E4F"/>
+  </g>
+  <g transform="translate(130,470)">
+    <circle r="26" fill="#FFFFFF" stroke="#0B1E4F" stroke-width="1.5"/>
+    <path d="M-11 8 L-11 -6 L-2 -6 L2 -11 L9 -11 L13 -6 L14 8 Z" fill="none" stroke="#7C5CFF" stroke-width="2.4" stroke-linejoin="round"/>
+    <circle cx="1" cy="0" r="4.5" fill="none" stroke="#7C5CFF" stroke-width="2.2"/>
+  </g>
+
+  <!-- Estrellitas -->
+  <path d="M470 470 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3Z" fill="#E9E45C"/>
+  <path d="M60 250 l2.5 6 6 2.5 -6 2.5 -2.5 6 -2.5 -6 -6 -2.5 6 -2.5Z" fill="#7C5CFF"/>
+</svg>

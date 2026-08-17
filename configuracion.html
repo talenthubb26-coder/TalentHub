@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configuración | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content" style="max-width:760px;margin-left:auto;margin-right:auto;">
+
+    <h1 class="font-display font-bold text-2xl mb-7">Configuración</h1>
+
+    <!-- Suscripcion -->
+    <section class="th-tarjeta p-6 md:p-7 mb-6 flex items-center justify-between gap-4 flex-wrap">
+      <div>
+        <h2 class="font-display font-semibold text-base mb-1">Suscripción</h2>
+        <p class="text-graytext text-sm" id="cfg-plan-actual">Estás en el Plan Estándar.</p>
+      </div>
+      <a href="planes.html" class="bg-navy text-white font-display text-sm font-semibold px-6 py-3 rounded-full hover:bg-navy-soft transition-colors duration-300 shrink-0">Ver planes</a>
+    </section>
+
+    <!-- Pagos y seguridad -->
+    <section class="th-tarjeta p-6 md:p-7 mb-6">
+      <h2 class="font-display font-semibold text-base mb-1">Pagos y seguridad</h2>
+      <p class="text-graytext text-sm mb-5">Tus métodos de pago son privados: nunca se muestran en tu perfil público.</p>
+      <div id="lista-metodos-pago" class="space-y-3 mb-4"></div>
+      <button type="button" id="btn-agregar-tarjeta" class="border-2 border-dashed border-navy/15 rounded-xl py-3 px-5 text-sm font-display font-semibold text-graytext hover:border-purple hover:text-purple transition-colors duration-300 inline-flex items-center gap-2">
+        <svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-plus"></use></svg> Agregar tarjeta
+      </button>
+    </section>
+
+    <!-- Datos basicos -->
+    <section class="th-tarjeta p-6 md:p-7 mb-6">
+      <h2 class="font-display font-semibold text-base mb-5">Datos básicos</h2>
+      <form id="form-datos-basicos">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="th-campo mb-4">
+            <label for="cfg-nombre">Nombre completo</label>
+            <input type="text" id="cfg-nombre" class="th-input">
+          </div>
+          <div class="th-campo mb-4">
+            <label for="cfg-correo">Correo electrónico</label>
+            <input type="email" id="cfg-correo" class="th-input">
+          </div>
+        </div>
+        <button type="submit" class="bg-navy text-white font-display text-sm font-semibold px-6 py-3 rounded-full hover:bg-navy-soft transition-colors duration-300">Guardar cambios</button>
+      </form>
+    </section>
+
+    <!-- Contraseña -->
+    <section class="th-tarjeta p-6 md:p-7 mb-6">
+      <h2 class="font-display font-semibold text-base mb-5">Contraseña</h2>
+      <form id="form-clave">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="th-campo mb-4">
+            <label for="cfg-clave-actual">Contraseña actual</label>
+            <input type="password" id="cfg-clave-actual" class="th-input">
+          </div>
+          <div class="th-campo mb-4">
+            <label for="cfg-clave-nueva">Nueva contraseña</label>
+            <input type="password" id="cfg-clave-nueva" class="th-input">
+          </div>
+        </div>
+        <button type="submit" class="bg-navy text-white font-display text-sm font-semibold px-6 py-3 rounded-full hover:bg-navy-soft transition-colors duration-300">Actualizar contraseña</button>
+      </form>
+    </section>
+
+    <!-- Privacidad -->
+    <section class="th-tarjeta p-6 md:p-7 mb-6">
+      <h2 class="font-display font-semibold text-base mb-5">Privacidad</h2>
+      <div class="space-y-4" id="lista-privacidad">
+        <label class="flex items-center justify-between gap-4 cursor-pointer">
+          <span class="text-sm">Mostrar mi edad públicamente en mi perfil</span>
+          <input type="checkbox" id="priv-edad" class="w-4 h-4 accent-purple">
+        </label>
+        <label class="flex items-center justify-between gap-4 cursor-pointer">
+          <span class="text-sm">Permitir que negocios me contacten directamente</span>
+          <input type="checkbox" id="priv-contacto" class="w-4 h-4 accent-purple" checked>
+        </label>
+        <label class="flex items-center justify-between gap-4 cursor-pointer">
+          <span class="text-sm">Mostrar mi perfil en el explorador público de talentos</span>
+          <input type="checkbox" id="priv-explorador" class="w-4 h-4 accent-purple" checked>
+        </label>
+      </div>
+    </section>
+
+    <!-- Notificaciones -->
+    <section class="th-tarjeta p-6 md:p-7 mb-6">
+      <h2 class="font-display font-semibold text-base mb-5">Notificaciones</h2>
+      <div class="space-y-4">
+        <label class="flex items-center justify-between gap-4 cursor-pointer">
+          <span class="text-sm">Nuevos encargos recomendados</span>
+          <input type="checkbox" class="w-4 h-4 accent-purple" checked>
+        </label>
+        <label class="flex items-center justify-between gap-4 cursor-pointer">
+          <span class="text-sm">Actividad en mis comunidades</span>
+          <input type="checkbox" class="w-4 h-4 accent-purple" checked>
+        </label>
+        <label class="flex items-center justify-between gap-4 cursor-pointer">
+          <span class="text-sm">Recordatorios del centro de aprendizaje</span>
+          <input type="checkbox" class="w-4 h-4 accent-purple">
+        </label>
+      </div>
+    </section>
+
+    <!-- Seguridad para menores -->
+    <section id="seccion-menores" class="th-tarjeta p-6 md:p-7 mb-6 oculto">
+      <h2 class="font-display font-semibold text-base mb-2">Seguridad para menores de edad</h2>
+      <div class="flex items-start gap-3 bg-gold/15 border border-gold/40 rounded-xl p-4 mb-5">
+        <svg width="18" height="18" class="text-navy mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-shield-check"></use></svg>
+        <div>
+          <p class="font-display font-semibold text-sm">Cuenta supervisada</p>
+          <p class="text-graytext text-xs mt-1 leading-relaxed">Para realizar determinadas operaciones económicas puede ser necesaria la autorización de tu padre, madre o tutor.</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <label class="flex items-center justify-between gap-4 cursor-pointer">
+          <span class="text-sm">Cuenta supervisada</span>
+          <input type="checkbox" id="menor-supervisada" class="w-4 h-4 accent-purple" checked>
+        </label>
+        <label class="flex items-center justify-between gap-4 cursor-pointer">
+          <span class="text-sm">Verificación de madre, padre o tutor</span>
+          <input type="checkbox" id="menor-verificacion" class="w-4 h-4 accent-purple">
+        </label>
+      </div>
+    </section>
+
+    <!-- Usuarios bloqueados -->
+    <section class="th-tarjeta p-6 md:p-7 mb-6">
+      <h2 class="font-display font-semibold text-base mb-2">Usuarios bloqueados</h2>
+      <p class="text-graytext text-sm" id="lista-bloqueados">No has bloqueado a ningún usuario.</p>
+    </section>
+
+    <!-- Zona de demostracion -->
+    <section class="th-tarjeta p-6 md:p-7 mb-6 border-dashed">
+      <h2 class="font-display font-semibold text-base mb-2">Datos del prototipo</h2>
+      <p class="text-graytext text-sm mb-4">Restablece toda la información de demostración de TalentHub (encargos, comunidades, notificaciones) a su estado original en este navegador.</p>
+      <button type="button" id="btn-reiniciar-demo" class="border-2 border-navy/15 text-navy font-display text-sm font-semibold px-6 py-3 rounded-full hover:border-navy/35 transition-colors duration-300">Restablecer datos de demostración</button>
+    </section>
+
+    <!-- Cerrar sesion -->
+    <section class="th-tarjeta p-6 md:p-7">
+      <h2 class="font-display font-semibold text-base mb-2 text-[#C0392B]">Cerrar sesión</h2>
+      <p class="text-graytext text-sm mb-4">Cerrarás sesión en este navegador. Tus datos seguirán guardados.</p>
+      <button type="button" id="btn-cerrar-sesion-config" class="bg-[#C0392B] text-white font-display text-sm font-semibold px-6 py-3 rounded-full hover:opacity-90 transition-opacity duration-300">Cerrar sesión</button>
+    </section>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<!-- Modal: agregar tarjeta (simulada) -->
+<div id="modal-agregar-tarjeta" class="modal-overlay oculto">
+  <div class="modal-caja">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg">Agregar tarjeta</h3>
+      <button type="button" data-cerrar-modal="modal-agregar-tarjeta" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <p class="text-graytext text-xs mb-5 bg-grayxl rounded-lg p-3">Prototipo de demostración: no ingreses datos reales de tarjetas. Esta información no se envía a ningún servidor.</p>
+    <form id="form-agregar-tarjeta">
+      <div class="th-campo mb-4">
+        <label for="tj-marca">Marca de la tarjeta</label>
+        <select id="tj-marca" class="th-select">
+          <option>Visa</option><option>Mastercard</option><option>Diners</option><option>American Express</option>
+        </select>
+      </div>
+      <div class="th-campo mb-4">
+        <label for="tj-numero">Número de tarjeta (de prueba)</label>
+        <input type="text" id="tj-numero" class="th-input" placeholder="0000 0000 0000 0000" maxlength="19">
+        <p class="th-ayuda">Solo usamos los últimos 4 dígitos para mostrarla, el resto no se guarda.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="th-campo">
+          <label for="tj-vencimiento">Vencimiento</label>
+          <input type="text" id="tj-vencimiento" class="th-input" placeholder="MM/AA" maxlength="5">
+        </div>
+        <div class="th-campo">
+          <label for="tj-cvv">CVV</label>
+          <input type="text" id="tj-cvv" class="th-input" placeholder="123" maxlength="4">
+        </div>
+      </div>
+      <button type="submit" class="w-full bg-navy text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-navy-soft transition-colors duration-300">Guardar tarjeta</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/configuracion.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iniciar sesión | TalentHub</title>
+<meta name="description" content="Inicia sesión en tu cuenta de TalentHub.">
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+        fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+      }
+    }
+  };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="font-body text-navy bg-white auth-body">
+
+<div class="auth-pantalla">
+
+  <!-- Panel izquierdo: identidad de marca (oculto en movil) -->
+  <aside class="auth-panel-marca auth-panel-marca--foto auth-panel-marca--login">
+
+    <a href="index.html" class="relative inline-flex items-center gap-2 text-white/70 hover:text-white text-sm font-medium transition-colors duration-300">
+      <svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-arrow-left"></use></svg>
+      Volver a la landing
+    </a>
+
+    <div class="relative">
+      <img src="assets/logo/logo-light.svg" alt="TalentHub" class="h-9 w-auto mb-10">
+      <h1 class="font-display font-bold text-3xl leading-tight text-balance">Bienvenido de nuevo.</h1>
+      <p class="mt-4 text-white/70 leading-relaxed max-w-sm">Accede a tu cuenta para seguir mostrando tu talento y creciendo dentro de la comunidad.</p>
+
+      <div class="mt-10 flex items-center gap-3">
+        <img src="assets/img/mascota-talenthub.png" alt="Mascota de TalentHub" class="w-16">
+        <p class="text-sm text-white/60 max-w-[220px]">"Cada sesión te acerca un poco más a tu próximo nivel."</p>
+      </div>
+    </div>
+
+    <p class="relative text-xs text-white/40">Crea y Emprende 2026 · Ministerio de Educación del Perú</p>
+  </aside>
+
+  <!-- Panel derecho: formulario -->
+  <div class="auth-panel-formulario">
+    <div class="auth-caja">
+      <a href="index.html" class="lg:hidden inline-flex items-center gap-2 mb-8">
+        <img src="assets/logo/logo.svg" alt="TalentHub" class="h-7 w-auto">
+      </a>
+
+      <h2 class="font-display font-bold text-2xl">Iniciar sesión</h2>
+      <p class="text-graytext text-sm mt-2">Ingresa tus datos para continuar creciendo.</p>
+
+      <button type="button" id="btn-usuario-prueba" class="auth-prototipo-aviso mt-5 mb-1 w-full text-left hover:bg-[#EFEFF7] transition-colors duration-300">
+        <svg width="15" height="15" class="shrink-0"><use href="assets/icons/sprite.svg#icon-spark"></use></svg>
+        ¿Solo quieres explorar? Toca aquí para usar la cuenta de prueba.
+      </button>
+
+      <form id="form-login" novalidate class="mt-6">
+        <div class="th-campo mb-4">
+          <label for="log-correo">Correo o nombre de usuario</label>
+          <input type="text" id="log-correo" name="correo" class="th-input" placeholder="tucorreo@ejemplo.com" autocomplete="username">
+          <p class="th-error">No encontramos una cuenta con ese correo o usuario.</p>
+        </div>
+
+        <div class="th-campo mb-2">
+          <label for="log-clave">Contraseña</label>
+          <div class="auth-input-icono">
+            <input type="password" id="log-clave" name="clave" class="th-input" placeholder="Tu contraseña" autocomplete="current-password">
+            <button type="button" class="auth-alternar-clave" data-alternar="log-clave" aria-label="Mostrar contraseña"><svg width="18" height="18"><use href="assets/icons/sprite.svg#icon-eye"></use></svg></button>
+          </div>
+          <p class="th-error">La contraseña no coincide con esta cuenta.</p>
+        </div>
+
+        <div class="flex items-center justify-between mb-6 mt-3">
+          <label class="flex items-center gap-2 cursor-pointer text-sm text-graytext">
+            <input type="checkbox" id="log-recordarme" class="w-4 h-4 accent-purple">
+            Recordarme
+          </label>
+          <a href="#" id="enlace-clave-olvidada" class="text-sm text-purple font-medium">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" class="w-full bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Ingresar</button>
+
+        <div class="auth-divisor">o continúa con</div>
+        <div class="auth-social">
+          <button type="button" class="auth-social__boton" title="Continuar con Google (demostrativo)">G</button>
+          <button type="button" class="auth-social__boton" title="Continuar con Facebook (demostrativo)">f</button>
+          <button type="button" class="auth-social__boton" title="Continuar con Apple (demostrativo)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 1.5c.1 1.1-.3 2.2-1 3-.7.8-1.9 1.5-3 1.4-.1-1.1.4-2.3 1-3 .8-.9 2-1.5 3-1.4Zm3.4 16c-.5 1.1-.7 1.6-1.4 2.6-.9 1.4-2.2 3.1-3.8 3.1-1.4 0-1.8-.9-3.7-.9-1.9 0-2.4.9-3.7.9-1.6 0-2.8-1.6-3.7-3-2.5-3.9-2.8-8.5-1.2-10.9 1.1-1.7 2.9-2.7 4.5-2.7 1.7 0 2.7 1 4.1 1 1.3 0 2.1-1 4.1-1 1.5 0 3 .8 4.1 2.2-3.6 2-3 7.1.7 8.7Z"/></svg>
+          </button>
+        </div>
+
+        <p class="text-center text-sm text-graytext mt-6">¿No tienes cuenta? <a href="registro.html" class="text-purple font-semibold">Regístrate</a></p>
+
+        <div class="auth-prototipo-aviso mt-6">
+          <svg width="15" height="15" class="shrink-0"><use href="assets/icons/sprite.svg#icon-alert"></use></svg>
+          Prototipo de demostración: el inicio de sesión es simulado, no hay servidor real.
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: contraseña olvidada (demostrativo) -->
+<div id="modal-clave-olvidada" class="modal-overlay oculto">
+  <div class="modal-caja text-center">
+    <div class="chip-icono bg-purple/10 text-purple mx-auto mb-4"><svg width="24" height="24"><use href="assets/icons/sprite.svg#icon-lock"></use></svg></div>
+    <h3 class="font-display font-bold text-xl">Recuperar contraseña</h3>
+    <p class="text-graytext text-sm mt-2">En la versión final, te enviaríamos un enlace de recuperación a tu correo. Esta función estará disponible próximamente.</p>
+    <button type="button" class="mt-6 w-full bg-navy text-white font-display text-sm font-semibold py-3 rounded-full" data-cerrar-modal="modal-clave-olvidada">Entendido</button>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

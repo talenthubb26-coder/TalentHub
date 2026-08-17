@@ -1,0 +1,55 @@
+/* =========================================================
+   TALENTHUB - DASHBOARD.CSS
+   Estilos especificos del panel principal (dashboard.html).
+   ========================================================= */
+
+.al-dashboard > * {
+  animation: aparecerDashboard 500ms ease both;
+}
+
+@keyframes aparecerDashboard {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dash-acceso {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 14px;
+  background-color: var(--color-gray-light);
+  color: var(--color-navy);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.dash-acceso svg {
+  color: var(--color-purple);
+}
+
+.dash-acceso:hover {
+  background-color: #ECEAFF;
+  transform: translateY(-2px);
+}
+
+.dash-mini-tarjeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+}
+
+.dash-insignia {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background-color: rgba(233, 228, 92, 0.22);
+  color: #6B6300;
+  font-size: 12.5px;
+  font-weight: 600;
+}

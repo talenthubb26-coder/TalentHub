@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi perfil | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/perfil.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content th-content--ancho">
+
+    <!-- Cabecera de perfil -->
+    <section class="th-tarjeta overflow-hidden">
+      <div class="perfil-portada" id="perfil-portada"></div>
+      <div class="px-5 md:px-8 pt-3 pb-7">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div class="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-4">
+            <img id="perfil-avatar" src="" alt="" class="w-24 h-24 rounded-2xl border-4 border-white bg-white shadow-md shrink-0 -translate-y-10 sm:-translate-y-12">
+            <div class="pb-1 -mt-6 sm:mt-0">
+              <h1 id="perfil-nombre" class="font-display font-bold text-xl md:text-2xl"></h1>
+              <p id="perfil-ubicacion" class="text-graytext text-sm mt-1 flex items-center gap-1.5"></p>
+            </div>
+          </div>
+          <div class="flex gap-2 pb-1">
+            <button type="button" id="btn-editar-perfil" class="inline-flex items-center gap-2 border-2 border-navy/15 text-navy font-display text-xs font-semibold px-4 py-2.5 rounded-full hover:border-navy/35 transition-colors duration-300">
+              <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-edit"></use></svg> Editar perfil
+            </button>
+            <button type="button" id="btn-compartir-perfil" class="inline-flex items-center gap-2 border-2 border-navy/15 text-navy font-display text-xs font-semibold px-4 py-2.5 rounded-full hover:border-navy/35 transition-colors duration-300">
+              <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-share"></use></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 mt-5" id="perfil-etiquetas"></div>
+
+        <div class="grid grid-cols-3 sm:flex sm:flex-wrap gap-4 sm:gap-8 mt-6 pt-6 border-t border-[#EEF0F7]">
+          <div>
+            <p class="font-display font-bold text-lg" id="perfil-stat-encargos">0</p>
+            <p class="text-graytext text-xs">Encargos</p>
+          </div>
+          <div>
+            <p class="font-display font-bold text-lg" id="perfil-stat-valoracion">0.0</p>
+            <p class="text-graytext text-xs">Valoración</p>
+          </div>
+          <div>
+            <p class="font-display font-bold text-lg" id="perfil-stat-xp">0</p>
+            <p class="text-graytext text-xs">XP total</p>
+          </div>
+          <button type="button" id="btn-ver-seguidores" class="text-left">
+            <p class="font-display font-bold text-lg" id="perfil-stat-seguidores">0</p>
+            <p class="text-graytext text-xs">Seguidores</p>
+          </button>
+          <button type="button" id="btn-ver-siguiendo" class="text-left">
+            <p class="font-display font-bold text-lg" id="perfil-stat-siguiendo">0</p>
+            <p class="text-graytext text-xs">Siguiendo</p>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="flex gap-6 border-b border-[#EEF0F7] mt-8 overflow-x-auto" role="tablist">
+      <button type="button" class="th-tab activo" data-tab="portafolio">Portafolio</button>
+      <button type="button" class="th-tab" data-tab="sobre-mi">Sobre mí</button>
+      <button type="button" class="th-tab" data-tab="servicios">Servicios</button>
+      <button type="button" class="th-tab" data-tab="personalizacion">Personalización</button>
+      <button type="button" class="th-tab" data-tab="valoraciones">Valoraciones</button>
+    </div>
+
+    <!-- Contenido: Portafolio -->
+    <section class="perfil-panel mt-7" data-panel="portafolio">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="font-display font-semibold text-lg">Proyectos del portafolio</h2>
+        <button type="button" id="btn-agregar-proyecto" class="inline-flex items-center gap-2 bg-purple text-white font-display text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-purple-dark transition-colors duration-300">
+          <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-plus"></use></svg> Agregar proyecto
+        </button>
+      </div>
+      <div id="perfil-portafolio-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </section>
+
+    <!-- Contenido: Sobre mi -->
+    <section class="perfil-panel mt-7 oculto" data-panel="sobre-mi">
+      <div class="th-tarjeta p-6 md:p-8 max-w-2xl">
+        <h2 class="font-display font-semibold text-lg mb-3">Sobre mí</h2>
+        <p id="perfil-bio" class="text-graytext leading-relaxed"></p>
+        <h3 class="font-display font-semibold text-sm mt-6 mb-3">Talentos principales</h3>
+        <div id="perfil-talentos-lista" class="flex flex-wrap gap-2"></div>
+      </div>
+    </section>
+
+    <!-- Contenido: Servicios -->
+    <section class="perfil-panel mt-7 oculto" data-panel="servicios">
+      <div class="flex items-center justify-between mb-5">
+        <div>
+          <h2 class="font-display font-semibold text-lg">Servicios y precios referenciales</h2>
+          <p class="text-graytext text-sm mt-1">Esta información también se mostrará en tu perfil público.</p>
+        </div>
+        <button type="button" id="btn-agregar-servicio" class="inline-flex items-center gap-2 bg-purple text-white font-display text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-purple-dark transition-colors duration-300 shrink-0">
+          <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-plus"></use></svg> Agregar servicio
+        </button>
+      </div>
+      <div id="perfil-servicios-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </section>
+
+    <!-- Contenido: Personalizacion -->
+    <section class="perfil-panel mt-7 oculto" data-panel="personalizacion">
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="th-tarjeta p-6 md:col-span-2">
+          <h2 class="font-display font-semibold text-base mb-4">Portada de perfil</h2>
+          <div class="grid grid-cols-4 gap-3" id="perfil-banners"></div>
+        </div>
+
+        <div class="th-tarjeta p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="font-display font-semibold text-base">Marcos de avatar</h2>
+            <span class="th-etiqueta th-etiqueta--gold" id="perfil-puntos-etiqueta">0 pts</span>
+          </div>
+          <div class="grid grid-cols-4 gap-3" id="perfil-marcos"></div>
+          <button type="button" id="btn-ver-anuncio" class="w-full mt-5 border-2 border-dashed border-navy/15 rounded-xl py-3 text-xs font-display font-semibold text-graytext hover:border-purple hover:text-purple transition-colors duration-300">
+            Ver anuncio para ganar 20 puntos
+          </button>
+        </div>
+
+        <div class="th-tarjeta p-6">
+          <h2 class="font-display font-semibold text-base mb-4">Plan de cuenta</h2>
+          <p class="text-sm text-graytext leading-relaxed mb-4" id="perfil-plan-texto">Estás en el Plan Estándar.</p>
+          <button type="button" id="btn-mejorar-plan" class="w-full bg-gold text-navy font-display text-sm font-semibold py-3 rounded-full hover:bg-navy hover:text-white transition-colors duration-300">Mejorar a Plan Plus</button>
+          <a href="planes.html" class="block text-center text-purple text-xs font-semibold mt-3">Ver todos los planes</a>
+          <div class="mt-6 pt-6 border-t border-[#EEF0F7]">
+            <h3 class="font-display font-semibold text-sm mb-3">Insignias desbloqueadas</h3>
+            <div id="perfil-insignias-lista" class="flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contenido: Valoraciones -->
+    <section class="perfil-panel mt-7 oculto" data-panel="valoraciones">
+      <div id="perfil-valoraciones-lista" class="space-y-4 max-w-2xl"></div>
+    </section>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<!-- Modal: editar perfil -->
+<div id="modal-editar-perfil" class="modal-overlay oculto">
+  <div class="modal-caja modal-caja--ancha">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg">Editar perfil</h3>
+      <button type="button" data-cerrar-modal="modal-editar-perfil" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <form id="form-editar-perfil">
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="th-campo mb-4">
+          <label for="ep-nombre">Nombre completo</label>
+          <input type="text" id="ep-nombre" class="th-input">
+        </div>
+        <div class="th-campo mb-4">
+          <label for="ep-ciudad">Ciudad o región</label>
+          <input type="text" id="ep-ciudad" class="th-input">
+        </div>
+      </div>
+      <div class="th-campo mb-4">
+        <label for="ep-bio">Biografía</label>
+        <textarea id="ep-bio" class="th-textarea" placeholder="Cuenta brevemente quién eres y qué haces"></textarea>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="th-campo mb-4">
+          <label for="ep-talentos">Talentos principales</label>
+          <input type="text" id="ep-talentos" class="th-input" placeholder="Sepáralos con comas">
+        </div>
+        <div class="th-campo mb-4">
+          <label for="ep-disponibilidad">Disponibilidad</label>
+          <select id="ep-disponibilidad" class="th-select">
+            <option value="Disponible">Disponible</option>
+            <option value="Ocupada">Ocupado/a</option>
+            <option value="No disponible">No disponible</option>
+          </select>
+        </div>
+      </div>
+      <label class="flex items-center gap-2.5 mb-6 cursor-pointer" id="contenedor-mostrar-edad">
+        <input type="checkbox" id="ep-mostrar-edad" class="w-4 h-4 accent-purple">
+        <span class="text-sm text-graytext">Mostrar mi edad públicamente en mi perfil</span>
+      </label>
+      <button type="submit" class="w-full bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Guardar cambios</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: agregar/editar proyecto -->
+<div id="modal-agregar-proyecto" class="modal-overlay oculto">
+  <div class="modal-caja modal-caja--ancha">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg" id="titulo-modal-proyecto">Agregar proyecto al portafolio</h3>
+      <button type="button" data-cerrar-modal="modal-agregar-proyecto" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <form id="form-agregar-proyecto">
+      <input type="hidden" id="ap-id-edicion" value="">
+      <div class="th-campo mb-4">
+        <label for="ap-titulo">Título del proyecto</label>
+        <input type="text" id="ap-titulo" class="th-input" placeholder="Ej: Identidad visual para cafetería">
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="th-campo mb-4">
+          <label for="ap-categoria">Categoría</label>
+          <select id="ap-categoria" class="th-select">
+            <option>Diseño</option><option>Ilustración</option><option>Programación</option>
+            <option>Música</option><option>Fotografía</option><option>Video</option><option>Educación</option>
+          </select>
+        </div>
+        <div class="th-campo mb-4">
+          <label for="ap-herramientas">Herramientas utilizadas</label>
+          <input type="text" id="ap-herramientas" class="th-input" placeholder="Ej: Illustrator, Photoshop">
+        </div>
+      </div>
+      <div class="th-campo mb-4">
+        <label for="ap-descripcion">Descripción</label>
+        <textarea id="ap-descripcion" class="th-textarea" placeholder="Cuenta de qué trata el proyecto"></textarea>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="th-campo mb-4">
+          <label for="ap-fecha">Fecha</label>
+          <input type="date" id="ap-fecha" class="th-input">
+          <p class="th-error">Elige una fecha real, no puede ser futura.</p>
+        </div>
+        <div class="th-campo mb-4">
+          <label for="ap-enlace">Enlace de demostración (opcional)</label>
+          <input type="url" id="ap-enlace" class="th-input" placeholder="https://">
+        </div>
+      </div>
+      <div class="th-campo mb-6">
+        <label>Imagen del proyecto</label>
+        <div class="border-2 border-dashed border-navy/15 rounded-xl py-8 text-center text-graytext text-xs">
+          <svg width="22" height="22" class="mx-auto mb-2 text-graytext/60"><use href="assets/icons/sprite.svg#icon-upload"></use></svg>
+          Arrastra una imagen o haz clic para subirla (demostrativo)
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <button type="button" id="btn-eliminar-proyecto" class="oculto shrink-0 border-2 border-[#E38A8A] text-[#C0392B] font-display text-sm font-semibold px-5 rounded-full hover:bg-[#FFF3F3] transition-colors duration-300">Eliminar</button>
+        <button type="submit" id="btn-guardar-proyecto" class="flex-1 bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Publicar proyecto</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: agregar/editar servicio -->
+<div id="modal-servicio" class="modal-overlay oculto">
+  <div class="modal-caja">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg" id="titulo-modal-servicio">Agregar servicio</h3>
+      <button type="button" data-cerrar-modal="modal-servicio" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <form id="form-servicio">
+      <input type="hidden" id="sv-id-edicion" value="">
+      <div class="th-campo mb-4">
+        <label for="sv-nombre">Nombre del servicio</label>
+        <input type="text" id="sv-nombre" class="th-input" placeholder="Ej: Diseño de logotipo">
+      </div>
+      <div class="th-campo mb-4">
+        <label for="sv-descripcion">Descripción</label>
+        <textarea id="sv-descripcion" class="th-textarea" placeholder="¿Qué incluye este servicio?" style="min-height:70px"></textarea>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="th-campo mb-4">
+          <label for="sv-precio-min">Precio mínimo (S/)</label>
+          <input type="number" id="sv-precio-min" class="th-input" min="0" placeholder="40">
+        </div>
+        <div class="th-campo mb-4">
+          <label for="sv-precio-max">Precio máximo (S/)</label>
+          <input type="number" id="sv-precio-max" class="th-input" min="0" placeholder="80">
+        </div>
+      </div>
+      <p class="th-error" id="error-precio-servicio" style="display:none;margin-top:-12px;margin-bottom:16px;">El precio máximo debe ser mayor o igual al mínimo.</p>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="th-campo mb-4">
+          <label for="sv-tiempo">Tiempo estimado</label>
+          <input type="text" id="sv-tiempo" class="th-input" placeholder="Ej: 3 a 5 días">
+        </div>
+        <div class="th-campo mb-6">
+          <label for="sv-disponibilidad">Disponibilidad</label>
+          <select id="sv-disponibilidad" class="th-select">
+            <option>Disponible ahora</option>
+            <option>Bajo consulta</option>
+            <option>Lista de espera</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <button type="button" id="btn-eliminar-servicio" class="oculto shrink-0 border-2 border-[#E38A8A] text-[#C0392B] font-display text-sm font-semibold px-5 rounded-full hover:bg-[#FFF3F3] transition-colors duration-300">Eliminar</button>
+        <button type="submit" class="flex-1 bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Guardar servicio</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: seguidores / siguiendo -->
+<div id="modal-seguidores" class="modal-overlay oculto">
+  <div class="modal-caja">
+    <div class="flex items-center justify-between mb-2">
+      <div class="flex gap-5" role="tablist">
+        <button type="button" class="th-tab activo" data-lista="seguidores" id="tab-seguidores">Seguidores</button>
+        <button type="button" class="th-tab" data-lista="siguiendo" id="tab-siguiendo">Siguiendo</button>
+      </div>
+      <button type="button" data-cerrar-modal="modal-seguidores" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <div id="lista-seguidores-personas" class="mt-4 space-y-1 max-h-[420px] overflow-y-auto"></div>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/perfil.js"></script>
+</body>
+</html>

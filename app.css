@@ -1,0 +1,557 @@
+/* =========================================================
+   TALENTHUB - APP.CSS
+   Estilos compartidos por todas las paginas internas de la
+   aplicacion (todo lo que no es la landing publica): estructura
+   del shell (sidebar, topbar, navegacion movil) y componentes
+   reutilizables (tarjetas, modales, toasts, barra de XP, tabs,
+   formularios). Depende de las variables definidas en styles.css,
+   que debe cargarse antes que este archivo.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. ESTRUCTURA BASE DEL SHELL
+   --------------------------------------------------------- */
+.th-app {
+  min-height: 100vh;
+  background-color: var(--color-gray-light);
+}
+
+/* Barra lateral de escritorio */
+.th-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 264px;
+  background-color: var(--color-navy);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+  transform: translateX(-100%);
+  transition: transform var(--transition-base);
+  overflow-y: auto;
+}
+
+@media (min-width: 1024px) {
+  .th-sidebar {
+    transform: translateX(0);
+  }
+}
+
+.th-sidebar--abierta {
+  transform: translateX(0);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.4);
+}
+
+.th-sidebar__logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px 18px;
+}
+
+.th-sidebar__cerrar {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.th-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.th-sidebar__extra {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.th-sidebar__enlace {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+.th-sidebar__enlace:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--color-white);
+}
+
+.th-sidebar__enlace.activo {
+  background-color: var(--color-purple);
+  color: var(--color-white);
+}
+
+.th-badge-num {
+  margin-left: auto;
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+.th-badge-punto {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--color-gold);
+  border: 2px solid var(--color-white);
+}
+
+.th-sidebar__usuario {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.th-sidebar__salir {
+  color: rgba(255, 255, 255, 0.5);
+  padding: 8px;
+  border-radius: 10px;
+  transition: background-color var(--transition-base), color var(--transition-base);
+  flex-shrink: 0;
+}
+
+.th-sidebar__salir:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+}
+
+/* Fondo oscuro detras de la sidebar en movil */
+#th-sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(11, 30, 79, 0.5);
+  z-index: 45;
+}
+
+#th-sidebar-overlay.activo {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  #th-sidebar-overlay {
+    display: none !important;
+  }
+}
+
+/* Barra superior */
+.th-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background-color: var(--color-white);
+  border-bottom: 1px solid #E7E9F2;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+}
+
+@media (min-width: 1024px) {
+  .th-topbar {
+    padding: 0 32px;
+  }
+}
+
+.th-topbar__hamburguesa {
+  color: var(--color-navy);
+  flex-shrink: 0;
+}
+
+.th-topbar__titulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--color-navy);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.th-topbar__acciones {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.th-topbar__icono {
+  position: relative;
+  color: var(--color-navy);
+  padding: 6px;
+  border-radius: 10px;
+  transition: background-color var(--transition-base);
+}
+
+.th-topbar__icono:hover {
+  background-color: var(--color-gray-light);
+}
+
+/* Area principal de contenido */
+.th-main {
+  min-height: 100vh;
+}
+
+@media (min-width: 1024px) {
+  .th-main {
+    margin-left: 264px;
+  }
+}
+
+.th-content {
+  padding: 24px 18px 96px;
+}
+
+@media (min-width: 768px) {
+  .th-content {
+    padding: 32px 28px 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .th-content {
+    padding: 36px 40px 56px;
+  }
+}
+
+.th-content--ancho {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Navegacion inferior movil */
+.th-navmovil {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background-color: var(--color-white);
+  border-top: 1px solid #E7E9F2;
+  display: flex;
+  padding: 6px 4px;
+  padding-bottom: max(6px, env(safe-area-inset-bottom));
+}
+
+@media (min-width: 1024px) {
+  .th-navmovil {
+    display: none;
+  }
+}
+
+.th-navmovil__enlace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 2px;
+  color: #9CA3AF;
+  font-size: 10.5px;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.th-navmovil__enlace.activo {
+  color: var(--color-purple);
+}
+
+.th-content {
+  padding-bottom: 88px;
+}
+
+@media (min-width: 1024px) {
+  .th-content {
+    padding-bottom: 56px;
+  }
+}
+
+/* ---------------------------------------------------------
+   2. COMPONENTES: TARJETAS DE ESTADISTICAS Y XP
+   --------------------------------------------------------- */
+.th-tarjeta {
+  background-color: var(--color-white);
+  border: 1px solid #ECEEF6;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.th-barra-xp {
+  width: 100%;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.th-barra-xp--clara {
+  background-color: #ECEAFF;
+}
+
+.th-barra-xp__relleno {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-purple), var(--color-gold));
+  border-radius: 999px;
+  transition: width 900ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------------------------------------------------------
+   3. BADGES / ETIQUETAS
+   --------------------------------------------------------- */
+.th-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 999px;
+}
+
+.th-etiqueta--purple { background-color: rgba(124, 92, 255, 0.12); color: var(--color-purple-dark); }
+.th-etiqueta--gold { background-color: rgba(233, 228, 92, 0.28); color: #7A6E00; }
+.th-etiqueta--navy { background-color: rgba(11, 30, 79, 0.08); color: var(--color-navy); }
+.th-etiqueta--verde { background-color: rgba(34, 172, 108, 0.12); color: #1C8F5B; }
+.th-etiqueta--rojo { background-color: rgba(239, 68, 68, 0.1); color: #C0392B; }
+
+/* ---------------------------------------------------------
+   4. TABS
+   --------------------------------------------------------- */
+.th-tab {
+  padding: 10px 4px;
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--color-graytext);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.th-tab.activo {
+  color: var(--color-purple);
+  border-color: var(--color-purple);
+}
+
+/* ---------------------------------------------------------
+   5. MODALES
+   --------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(11, 30, 79, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.modal-overlay.oculto {
+  display: none;
+}
+
+.modal-overlay.activo {
+  opacity: 1;
+}
+
+.modal-caja {
+  background-color: var(--color-white);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
+  transform: translateY(14px) scale(0.98);
+  transition: transform 220ms ease;
+}
+
+.modal-overlay.activo .modal-caja {
+  transform: translateY(0) scale(1);
+}
+
+.modal-caja--ancha {
+  max-width: 680px;
+}
+
+/* ---------------------------------------------------------
+   6. TOASTS
+   --------------------------------------------------------- */
+.contenedor-toasts {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  width: calc(100% - 32px);
+  max-width: 420px;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .contenedor-toasts {
+    bottom: 24px;
+    left: auto;
+    right: 24px;
+    transform: none;
+  }
+}
+
+.toast {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 13px 18px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.toast.activo {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast--exito { background-color: #1B8F5B; }
+.toast--error { background-color: #C0392B; }
+.toast--info { background-color: var(--color-navy); }
+
+/* ---------------------------------------------------------
+   7. FORMULARIOS DE LA APLICACION (fondo claro)
+   --------------------------------------------------------- */
+.th-campo label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: 6px;
+}
+
+.th-input,
+.th-select,
+.th-textarea {
+  width: 100%;
+  border: 1.5px solid #E1E4EF;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 14px;
+  color: var(--color-navy);
+  background-color: var(--color-white);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.th-input:focus,
+.th-select:focus,
+.th-textarea:focus {
+  border-color: var(--color-purple);
+  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.15);
+}
+
+.th-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.th-ayuda {
+  font-size: 12px;
+  color: #8A90A3;
+  margin-top: 5px;
+}
+
+.th-error {
+  font-size: 12px;
+  color: #C0392B;
+  margin-top: 5px;
+  display: none;
+}
+
+.th-campo.th-campo--error .th-input,
+.th-campo.th-campo--error .th-select,
+.th-campo.th-campo--error .th-textarea {
+  border-color: #E38A8A;
+}
+
+.th-campo.th-campo--error .th-error {
+  display: block;
+}
+
+/* ---------------------------------------------------------
+   8. ESTADOS VACIOS
+   --------------------------------------------------------- */
+.th-vacio {
+  text-align: center;
+  padding: 52px 20px;
+}
+
+/* ---------------------------------------------------------
+   9. UTILITARIOS
+   --------------------------------------------------------- */
+.th-avatar-marco {
+  border: 3px solid var(--color-gold);
+}
+
+.dash-fila-actividad {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+}
+
+.dash-fila-actividad__icono {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: rgba(124, 92, 255, 0.1);
+  color: var(--color-purple);
+}
+
+.th-fila-hover:hover {
+  background-color: var(--color-gray-light);
+}
+
+.oculto {
+  display: none !important;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centro de aprendizaje | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/aprendizaje.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content th-content--ancho">
+
+    <div class="th-tarjeta bg-navy text-white p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-5 mb-8">
+      <div>
+        <h1 class="font-display font-bold text-xl md:text-2xl">Centro de aprendizaje</h1>
+        <p class="text-white/70 text-sm mt-2 max-w-lg">Recursos cortos y prácticos para que consigas tus primeros clientes con más confianza.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="text-center">
+          <p class="font-display font-bold text-2xl" id="aprendizaje-completados">0</p>
+          <p class="text-white/60 text-xs">Completados</p>
+        </div>
+        <div class="w-px h-10 bg-white/15"></div>
+        <div class="text-center">
+          <p class="font-display font-bold text-2xl" id="aprendizaje-total">0</p>
+          <p class="text-white/60 text-xs">Disponibles</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="aprendizaje-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<!-- Modal: ver curso -->
+<div id="modal-curso" class="modal-overlay oculto">
+  <div class="modal-caja modal-caja--ancha">
+    <div class="flex items-center justify-between mb-2">
+      <span class="th-etiqueta th-etiqueta--purple" id="curso-modal-categoria"></span>
+      <button type="button" data-cerrar-modal="modal-curso" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <h3 class="font-display font-bold text-xl mt-3" id="curso-modal-titulo"></h3>
+    <p class="text-graytext text-xs mt-1" id="curso-modal-meta"></p>
+    <div class="mt-5 text-sm text-graytext leading-relaxed space-y-3" id="curso-modal-contenido"></div>
+    <button type="button" id="btn-completar-curso" class="w-full mt-7 bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Marcar como completado</button>
+  </div>
+</div>
+
+<!-- Modal: logro desbloqueado -->
+<div id="modal-logro-curso" class="modal-overlay oculto">
+  <div class="modal-caja text-center">
+    <img src="assets/img/mascota-talenthub.png" alt="" class="w-24 mx-auto mb-4">
+    <h3 class="font-display font-bold text-xl">¡Recurso completado!</h3>
+    <p class="text-graytext text-sm mt-2" id="logro-curso-texto"></p>
+    <button type="button" class="w-full mt-6 bg-navy text-white font-display text-sm font-semibold py-3 rounded-full" data-cerrar-modal="modal-logro-curso">Genial</button>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/aprendizaje.js"></script>
+</body>
+</html>

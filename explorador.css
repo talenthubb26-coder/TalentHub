@@ -1,0 +1,143 @@
+/* =========================================================
+   TALENTHUB - EXPLORADOR.CSS
+   Estilos del explorador de talentos, incluida la identidad
+   visual propia de cada categoria (banner tematico y acentos),
+   manteniendo siempre la paleta de marca de TalentHub.
+   ========================================================= */
+
+.explorador-banner {
+  position: relative;
+  border-radius: 20px;
+  padding: 28px 26px;
+  overflow: hidden;
+  background-color: var(--color-navy);
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  transition: background 420ms ease;
+}
+
+.explorador-banner__contenido {
+  position: relative;
+  z-index: 3;
+  max-width: 62%;
+}
+
+.explorador-banner__icono {
+  position: relative;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.22);
+  flex-shrink: 0;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .explorador-banner__icono {
+    display: block;
+  }
+}
+
+.explorador-banner__patron {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+/* Velo de legibilidad: oscurece siempre la zona donde vive el texto
+   (izquierda), sin importar la categoria, dejando que el patron
+   decorativo se luzca sobre todo del centro hacia la derecha. */
+.explorador-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.12) 45%, transparent 75%);
+  pointer-events: none;
+}
+
+/* Categoria: Todas (por defecto) -- azul marino solido de marca */
+.explorador-banner--todos {
+  background: var(--color-navy);
+}
+.explorador-banner--todos .explorador-banner__patron {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+
+/* Categoria: Diseno y Arte Digital -- morado vibrante, sensacion creativa */
+.explorador-banner--diseno {
+  background: linear-gradient(120deg, var(--color-purple-dark) 0%, var(--color-purple) 100%);
+}
+.explorador-banner--diseno .explorador-banner__patron {
+  background-image:
+    radial-gradient(circle at 68% 25%, rgba(233, 228, 92, 0.55) 0, rgba(233, 228, 92, 0.55) 26px, transparent 27px),
+    radial-gradient(circle at 80% 72%, rgba(255, 255, 255, 0.35) 0, rgba(255, 255, 255, 0.35) 14px, transparent 15px),
+    radial-gradient(circle at 92% 20%, rgba(233, 228, 92, 0.4) 0, rgba(233, 228, 92, 0.4) 34px, transparent 35px),
+    radial-gradient(circle at 96% 78%, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 18px, transparent 19px);
+}
+
+/* Categoria: Tutorias y Clases -- azul marino calido con acentos dorados */
+.explorador-banner--tutorias {
+  background: linear-gradient(120deg, var(--color-navy) 0%, var(--color-navy-soft) 100%);
+}
+.explorador-banner--tutorias .explorador-banner__patron {
+  background-image: repeating-linear-gradient(to bottom, rgba(233, 228, 92, 0.3) 0, rgba(233, 228, 92, 0.3) 1.5px, transparent 1.5px, transparent 30px);
+}
+
+
+/* Categoria: Musica y Produccion -- degradado morado-marino con ondas de sonido */
+.explorador-banner--musica {
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-purple-dark) 100%);
+}
+.explorador-banner--musica .explorador-banner__patron {
+  background-image: repeating-linear-gradient(90deg, rgba(233, 228, 92, 0.45) 0 3px, transparent 3px 10px);
+  -webkit-mask-image: linear-gradient(to top, black, black 30%, transparent 65%), linear-gradient(to right, transparent 35%, black 55%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to top, black, black 30%, transparent 65%), linear-gradient(to right, transparent 35%, black 55%);
+  mask-composite: intersect;
+}
+
+/* Categoria: Tecnologia y Codigo -- azul marino oscuro con cuadricula estructurada */
+.explorador-banner--tecnologia {
+  background: linear-gradient(135deg, #071230 0%, var(--color-navy) 100%);
+}
+.explorador-banner--tecnologia .explorador-banner__patron {
+  background-image:
+    linear-gradient(rgba(233, 228, 92, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 228, 92, 0.22) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: linear-gradient(to right, transparent 30%, black 55%);
+  mask-image: linear-gradient(to right, transparent 30%, black 55%);
+}
+
+/* ---------------------------------------------------------
+   TARJETAS DE TALENTO
+   --------------------------------------------------------- */
+.talento-tarjeta {
+  background-color: var(--color-white);
+  border: 1px solid #ECEEF6;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.talento-tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.talento-tarjeta__franja {
+  height: 4px;
+  border-radius: 4px;
+  margin: -20px -20px 16px;
+}
+
+.franja--diseno { background: linear-gradient(90deg, var(--color-purple), var(--color-gold)); }
+.franja--tutorias { background: var(--color-gold); }
+.franja--musica { background: var(--color-purple); }
+.franja--tecnologia { background: var(--color-navy); }

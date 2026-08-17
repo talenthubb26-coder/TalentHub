@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detalle del encargo | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content" style="max-width:900px;margin-left:auto;margin-right:auto;">
+
+    <a href="muro.html" class="inline-flex items-center gap-2 text-graytext text-sm font-medium mb-5 hover:text-navy transition-colors duration-300">
+      <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-arrow-left"></use></svg> Volver al muro
+    </a>
+
+    <div id="encargo-contenido">
+      <!-- Se rellena dinamicamente por encargo.js -->
+    </div>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<!-- Modal: postularme -->
+<div id="modal-postular" class="modal-overlay oculto">
+  <div class="modal-caja modal-caja--ancha">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg">Postularme al encargo</h3>
+      <button type="button" data-cerrar-modal="modal-postular" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <form id="form-postular">
+      <div class="th-campo mb-4">
+        <label for="post-mensaje">Mensaje de presentación</label>
+        <textarea id="post-mensaje" class="th-textarea" placeholder="Cuéntale al negocio por qué eres una buena opción para este encargo"></textarea>
+      </div>
+      <div class="th-campo mb-6">
+        <label for="post-proyecto">Selecciona un proyecto de tu portafolio (opcional)</label>
+        <select id="post-proyecto" class="th-select">
+          <option value="">No adjuntar proyecto</option>
+        </select>
+      </div>
+      <button type="submit" class="w-full bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Enviar postulación</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: postulacion enviada -->
+<div id="modal-postulacion-exito" class="modal-overlay oculto">
+  <div class="modal-caja text-center">
+    <img src="assets/img/mascota-talenthub.png" alt="" class="w-20 mx-auto mb-4">
+    <h3 class="font-display font-bold text-xl">Postulación enviada correctamente</h3>
+    <p class="text-graytext text-sm mt-2">El negocio revisará tu propuesta. Puedes seguir el estado desde tus notificaciones.</p>
+    <p class="th-etiqueta th-etiqueta--gold inline-flex mt-4" id="texto-xp-postulacion"></p>
+    <button type="button" class="w-full mt-5 bg-navy text-white font-display text-sm font-semibold py-3 rounded-full" data-cerrar-modal="modal-postulacion-exito">Continuar</button>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/encargo.js"></script>
+</body>
+</html>

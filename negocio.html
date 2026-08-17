@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de negocio | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content th-content--ancho">
+
+    <section class="th-tarjeta bg-navy text-white p-6 md:p-8 relative overflow-hidden al-dashboard">
+      <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-purple/25" aria-hidden="true"></div>
+      <div class="relative flex items-start justify-between gap-4 flex-wrap">
+        <div>
+          <p class="text-white/60 text-sm">Panel de negocio</p>
+          <h1 id="negocio-nombre" class="font-display font-bold text-2xl md:text-3xl mt-1"></h1>
+          <p class="text-white/60 text-sm mt-1" id="negocio-categoria"></p>
+        </div>
+        <a href="publicar-encargo.html" class="inline-flex items-center gap-2 bg-gold text-navy font-display text-sm font-semibold px-5 py-3 rounded-full hover:bg-white transition-colors duration-300">
+          <svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-plus"></use></svg> Publicar encargo
+        </a>
+      </div>
+
+      <div class="relative grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-white/10">
+        <div><p class="font-display font-bold text-2xl" id="negocio-stat-activos">0</p><p class="text-white/60 text-xs mt-1" id="negocio-stat-activos-label">Encargos activos</p></div>
+        <div><p class="font-display font-bold text-2xl" id="negocio-stat-postulantes">0</p><p class="text-white/60 text-xs mt-1">Postulaciones recibidas</p></div>
+        <button type="button" id="btn-ver-guardados" class="text-left"><p class="font-display font-bold text-2xl" id="negocio-stat-guardados">0</p><p class="text-white/60 text-xs mt-1">Talentos guardados</p></button>
+      </div>
+    </section>
+
+    <!-- Promocion de Plan Empresas (solo si el negocio aun no lo tiene) -->
+    <section id="negocio-promo-premium" class="th-tarjeta bg-gold/15 border border-gold/40 p-5 md:p-6 mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 oculto">
+      <div class="flex items-center gap-4 min-w-0">
+        <div class="chip-icono bg-gold/30 text-navy shrink-0"><svg width="22" height="22"><use href="assets/icons/sprite.svg#icon-star"></use></svg></div>
+        <div class="min-w-0">
+          <h3 class="font-display font-semibold text-sm">Desbloquea todo el potencial de tu negocio</h3>
+          <p class="text-graytext text-xs mt-1">Publicaciones ilimitadas, talentos destacados y mejor posicionamiento con el Plan Empresas.</p>
+        </div>
+      </div>
+      <a href="planes.html" class="bg-navy text-white font-display text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-navy-soft transition-colors duration-300 shrink-0 text-center">Ver Plan Empresas</a>
+    </section>
+
+    <!-- Mis encargos -->
+    <section class="mt-10">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-display font-semibold text-lg">Mis encargos publicados</h2>
+        <a href="muro.html" class="text-purple text-sm font-semibold">Ver muro completo</a>
+      </div>
+      <div id="negocio-encargos" class="space-y-4"></div>
+    </section>
+
+    <!-- Explorador de talentos -->
+    <section class="mt-10">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="font-display font-semibold text-lg">Explorador de talentos</h2>
+        <a href="explorador.html" class="text-purple text-sm font-semibold">Ver explorador completo</a>
+      </div>
+      <div id="negocio-talentos" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </section>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<!-- Modal: postulantes de un encargo -->
+<div id="modal-postulantes" class="modal-overlay oculto">
+  <div class="modal-caja modal-caja--ancha">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg">Postulantes</h3>
+      <button type="button" data-cerrar-modal="modal-postulantes" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <div id="lista-postulantes" class="space-y-3"></div>
+  </div>
+</div>
+
+<!-- Modal: talentos guardados -->
+<div id="modal-guardados" class="modal-overlay oculto">
+  <div class="modal-caja modal-caja--ancha">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg">Talentos guardados</h3>
+      <button type="button" data-cerrar-modal="modal-guardados" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <div id="lista-guardados" class="space-y-3"></div>
+  </div>
+</div>
+
+<!-- Modal: contactar talento -->
+<div id="modal-contactar-talento" class="modal-overlay oculto">
+  <div class="modal-caja">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg" id="titulo-contactar-talento">Enviar mensaje</h3>
+      <button type="button" data-cerrar-modal="modal-contactar-talento" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <form id="form-contactar-talento">
+      <div class="th-campo mb-4">
+        <label for="nt-mensaje">Mensaje</label>
+        <textarea id="nt-mensaje" class="th-textarea" placeholder="Cuéntale a este talento en qué estás pensando..."></textarea>
+      </div>
+      <div class="th-campo mb-6">
+        <label for="nt-proyecto">Referenciar un proyecto de su portafolio (opcional)</label>
+        <select id="nt-proyecto" class="th-select">
+          <option value="">No referenciar ningún proyecto</option>
+        </select>
+      </div>
+      <button type="submit" class="w-full bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Enviar mensaje</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/negocio.js"></script>
+</body>
+</html>

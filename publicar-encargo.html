@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publicar encargo | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content" style="max-width:720px;margin-left:auto;margin-right:auto;">
+
+    <a href="negocio.html" class="inline-flex items-center gap-2 text-graytext text-sm font-medium mb-5 hover:text-navy transition-colors duration-300">
+      <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-arrow-left"></use></svg> Volver al panel
+    </a>
+
+    <h1 class="font-display font-bold text-2xl mb-1">Publicar un encargo</h1>
+    <p class="text-graytext text-sm mb-7">Describe lo que necesitas y deja que el talento joven de TalentHub postule.</p>
+
+    <form id="form-publicar-encargo" class="th-tarjeta p-6 md:p-8">
+      <div class="th-campo mb-5">
+        <label for="pe-titulo">Título del encargo</label>
+        <input type="text" id="pe-titulo" class="th-input" placeholder="Ej: Diseño de logo para marca de ropa">
+      </div>
+
+      <div class="th-campo mb-5">
+        <label for="pe-descripcion">Descripción</label>
+        <textarea id="pe-descripcion" class="th-textarea" placeholder="Cuéntales a los talentos qué necesitas exactamente"></textarea>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="th-campo mb-5">
+          <label for="pe-categoria">Categoría</label>
+          <select id="pe-categoria" class="th-select">
+            <option>Diseño</option><option>Ilustración</option><option>Programación</option>
+            <option>Música</option><option>Fotografía</option><option>Video</option>
+            <option>Educación</option><option>Tecnología</option><option>Marketing</option>
+          </select>
+        </div>
+        <div class="th-campo mb-5">
+          <label for="pe-modalidad">Modalidad</label>
+          <select id="pe-modalidad" class="th-select">
+            <option>Remoto</option>
+            <option>Presencial</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="th-campo mb-5">
+          <label for="pe-presupuesto-min">Presupuesto mínimo (S/)</label>
+          <input type="number" id="pe-presupuesto-min" class="th-input" min="0" placeholder="50">
+        </div>
+        <div class="th-campo mb-5">
+          <label for="pe-presupuesto-max">Presupuesto máximo (S/)</label>
+          <input type="number" id="pe-presupuesto-max" class="th-input" min="0" placeholder="150">
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="th-campo mb-5">
+          <label for="pe-ubicacion">Ubicación</label>
+          <input type="text" id="pe-ubicacion" class="th-input" placeholder="Ej: Lima">
+        </div>
+        <div class="th-campo mb-5">
+          <label for="pe-fecha-limite">Fecha límite</label>
+          <input type="date" id="pe-fecha-limite" class="th-input">
+        </div>
+      </div>
+
+      <div class="th-campo mb-5">
+        <label for="pe-habilidades">Habilidades necesarias</label>
+        <input type="text" id="pe-habilidades" class="th-input" placeholder="Sepáralas con comas. Ej: Illustrator, Branding">
+      </div>
+
+      <div class="th-campo mb-7">
+        <label for="pe-nivel">Nivel recomendado</label>
+        <select id="pe-nivel" class="th-select">
+          <option value="1">Nivel 1 · Talento nuevo</option>
+          <option value="2" selected>Nivel 2 · Con algo de experiencia</option>
+          <option value="3">Nivel 3 · Experimentado</option>
+        </select>
+      </div>
+
+      <button type="submit" class="w-full bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Publicar encargo</button>
+    </form>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<!-- Modal: encargo publicado -->
+<div id="modal-encargo-publicado" class="modal-overlay oculto">
+  <div class="modal-caja text-center">
+    <img src="assets/img/mascota-talenthub.png" alt="" class="w-20 mx-auto mb-4">
+    <h3 class="font-display font-bold text-xl">Encargo publicado correctamente</h3>
+    <p class="text-graytext text-sm mt-2">Ya está visible en el muro de encargos para todos los talentos de TalentHub.</p>
+    <div class="flex gap-3 mt-6">
+      <a href="negocio.html" class="flex-1 border-2 border-navy/15 text-navy font-display text-sm font-semibold py-3 rounded-full">Volver al panel</a>
+      <a href="muro.html" class="flex-1 bg-navy text-white font-display text-sm font-semibold py-3 rounded-full">Ver en el muro</a>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: limite de encargos alcanzado -->
+<div id="modal-limite-encargos" class="modal-overlay oculto">
+  <div class="modal-caja text-center">
+    <div class="chip-icono bg-gold/25 text-navy mx-auto mb-4"><svg width="24" height="24"><use href="assets/icons/sprite.svg#icon-lock"></use></svg></div>
+    <h3 class="font-display font-bold text-xl">Alcanzaste tu límite de encargos</h3>
+    <p class="text-graytext text-sm mt-2 leading-relaxed">El Plan Estándar permite hasta <strong id="limite-numero-encargos">3</strong> encargos activos al mismo tiempo. Tienes estas opciones:</p>
+    <ul class="text-left text-graytext text-sm mt-4 space-y-2.5">
+      <li class="flex items-start gap-2"><svg width="15" height="15" class="text-purple mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-clock"></use></svg> Esperar a que un encargo caduque en su fecha límite.</li>
+      <li class="flex items-start gap-2"><svg width="15" height="15" class="text-purple mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-trash"></use></svg> Eliminar un encargo (el cupo se libera recién a las 24 horas).</li>
+      <li class="flex items-start gap-2"><svg width="15" height="15" class="text-purple mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-star"></use></svg> Mejorar al Plan Empresas para publicar sin límite.</li>
+    </ul>
+    <div class="flex gap-3 mt-6">
+      <a href="negocio.html" class="flex-1 border-2 border-navy/15 text-navy font-display text-sm font-semibold py-3 rounded-full">Volver al panel</a>
+      <a href="planes.html" class="flex-1 bg-navy text-white font-display text-sm font-semibold py-3 rounded-full">Ver Plan Empresas</a>
+    </div>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/publicar-encargo.js"></script>
+</body>
+</html>

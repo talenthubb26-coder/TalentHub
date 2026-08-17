@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crear cuenta | TalentHub</title>
+<meta name="description" content="Crea tu cuenta en TalentHub y empieza a mostrar tu talento.">
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+        fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+      }
+    }
+  };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="font-body text-navy bg-white auth-body">
+
+<div class="auth-pantalla">
+
+  <!-- Panel izquierdo: identidad de marca (oculto en movil) -->
+  <aside class="auth-panel-marca auth-panel-marca--foto auth-panel-marca--registro">
+
+    <a href="index.html" class="relative inline-flex items-center gap-2 text-white/70 hover:text-white text-sm font-medium transition-colors duration-300">
+      <svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-arrow-left"></use></svg>
+      Volver a la landing
+    </a>
+
+    <div class="relative">
+      <img src="assets/logo/logo-light.svg" alt="TalentHub" class="h-9 w-auto mb-10">
+      <h1 class="font-display font-bold text-3xl leading-tight text-balance">Únete a la comunidad de talento joven del Perú.</h1>
+      <p class="mt-4 text-white/70 leading-relaxed max-w-sm">Crea tu cuenta y empieza a mostrar lo que sabes hacer. Es gratis, es tuyo y crece contigo.</p>
+
+      <div class="mt-10 flex items-center gap-3">
+        <img src="assets/img/mascota-talenthub.png" alt="Mascota de TalentHub" class="w-16">
+        <p class="text-sm text-white/60 max-w-[220px]">"Tu primer encargo está más cerca de lo que piensas."</p>
+      </div>
+    </div>
+
+    <p class="relative text-xs text-white/40">Crea y Emprende 2026 · Ministerio de Educación del Perú</p>
+  </aside>
+
+  <!-- Panel derecho: formulario -->
+  <div class="auth-panel-formulario">
+    <div class="auth-caja">
+      <a href="index.html" class="lg:hidden inline-flex items-center gap-2 mb-8">
+        <img src="assets/logo/logo.svg" alt="TalentHub" class="h-7 w-auto">
+      </a>
+
+      <h2 class="font-display font-bold text-2xl">Crear cuenta</h2>
+      <p class="text-graytext text-sm mt-1">Elige el tipo de cuenta que quieres crear.</p>
+
+      <!-- Selector de tipo de cuenta -->
+      <div class="auth-tabs" role="tablist" aria-label="Tipo de cuenta">
+        <button type="button" class="auth-tab activo" id="tab-talento" data-tipo="talento">Joven / Talento</button>
+        <button type="button" class="auth-tab" id="tab-negocio" data-tipo="negocio">Negocio / Emprendimiento</button>
+      </div>
+
+      <div id="aviso-plan-premium" class="th-etiqueta th-etiqueta--gold mb-4 oculto">Empezarás con el Plan Plus activado</div>
+
+      <form id="form-registro" novalidate>
+
+        <!-- Campos comunes: nombre -->
+        <div class="th-campo mb-3">
+          <label for="reg-nombre">Nombre completo</label>
+          <input type="text" id="reg-nombre" name="nombre" class="th-input" placeholder="Escribe tu nombre completo" autocomplete="name">
+          <p class="th-error">Ingresa tu nombre completo.</p>
+        </div>
+
+        <!-- Solo negocio: nombre de la empresa -->
+        <div class="th-campo mb-4 oculto" id="campo-nombre-empresa">
+          <label for="reg-empresa">Nombre del negocio o emprendimiento</label>
+          <input type="text" id="reg-empresa" name="nombreEmpresa" class="th-input" placeholder="Ej: Café Central">
+          <p class="th-error">Ingresa el nombre de tu negocio.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="th-campo mb-3">
+            <label for="reg-usuario">Nombre de usuario</label>
+            <input type="text" id="reg-usuario" name="usuario" class="th-input" placeholder="Sin espacios">
+            <p class="th-error">Elige un nombre de usuario (mínimo 4 caracteres).</p>
+          </div>
+          <div class="th-campo mb-3" id="campo-ciudad">
+            <label for="reg-ciudad">Ciudad o región</label>
+            <input type="text" id="reg-ciudad" name="ciudad" class="th-input" placeholder="Ej: Lima, Perú">
+            <p class="th-error">Cuéntanos tu ciudad o región.</p>
+          </div>
+        </div>
+
+        <div class="th-campo mb-3">
+          <label for="reg-correo">Correo electrónico</label>
+          <input type="email" id="reg-correo" name="correo" class="th-input" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+          <p class="th-error">Ingresa un correo electrónico válido.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="th-campo mb-3">
+            <label for="reg-clave">Contraseña</label>
+            <div class="auth-input-icono">
+              <input type="password" id="reg-clave" name="clave" class="th-input" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+              <button type="button" class="auth-alternar-clave" data-alternar="reg-clave" aria-label="Mostrar contraseña"><svg width="18" height="18"><use href="assets/icons/sprite.svg#icon-eye"></use></svg></button>
+            </div>
+            <p class="th-error">La contraseña debe tener al menos 6 caracteres.</p>
+          </div>
+          <div class="th-campo mb-3">
+            <label for="reg-clave2">Confirmar contraseña</label>
+            <div class="auth-input-icono">
+              <input type="password" id="reg-clave2" name="clave2" class="th-input" placeholder="Repite tu contraseña" autocomplete="new-password">
+              <button type="button" class="auth-alternar-clave" data-alternar="reg-clave2" aria-label="Mostrar contraseña"><svg width="18" height="18"><use href="assets/icons/sprite.svg#icon-eye"></use></svg></button>
+            </div>
+            <p class="th-error">Las contraseñas no coinciden.</p>
+          </div>
+        </div>
+
+        <!-- Solo talento: edad -->
+        <div class="th-campo mb-3" id="campo-edad">
+          <label for="reg-edad">Edad</label>
+          <input type="number" id="reg-edad" name="edad" class="th-input" placeholder="Tu edad" min="14" max="99">
+          <p class="th-error">TalentHub está pensado para jóvenes de 14 a 25 años.</p>
+        </div>
+
+        <div id="aviso-menor" class="auth-aviso-menor mb-4 oculto">
+          <svg width="18" height="18" class="shrink-0 mt-0.5"><use href="assets/icons/sprite.svg#icon-shield-check"></use></svg>
+          <span>Como eres menor de 18 años, algunas funciones de TalentHub (como recibir pagos) pueden requerir la autorización de tu madre, padre o tutor. Este es un prototipo: no se realiza ninguna verificación real.</span>
+        </div>
+
+        <!-- Solo talento: talentos principales -->
+        <div class="th-campo mb-3" id="campo-talentos">
+          <label for="reg-talentos">Talentos principales</label>
+          <input type="text" id="reg-talentos" name="talentos" class="th-input" placeholder="Ej: Diseño, Ilustración, Fotografía">
+          <p class="th-ayuda">Sepáralos con comas. Podrás editarlos luego desde tu perfil.</p>
+        </div>
+
+        <!-- Solo negocio: categoria -->
+        <div class="th-campo mb-4 oculto" id="campo-categoria-empresa">
+          <label for="reg-categoria">Categoría del negocio</label>
+          <select id="reg-categoria" name="categoriaEmpresa" class="th-select">
+            <option value="Alimentos y bebidas">Alimentos y bebidas</option>
+            <option value="Moda y textiles">Moda y textiles</option>
+            <option value="Tecnología">Tecnología</option>
+            <option value="Educación">Educación</option>
+            <option value="Servicios">Servicios</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+
+        <label class="flex items-start gap-3 mb-4 cursor-pointer">
+          <input type="checkbox" id="reg-terminos" class="mt-1 w-4 h-4 accent-purple shrink-0">
+          <span class="text-sm text-graytext leading-snug">Acepto los <a href="#" class="text-purple font-medium">Términos y condiciones</a> y la <a href="#" class="text-purple font-medium">Política de privacidad</a> de TalentHub.</span>
+        </label>
+        <p class="th-error -mt-3 mb-3" id="error-terminos">Debes aceptar los términos para continuar.</p>
+
+        <button type="submit" class="w-full bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Registrarse</button>
+
+        <div class="auth-divisor">o continúa con</div>
+        <div class="auth-social">
+          <button type="button" class="auth-social__boton" title="Continuar con Google (demostrativo)">G</button>
+          <button type="button" class="auth-social__boton" title="Continuar con Facebook (demostrativo)">f</button>
+          <button type="button" class="auth-social__boton" title="Continuar con Apple (demostrativo)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 1.5c.1 1.1-.3 2.2-1 3-.7.8-1.9 1.5-3 1.4-.1-1.1.4-2.3 1-3 .8-.9 2-1.5 3-1.4Zm3.4 16c-.5 1.1-.7 1.6-1.4 2.6-.9 1.4-2.2 3.1-3.8 3.1-1.4 0-1.8-.9-3.7-.9-1.9 0-2.4.9-3.7.9-1.6 0-2.8-1.6-3.7-3-2.5-3.9-2.8-8.5-1.2-10.9 1.1-1.7 2.9-2.7 4.5-2.7 1.7 0 2.7 1 4.1 1 1.3 0 2.1-1 4.1-1 1.5 0 3 .8 4.1 2.2-3.6 2-3 7.1.7 8.7Z"/></svg>
+          </button>
+        </div>
+
+        <p class="text-center text-sm text-graytext mt-4">¿Ya tienes cuenta? <a href="login.html" class="text-purple font-semibold">Iniciar sesión</a></p>
+
+        <div class="auth-prototipo-aviso mt-4">
+          <svg width="15" height="15" class="shrink-0"><use href="assets/icons/sprite.svg#icon-alert"></use></svg>
+          Prototipo de demostración: tus datos se guardan solo en este navegador.
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de éxito -->
+<div id="modal-exito-registro" class="modal-overlay oculto">
+  <div class="modal-caja text-center">
+    <img src="assets/img/mascota-talenthub.png" alt="" class="w-24 mx-auto mb-4">
+    <h3 class="font-display font-bold text-xl">¡Cuenta creada, <span id="texto-nombre-exito">Talento</span>!</h3>
+    <p class="text-graytext text-sm mt-2">Tu cuenta se guardó en este navegador. Estás a punto de entrar a TalentHub.</p>
+    <div class="mt-6 th-barra-xp th-barra-xp--clara"><div class="th-barra-xp__relleno" style="width:100%"></div></div>
+    <p class="text-xs text-graytext mt-2">Redirigiendo…</p>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

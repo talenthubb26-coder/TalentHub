@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfil de talento | TalentHub</title>
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { navy: '#0B1E4F', 'navy-soft': '#16296B', purple: '#7C5CFF', 'purple-dark': '#6A45F0', gold: '#E9E45C', grayxl: '#F6F7FB', graytext: '#4B5563' },
+    fontFamily: { display: ['Unbounded', 'sans-serif'], body: ['Plus Jakarta Sans', 'sans-serif'] }
+  } } };
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/perfil.css">
+</head>
+<body class="font-body text-navy th-app">
+
+<div id="th-sidebar-overlay"></div>
+<aside id="th-sidebar" class="th-sidebar"></aside>
+
+<div class="th-main">
+  <header id="th-topbar" class="th-topbar"></header>
+
+  <main class="th-content th-content--ancho">
+
+    <a href="explorador.html" class="inline-flex items-center gap-2 text-graytext text-sm font-medium mb-5 hover:text-navy transition-colors duration-300">
+      <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-arrow-left"></use></svg> Volver al explorador
+    </a>
+
+    <div id="pp-no-encontrado" class="th-vacio oculto">
+      <h2 class="font-display font-semibold text-lg">No encontramos este perfil</h2>
+    </div>
+
+    <div id="pp-contenido" class="oculto">
+      <!-- Cabecera de perfil -->
+      <section class="th-tarjeta overflow-hidden">
+        <div class="perfil-portada" id="pp-portada"></div>
+        <div class="px-5 md:px-8 pt-3 pb-7">
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-4">
+              <img id="pp-avatar" src="" alt="" class="w-24 h-24 rounded-2xl border-4 border-white bg-white shadow-md shrink-0 -translate-y-10 sm:-translate-y-12">
+              <div class="pb-1 -mt-6 sm:mt-0">
+                <h1 id="pp-nombre" class="font-display font-bold text-xl md:text-2xl"></h1>
+                <p id="pp-ubicacion" class="text-graytext text-sm mt-1 flex items-center gap-1.5"></p>
+              </div>
+            </div>
+            <div class="flex gap-2 pb-1">
+              <button type="button" id="btn-seguir" class="inline-flex items-center gap-2 font-display text-xs font-semibold px-4 py-2.5 rounded-full transition-colors duration-300">
+                <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-plus"></use></svg> Seguir
+              </button>
+              <button type="button" id="btn-valorar" class="oculto inline-flex items-center gap-2 border-2 border-navy/15 text-navy font-display text-xs font-semibold px-4 py-2.5 rounded-full hover:border-navy/35 transition-colors duration-300">
+                <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-star"></use></svg> Valorar
+              </button>
+              <button type="button" id="btn-contactar" class="inline-flex items-center gap-2 bg-purple text-white font-display text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-purple-dark transition-colors duration-300">
+                <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-message-circle"></use></svg> Contactar
+              </button>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 mt-5" id="pp-etiquetas"></div>
+
+          <div class="grid grid-cols-3 sm:flex sm:flex-wrap gap-4 sm:gap-8 mt-6 pt-6 border-t border-[#EEF0F7]">
+            <div><p class="font-display font-bold text-lg" id="pp-stat-encargos">0</p><p class="text-graytext text-xs">Encargos</p></div>
+            <div><p class="font-display font-bold text-lg" id="pp-stat-valoracion">0.0</p><p class="text-graytext text-xs">Valoración</p></div>
+            <div><p class="font-display font-bold text-lg" id="pp-stat-nivel">1</p><p class="text-graytext text-xs">Nivel</p></div>
+            <div><p class="font-display font-bold text-lg" id="pp-stat-seguidores">0</p><p class="text-graytext text-xs">Seguidores</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tabs -->
+      <div class="flex gap-6 border-b border-[#EEF0F7] mt-8 overflow-x-auto" role="tablist">
+        <button type="button" class="th-tab activo" data-tab="portafolio">Portafolio</button>
+        <button type="button" class="th-tab" data-tab="sobre-mi">Sobre mí</button>
+        <button type="button" class="th-tab" data-tab="servicios">Servicios</button>
+        <button type="button" class="th-tab" data-tab="valoraciones">Valoraciones</button>
+      </div>
+
+      <section class="perfil-panel mt-7" data-panel="portafolio">
+        <div id="pp-portafolio-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </section>
+
+      <section class="perfil-panel mt-7 oculto" data-panel="sobre-mi">
+        <div class="th-tarjeta p-6 md:p-8 max-w-2xl">
+          <h2 class="font-display font-semibold text-lg mb-3">Sobre mí</h2>
+          <p id="pp-bio" class="text-graytext leading-relaxed"></p>
+          <h3 class="font-display font-semibold text-sm mt-6 mb-3">Talentos principales</h3>
+          <div id="pp-talentos-lista" class="flex flex-wrap gap-2"></div>
+          <h3 class="font-display font-semibold text-sm mt-6 mb-3">Insignias</h3>
+          <div id="pp-insignias-lista" class="flex flex-wrap gap-2"></div>
+        </div>
+      </section>
+
+      <section class="perfil-panel mt-7 oculto" data-panel="servicios">
+        <div id="pp-servicios-grid" class="grid sm:grid-cols-2 gap-5"></div>
+      </section>
+
+      <section class="perfil-panel mt-7 oculto" data-panel="valoraciones">
+        <div id="pp-valoraciones-lista" class="space-y-4 max-w-2xl"></div>
+      </section>
+    </div>
+
+  </main>
+</div>
+
+<nav id="th-mobile-nav" class="th-navmovil"></nav>
+
+<!-- Modal: contactar -->
+<div id="modal-contactar-pp" class="modal-overlay oculto">
+  <div class="modal-caja">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg">Enviar mensaje</h3>
+      <button type="button" data-cerrar-modal="modal-contactar-pp" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <form id="form-contactar-pp">
+      <div class="th-campo mb-4">
+        <label for="pp-mensaje-contacto">Mensaje</label>
+        <textarea id="pp-mensaje-contacto" class="th-textarea" placeholder="Cuéntale en qué estás pensando..."></textarea>
+      </div>
+      <div class="th-campo mb-6">
+        <label for="pp-proyecto-contacto">Referenciar un proyecto de su portafolio (opcional)</label>
+        <select id="pp-proyecto-contacto" class="th-select">
+          <option value="">No referenciar ningún proyecto</option>
+        </select>
+      </div>
+      <button type="submit" class="w-full bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Enviar mensaje</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: dejar valoracion (solo cuentas de negocio) -->
+<div id="modal-valorar" class="modal-overlay oculto">
+  <div class="modal-caja">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-display font-bold text-lg">Dejar una valoración</h3>
+      <button type="button" data-cerrar-modal="modal-valorar" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <form id="form-valorar">
+      <div class="th-campo mb-5">
+        <label>Calificación</label>
+        <div class="flex gap-1.5" id="estrellas-valorar"></div>
+        <input type="hidden" id="valorar-estrellas" value="5">
+      </div>
+      <div class="th-campo mb-6">
+        <label for="valorar-comentario">Comentario</label>
+        <textarea id="valorar-comentario" class="th-textarea" placeholder="Cuéntale a otros negocios cómo fue trabajar con este talento"></textarea>
+      </div>
+      <button type="submit" class="w-full bg-navy text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-navy-soft transition-colors duration-300">Publicar valoración</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: solicitar encargo (flujo de varios pasos) -->
+<div id="modal-solicitar" class="modal-overlay oculto">
+  <div class="modal-caja modal-caja--ancha">
+    <div class="flex items-center justify-between mb-2">
+      <h3 class="font-display font-bold text-lg">Solicitar encargo</h3>
+      <button type="button" data-cerrar-modal="modal-solicitar" class="text-graytext"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-close"></use></svg></button>
+    </div>
+    <p class="text-graytext text-xs mb-5" id="solicitar-paso-indicador">Paso 1 de 4 · Detallar solicitud</p>
+
+    <!-- Paso 1: detallar solicitud -->
+    <div class="solicitar-paso" data-paso="1">
+      <div class="th-tarjeta p-4 mb-5 flex items-center justify-between gap-3">
+        <div>
+          <p class="font-display font-semibold text-sm" id="solicitar-servicio-nombre"></p>
+          <p class="text-graytext text-xs mt-1" id="solicitar-servicio-precio"></p>
+        </div>
+        <span class="th-etiqueta th-etiqueta--purple">Referencial</span>
+      </div>
+
+      <div id="solicitar-aviso-menor" class="auth-aviso-menor mb-5 oculto">
+        <svg width="18" height="18" class="shrink-0 mt-0.5"><use href="assets/icons/sprite.svg#icon-shield-check"></use></svg>
+        <span>Cuenta supervisada: para realizar determinadas operaciones económicas puede ser necesaria la autorización de tu padre, madre o tutor.</span>
+      </div>
+
+      <div class="th-campo mb-4">
+        <label for="sol-necesidad">¿Qué necesitas?</label>
+        <input type="text" id="sol-necesidad" class="th-input" placeholder="Ej: Logotipo para mi emprendimiento de repostería">
+      </div>
+      <div class="th-campo mb-4">
+        <label for="sol-descripcion">Descripción del trabajo</label>
+        <textarea id="sol-descripcion" class="th-textarea" placeholder="Cuenta los detalles que el talento debería conocer"></textarea>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="th-campo mb-4">
+          <label for="sol-fecha">Fecha deseada</label>
+          <input type="date" id="sol-fecha" class="th-input">
+        </div>
+        <div class="th-campo mb-4">
+          <label>Archivo de referencia (opcional)</label>
+          <div class="border-2 border-dashed border-navy/15 rounded-xl h-[46px] flex items-center justify-center text-graytext text-xs gap-2">
+            <svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-upload"></use></svg> Adjuntar (demostrativo)
+          </div>
+        </div>
+      </div>
+      <p class="th-error" id="error-solicitar-paso1">Cuéntanos al menos qué necesitas.</p>
+      <button type="button" id="btn-ir-paso-2" class="w-full mt-2 bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Continuar</button>
+    </div>
+
+    <!-- Paso 2: acordar precio -->
+    <div class="solicitar-paso oculto" data-paso="2">
+      <div class="text-center py-4">
+        <p class="text-graytext text-sm mb-2">Precio acordado para este encargo</p>
+        <div class="th-campo max-w-[200px] mx-auto text-center">
+          <input type="number" id="sol-precio-acordado" class="th-input text-center font-display font-bold text-2xl">
+        </div>
+        <p class="th-ayuda mt-2" id="sol-precio-rango"></p>
+      </div>
+      <div class="flex gap-3 mt-4">
+        <button type="button" class="btn-volver-paso flex-1 border-2 border-navy/15 text-navy font-display text-sm font-semibold py-3.5 rounded-full" data-volver="1">Atrás</button>
+        <button type="button" id="btn-ir-paso-3" class="flex-1 bg-purple text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300">Continuar al depósito</button>
+      </div>
+    </div>
+
+    <!-- Paso 3: confirmar deposito -->
+    <div class="solicitar-paso oculto" data-paso="3">
+      <h4 class="font-display font-semibold text-base mb-4">Confirmar depósito</h4>
+      <div id="sol-sin-metodo" class="th-vacio oculto">
+        <p class="text-graytext text-sm mb-4">Todavía no agregaste un método de pago.</p>
+        <a href="configuracion.html" class="inline-flex bg-navy text-white font-display text-xs font-semibold px-5 py-2.5 rounded-full">Agregar método de pago</a>
+      </div>
+      <div id="sol-con-metodo">
+        <div class="th-campo mb-4">
+          <label for="sol-metodo-pago">Método de pago</label>
+          <select id="sol-metodo-pago" class="th-select"></select>
+        </div>
+        <div class="flex items-center justify-between th-tarjeta p-4 mb-5">
+          <span class="text-graytext text-sm">Monto a depositar</span>
+          <span class="font-display font-bold text-navy text-lg" id="sol-monto-texto">S/ 0.00</span>
+        </div>
+        <button type="button" id="btn-confirmar-deposito" class="w-full bg-navy text-white font-display text-sm font-semibold py-3.5 rounded-full hover:bg-navy-soft transition-colors duration-300">Confirmar depósito</button>
+      </div>
+      <button type="button" class="btn-volver-paso w-full mt-3 text-graytext text-sm font-medium" data-volver="2">Atrás</button>
+    </div>
+
+    <!-- Paso 4: confirmacion -->
+    <div class="solicitar-paso oculto text-center py-4" data-paso="4">
+      <div class="w-14 h-14 rounded-full bg-[#1C8F5B]/10 text-[#1C8F5B] flex items-center justify-center mx-auto mb-4">
+        <svg width="26" height="26"><use href="assets/icons/sprite.svg#icon-check-circle"></use></svg>
+      </div>
+      <h4 class="font-display font-bold text-lg">Depósito registrado</h4>
+      <p class="text-graytext text-sm mt-2">El encargo ha sido solicitado correctamente. Podrás seguir su avance desde tus notificaciones.</p>
+      <button type="button" class="w-full mt-6 bg-navy text-white font-display text-sm font-semibold py-3 rounded-full" data-cerrar-modal="modal-solicitar">Listo</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/perfil-publico.js"></script>
+</body>
+</html>

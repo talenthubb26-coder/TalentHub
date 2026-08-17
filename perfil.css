@@ -1,0 +1,80 @@
+/* =========================================================
+   TALENTHUB - PERFIL.CSS
+   Estilos especificos de perfil.html.
+   ========================================================= */
+
+.perfil-portada {
+  height: 108px;
+  background: linear-gradient(120deg, var(--color-navy) 0%, var(--color-purple) 100%);
+  position: relative;
+}
+
+.perfil-portada--aurora { background: linear-gradient(120deg, var(--color-navy) 0%, var(--color-purple) 100%); }
+.perfil-portada--atardecer { background: linear-gradient(120deg, var(--color-purple) 0%, var(--color-gold) 100%); }
+.perfil-portada--medianoche { background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-soft) 100%); }
+.perfil-portada--electrico { background: linear-gradient(120deg, var(--color-purple-dark) 0%, var(--color-purple) 100%); }
+
+.perfil-banner-opcion {
+  height: 46px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.perfil-banner-opcion:hover {
+  transform: translateY(-2px);
+}
+
+.perfil-banner-opcion.seleccionado {
+  border-color: var(--color-navy);
+}
+
+.perfil-proyecto {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #ECEEF6;
+  background-color: var(--color-white);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.perfil-proyecto:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.perfil-proyecto__imagen {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.perfil-marco {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background-color: var(--color-gray-light);
+  position: relative;
+  transition: border-color var(--transition-base);
+}
+
+.perfil-marco.seleccionado {
+  border-color: var(--color-purple);
+}
+
+.perfil-marco.bloqueado {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.perfil-marco__candado {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  color: var(--color-navy);
+}

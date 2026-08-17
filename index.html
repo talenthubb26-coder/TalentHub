@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalentHub | Financia tus estudios impulsando tu propio talento</title>
+<meta name="description" content="TalentHub conecta a jóvenes peruanos de 14 a 25 años con clientes reales para que muestren su talento, generen ingresos y ganen experiencia de forma segura.">
+
+<!-- Iconos de pestana -->
+<link rel="icon" href="assets/logo/logo.svg" type="image/svg+xml">
+
+<!-- Tipografia: Unbounded (display, con caracter) + Plus Jakarta Sans (texto, legible) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS via CDN, configurado con la paleta e identidad de TalentHub -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: '#0B1E4F',
+          'navy-soft': '#16296B',
+          purple: '#7C5CFF',
+          'purple-dark': '#6A45F0',
+          gold: '#E9E45C',
+          grayxl: '#F6F7FB',
+          graytext: '#4B5563'
+        },
+        fontFamily: {
+          display: ['Unbounded', 'sans-serif'],
+          body: ['Plus Jakarta Sans', 'sans-serif']
+        }
+      }
+    }
+  };
+</script>
+
+<!-- Leaflet (mapa interactivo de cobertura) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<!-- Hoja de estilos propia del proyecto -->
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="font-body text-navy bg-white">
+
+<!-- Trayectoria de lanzamiento: elemento de firma visual que acompana el scroll (solo escritorio) -->
+<div class="trayectoria" aria-hidden="true">
+  <div class="trayectoria__linea"></div>
+  <div class="trayectoria__cohete" id="cohete-scroll">
+    <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-rocket"></use></svg>
+  </div>
+</div>
+
+<!-- =========================================================
+     NAVBAR
+     Fijo en la parte superior. Al hacer scroll reduce su altura
+     mediante la clase "navbar-compacta" (ver js/main.js).
+     ========================================================= -->
+<header id="navbar" class="navbar fixed top-0 left-0 w-full z-50">
+  <div class="contenedor flex items-center justify-between py-4 transition-all duration-300" id="navbar-interior">
+    <a href="#inicio" class="flex items-center shrink-0" aria-label="TalentHub, ir al inicio">
+      <img src="assets/logo/logo-light.svg" alt="TalentHub" class="h-8 md:h-9 w-auto">
+    </a>
+
+    <!-- Enlaces de escritorio -->
+    <nav class="hidden lg:flex items-center gap-7 font-body text-sm font-medium" aria-label="Navegación principal">
+      <a href="#inicio" class="enlace-nav">Inicio</a>
+      <a href="#que-es" class="enlace-nav">Qué es</a>
+      <a href="#como-funciona" class="enlace-nav">Cómo funciona</a>
+      <a href="#funcionalidades" class="enlace-nav">Funcionalidades</a>
+      <a href="#planes" class="enlace-nav">Planes</a>
+      <a href="#preguntas-frecuentes" class="enlace-nav">Preguntas</a>
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-5 shrink-0">
+      <a href="login.html" id="nav-login" class="font-body text-sm font-medium text-white/80 hover:text-white transition-colors duration-300">Iniciar sesión</a>
+      <a href="registro.html" id="nav-cta" class="inline-flex items-center gap-2 bg-gold text-navy font-body text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-white transition-colors duration-300">
+        Unirme gratis
+        <svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-arrow-right"></use></svg>
+      </a>
+    </div>
+
+    <!-- Boton de menú móvil -->
+    <button id="boton-menu-movil" class="lg:hidden text-white p-2" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="menu-movil">
+      <svg width="26" height="26" id="icono-abrir-menu"><use href="assets/icons/sprite.svg#icon-menu"></use></svg>
+      <svg width="26" height="26" id="icono-cerrar-menu" class="hidden"><use href="assets/icons/sprite.svg#icon-close"></use></svg>
+    </button>
+  </div>
+
+  <!-- Menu desplegable móvil -->
+  <nav id="menu-movil" class="menu-movil lg:hidden absolute top-full left-0 w-full bg-navy-soft border-t border-white/10 px-6 py-6 flex flex-col gap-1 font-body text-[15px] font-medium" aria-label="Navegación móvil">
+    <a href="#inicio" class="text-white/85 py-3 border-b border-white/10">Inicio</a>
+    <a href="#que-es" class="text-white/85 py-3 border-b border-white/10">Qué es</a>
+    <a href="#como-funciona" class="text-white/85 py-3 border-b border-white/10">Cómo funciona</a>
+    <a href="#funcionalidades" class="text-white/85 py-3 border-b border-white/10">Funcionalidades</a>
+    <a href="#planes" class="text-white/85 py-3 border-b border-white/10">Planes</a>
+    <a href="#preguntas-frecuentes" class="text-white/85 py-3 border-b border-white/10">Preguntas</a>
+    <a href="login.html" id="nav-login-movil" class="text-white/85 py-3 border-b border-white/10">Iniciar sesión</a>
+    <a href="registro.html" id="nav-cta-movil" class="mt-4 inline-flex items-center justify-center gap-2 bg-gold text-navy font-semibold px-5 py-3 rounded-full">Unirme gratis</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- =========================================================
+     SECCIÓN: HERO
+     Titulo de impacto + propuesta de valor a la izquierda,
+     ilustración original a la derecha. Primera impresión del
+     proyecto ante el jurado.
+     ========================================================= -->
+<section id="inicio" class="relative bg-grayxl pt-24 pb-14 md:pt-28 md:pb-16 lg:min-h-screen lg:flex lg:items-center overflow-hidden">
+  <!-- Formas decorativas de fondo, sutiles, sin degradados llamativos -->
+  <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-purple/5" aria-hidden="true"></div>
+  <div class="absolute bottom-0 left-0 w-56 h-56 rounded-full bg-gold/10 -translate-x-1/3" aria-hidden="true"></div>
+
+  <div class="contenedor relative grid lg:grid-cols-2 gap-10 lg:gap-10 items-center w-full">
+    <div class="al-aparecer-izq">
+      <span class="inline-flex items-center gap-2 bg-white border border-navy/10 text-[12px] font-display uppercase tracking-wider text-purple px-4 py-2 rounded-full shadow-sm">
+        <svg width="14" height="14"><use href="assets/icons/sprite.svg#icon-spark"></use></svg>
+        Crea y Emprende 2026 · Minedu
+      </span>
+
+      <h1 class="font-display font-bold text-4xl leading-[1.12] md:text-[2.85rem] lg:text-[3.15rem] md:leading-[1.1] mt-5 text-balance">
+        Financia tus estudios
+        <span class="text-purple">impulsando tu propio talento.</span>
+      </h1>
+
+      <p class="mt-5 text-base md:text-lg text-graytext max-w-lg leading-relaxed">
+        TalentHub es la plataforma peruana donde jóvenes de 14 a 25 años convierten su arte, su música, su código o su ingenio en un portafolio profesional, consiguen clientes reales y reciben sus pagos de forma segura. Sin experiencia previa, con toda la confianza.
+      </p>
+
+      <div class="mt-7 flex flex-col sm:flex-row gap-4">
+        <a href="registro.html" id="hero-cta" class="inline-flex items-center justify-center gap-2 bg-purple text-white font-display text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-purple-dark transition-colors duration-300 shadow-[0_16px_30px_-12px_rgba(124,92,255,0.55)]">
+          Comenzar gratis
+          <svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-arrow-right"></use></svg>
+        </a>
+        <a href="#que-es" class="inline-flex items-center justify-center gap-2 border-2 border-navy/15 text-navy font-display text-sm font-semibold px-7 py-3.5 rounded-full hover:border-navy/40 transition-colors duration-300">
+          Conocer más
+        </a>
+      </div>
+
+      <div class="mt-8 flex items-center gap-4 flex-wrap">
+        <p class="text-xs font-display uppercase tracking-wider text-graytext/70">Pensado para</p>
+        <div class="flex items-center gap-4 text-graytext/60 flex-wrap">
+          <span class="text-sm font-medium">Arte</span>
+          <span class="w-1 h-1 rounded-full bg-graytext/30"></span>
+          <span class="text-sm font-medium">Música</span>
+          <span class="w-1 h-1 rounded-full bg-graytext/30"></span>
+          <span class="text-sm font-medium">Programación</span>
+          <span class="w-1 h-1 rounded-full bg-graytext/30"></span>
+          <span class="text-sm font-medium">Diseño</span>
+          <span class="w-1 h-1 rounded-full bg-graytext/30"></span>
+          <span class="text-sm font-medium">Fotografía</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="al-aparecer-der relative flex justify-center lg:justify-end">
+      <!-- Forma organica detras de la fotografía -->
+      <div class="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] rounded-full bg-purple/10" aria-hidden="true"></div>
+      <div class="absolute w-40 h-40 md:w-52 md:h-52 rounded-full bg-gold/15 -bottom-4 -right-2" aria-hidden="true"></div>
+
+      <!-- Puntos orbitales decorativos -->
+      <svg class="absolute inset-0 w-full h-full text-gold/70" aria-hidden="true" viewBox="0 0 400 480" fill="none">
+        <circle cx="200" cy="230" r="205" stroke="currentColor" stroke-width="2" stroke-dasharray="1 10" stroke-linecap="round"/>
+      </svg>
+
+      <img src="assets/img/hero-foto.png" alt="Joven sonriendo mientras usa su celular con audifonos, revisando su portafolio en TalentHub" class="relative w-full max-w-[260px] sm:max-w-[300px] md:max-w-[340px] lg:max-w-[380px] h-auto object-contain drop-shadow-xl">
+
+      <!-- Iconos flotantes de categorías -->
+      <div class="hidden sm:flex absolute top-4 left-0 w-14 h-14 rounded-full bg-white shadow-[var(--shadow-card)] items-center justify-center text-purple">
+        <svg width="22" height="22"><use href="assets/icons/sprite.svg#icon-message-circle"></use></svg>
+      </div>
+      <div class="hidden sm:flex absolute bottom-10 right-0 w-14 h-14 rounded-full bg-white shadow-[var(--shadow-card)] items-center justify-center text-navy">
+        <svg width="22" height="22"><use href="assets/icons/sprite.svg#icon-badge"></use></svg>
+      </div>
+
+      <!-- Mascota asomando de forma sutil, sin competir con la fotografía principal -->
+      <img src="assets/img/mascota-talenthub.png" alt="Mascota de TalentHub, un gato espacial, saludando" class="mascota-flotante absolute -bottom-2 left-0 sm:-left-4 w-20 md:w-24 drop-shadow-lg" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: QUE ES TALENTHUB
+     Presenta el proyecto, misión, visión y valores.
+     ========================================================= -->
+<section id="que-es" class="py-24 md:py-32 bg-white relative">
+  <div class="contenedor">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-5 al-aparecer">
+        <span class="text-xs font-display uppercase tracking-wider text-purple">¿Qué es TalentHub?</span>
+        <h2 class="font-display font-bold text-3xl md:text-[2.6rem] leading-tight mt-4 text-balance">
+          Un emprendimiento social hecho por y para el talento joven del Perú.
+        </h2>
+        <p class="mt-6 text-graytext leading-relaxed">
+          Nacimos de una idea simple: miles de adolescentes y jóvenes peruanos tienen un talento real, pero no tienen donde mostrarlo ni como cobrar por el. TalentHub existe para cerrar esa brecha, dandoles un espacio profesional, seguro y pensado especialmente para su edad.
+        </p>
+        <p class="mt-4 text-graytext leading-relaxed">
+          No competimos contra plataformas freelance para adultos: construimos la puerta de entrada al mundo laboral que a los jóvenes peruanos nunca les dieron.
+        </p>
+      </div>
+
+      <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
+        <div class="tarjeta al-aparecer retraso-1 p-7 sm:col-span-2 bg-navy text-white">
+          <div class="chip-icono bg-white/10 text-gold mb-5">
+            <svg width="24" height="24"><use href="assets/icons/sprite.svg#icon-rocket"></use></svg>
+          </div>
+          <h3 class="font-display font-semibold text-lg mb-2">Nuestra misión</h3>
+          <p class="text-white/75 text-sm leading-relaxed">Ofrecer un espacio digital libre, seguro y altamente creativo donde los jóvenes construyan su identidad profesional desde el colegio, rompiendo barreras económicas mediante el autoempleo y el trabajo comunitario.</p>
+        </div>
+
+        <div class="tarjeta al-aparecer retraso-2 p-7 border border-navy/5">
+          <div class="chip-icono bg-purple/10 text-purple mb-5">
+            <svg width="22" height="22"><use href="assets/icons/sprite.svg#icon-spark"></use></svg>
+          </div>
+          <h3 class="font-display font-semibold text-base mb-2">Innovación</h3>
+          <p class="text-graytext text-sm leading-relaxed">Gamificación, comunidades y herramientas pensadas para la forma en que los jóvenes ya aprenden y crean hoy.</p>
+        </div>
+
+        <div class="tarjeta al-aparecer retraso-3 p-7 border border-navy/5">
+          <div class="chip-icono bg-gold/20 text-navy mb-5">
+            <svg width="22" height="22"><use href="assets/icons/sprite.svg#icon-shield-check"></use></svg>
+          </div>
+          <h3 class="font-display font-semibold text-base mb-2">Seguridad para menores</h3>
+          <p class="text-graytext text-sm leading-relaxed">Verificación de perfiles, pagos protegidos y moderación activa para que madres, padres y colegios confíen en la plataforma.</p>
+        </div>
+
+        <div class="tarjeta al-aparecer retraso-4 p-7 sm:col-span-2 border border-navy/5">
+          <div class="chip-icono bg-purple/10 text-purple mb-5">
+            <svg width="22" height="22"><use href="assets/icons/sprite.svg#icon-users"></use></svg>
+          </div>
+          <h3 class="font-display font-semibold text-base mb-2">Inclusión y comunidad</h3>
+          <p class="text-graytext text-sm leading-relaxed">Sin importar el colegio, la región o los recursos con los que cuentes: si tienes talento y ganas de crecer, hay un lugar para ti en TalentHub.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: PROBLEMA VS SOLUCIÓN
+     Comparacion visual de dos columnas.
+     ========================================================= -->
+<section class="py-24 md:py-32 bg-grayxl">
+  <div class="contenedor">
+    <div class="text-center max-w-2xl mx-auto al-aparecer">
+      <span class="text-xs font-display uppercase tracking-wider text-purple">La brecha que resolvemos</span>
+      <h2 class="font-display font-bold text-3xl md:text-[2.4rem] leading-tight mt-4 text-balance">De talento sin oportunidades a una carrera que empieza hoy.</h2>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-2 gap-6">
+      <!-- Columna: problema -->
+      <div class="al-aparecer-izq bg-white rounded-2xl p-8 md:p-10 border border-navy/5">
+        <h3 class="font-display font-semibold text-xl text-graytext mb-6">Hoy, sin TalentHub</h3>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <svg width="20" height="20" class="text-graytext/50 mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-x-circle"></use></svg>
+            <span class="text-graytext">Tienen talento real, pero no consiguen clientes que lo paguen.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg width="20" height="20" class="text-graytext/50 mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-x-circle"></use></svg>
+            <span class="text-graytext">Enfrentan desconfianza en el mercado laboral solo por su edad.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg width="20" height="20" class="text-graytext/50 mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-x-circle"></use></svg>
+            <span class="text-graytext">No tienen forma de sumar experiencia comprobable antes de egresar.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg width="20" height="20" class="text-graytext/50 mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-x-circle"></use></svg>
+            <span class="text-graytext">No existe una plataforma peruana pensada para su edad y su realidad.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna: solución -->
+      <div class="al-aparecer-der bg-navy rounded-2xl p-8 md:p-10 text-white relative overflow-hidden">
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-purple/20" aria-hidden="true"></div>
+        <h3 class="font-display font-semibold text-xl text-gold mb-6 relative">Con TalentHub</h3>
+        <ul class="space-y-4 relative">
+          <li class="flex items-start gap-3">
+            <svg width="20" height="20" class="text-gold mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-check-circle"></use></svg>
+            <span class="text-white/90">Crean un portafolio profesional y publican sus proyectos en minutos.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg width="20" height="20" class="text-gold mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-check-circle"></use></svg>
+            <span class="text-white/90">Encuentran clientes reales en el muro de encargos y reciben pagos seguros.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg width="20" height="20" class="text-gold mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-check-circle"></use></svg>
+            <span class="text-white/90">Ganan experiencia comprobable, suben de nivel y construyen reputación.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg width="20" height="20" class="text-gold mt-0.5 shrink-0"><use href="assets/icons/sprite.svg#icon-check-circle"></use></svg>
+            <span class="text-white/90">Forman parte de comunidades de talento donde aprenden y colaboran.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: COMO FUNCIONA
+     Pasos numerados: aquí la numeracion si tiene sentido, porque
+     describe una secuencia real de uso de la plataforma.
+     ========================================================= -->
+<section id="como-funciona" class="py-24 md:py-32 bg-white">
+  <div class="contenedor">
+    <div class="max-w-2xl al-aparecer">
+      <span class="text-xs font-display uppercase tracking-wider text-purple">¿Cómo funciona?</span>
+      <h2 class="font-display font-bold text-3xl md:text-[2.4rem] leading-tight mt-4 text-balance">Del primer clic al primer pago, en seis pasos.</h2>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+      <div class="al-aparecer retraso-1 flex gap-5">
+        <div class="shrink-0">
+          <div class="chip-icono bg-purple text-white"><svg width="24" height="24"><use href="assets/icons/sprite.svg#icon-user-plus"></use></svg></div>
+        </div>
+        <div>
+          <span class="font-display text-xs text-purple">Paso 01</span>
+          <h3 class="font-display font-semibold text-lg mt-1 mb-2">Crea tu cuenta</h3>
+          <p class="text-graytext text-sm leading-relaxed">Regístrate y completa tu perfil con tus datos, tu foto y una breve presentación de quién eres.</p>
+        </div>
+      </div>
+
+      <div class="al-aparecer retraso-2 flex gap-5">
+        <div class="shrink-0">
+          <div class="chip-icono bg-purple text-white"><svg width="24" height="24"><use href="assets/icons/sprite.svg#icon-palette"></use></svg></div>
+        </div>
+        <div>
+          <span class="font-display text-xs text-purple">Paso 02</span>
+          <h3 class="font-display font-semibold text-lg mt-1 mb-2">Arma tu portafolio</h3>
+          <p class="text-graytext text-sm leading-relaxed">Publica tus habilidades, tus proyectos anteriores y tus tarifas para que cualquiera vea tu trabajo.</p>
+        </div>
+      </div>
+
+      <div class="al-aparecer retraso-3 flex gap-5">
+        <div class="shrink-0">
+          <div class="chip-icono bg-purple text-white"><svg width="24" height="24"><use href="assets/icons/sprite.svg#icon-layout-grid"></use></svg></div>
+        </div>
+        <div>
+          <span class="font-display text-xs text-purple">Paso 03</span>
+          <h3 class="font-display font-semibold text-lg mt-1 mb-2">Explora el muro</h3>
+          <p class="text-graytext text-sm leading-relaxed">Recorre el muro de encargos o espera solicitudes directas de clientes interesados en tu perfil.</p>
+        </div>
+      </div>
+
+      <div class="al-aparecer retraso-1 flex gap-5">
+        <div class="shrink-0">
+          <div class="chip-icono bg-purple text-white"><svg width="24" height="24"><use href="assets/icons/sprite.svg#icon-send"></use></svg></div>
+        </div>
+        <div>
+          <span class="font-display text-xs text-purple">Paso 04</span>
+          <h3 class="font-display font-semibold text-lg mt-1 mb-2">Postula o acepta</h3>
+          <p class="text-graytext text-sm leading-relaxed">Postula a los encargos que te interesen o acepta las solicitudes que te lleguen directamente.</p>
+        </div>
+      </div>
+
+      <div class="al-aparecer retraso-2 flex gap-5">
+        <div class="shrink-0">
+          <div class="chip-icono bg-purple text-white"><svg width="24" height="24"><use href="assets/icons/sprite.svg#icon-credit-card"></use></svg></div>
+        </div>
+        <div>
+          <span class="font-display text-xs text-purple">Paso 05</span>
+          <h3 class="font-display font-semibold text-lg mt-1 mb-2">Completa y cobra</h3>
+          <p class="text-graytext text-sm leading-relaxed">Entrega el encargo y recibe tu pago de forma segura dentro de la misma plataforma.</p>
+        </div>
+      </div>
+
+      <div class="al-aparecer retraso-3 flex gap-5">
+        <div class="shrink-0">
+          <div class="chip-icono bg-purple text-white"><svg width="24" height="24"><use href="assets/icons/sprite.svg#icon-trending-up"></use></svg></div>
+        </div>
+        <div>
+          <span class="font-display text-xs text-purple">Paso 06</span>
+          <h3 class="font-display font-semibold text-lg mt-1 mb-2">Sube de nivel</h3>
+          <p class="text-graytext text-sm leading-relaxed">Gana experiencia, desbloquea insignias y mejora tu posicionamiento dentro de TalentHub.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: FUNCIONALIDADES
+     Grid tipo "bento" con tamanos variados en vez de tarjetas
+     identicas repetidas, para romper el patron predecible.
+     ========================================================= -->
+<section id="funcionalidades" class="py-24 md:py-32 bg-navy text-white relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-purple/10 translate-x-1/3 -translate-y-1/3" aria-hidden="true"></div>
+  <div class="contenedor relative">
+    <div class="max-w-2xl al-aparecer">
+      <span class="text-xs font-display uppercase tracking-wider text-gold">Funcionalidades</span>
+      <h2 class="font-display font-bold text-3xl md:text-[2.4rem] leading-tight mt-4 text-balance">Todo lo que necesitas para convertir tu talento en una carrera.</h2>
+    </div>
+
+    <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Tarjeta grande destacada -->
+      <div class="al-aparecer sm:col-span-2 bg-white/5 border border-white/10 rounded-2xl p-7">
+        <div class="chip-icono bg-purple text-white mb-6"><svg width="24" height="24"><use href="assets/icons/sprite.svg#icon-palette"></use></svg></div>
+        <h3 class="font-display font-semibold text-xl mb-2">Portafolio profesional personalizable</h3>
+        <p class="text-white/70 text-sm leading-relaxed">Muestra tus proyectos, tus habilidades y tus tarifas con un diseño que puedes personalizar a tu estilo.</p>
+      </div>
+
+      <div class="al-aparecer retraso-1 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-layout-grid"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Muro de encargos</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Encuentra oportunidades publicadas por empresas y clientes en tiempo real.</p>
+      </div>
+
+      <div class="al-aparecer retraso-2 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-clipboard-check"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Sistema de postulaciones</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Postula con un mensaje y una propuesta clara para cada encargo.</p>
+      </div>
+
+      <div class="al-aparecer retraso-3 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-gold/20 text-gold mb-4"><svg width="22" height="22"><use href="assets/icons/sprite.svg#icon-badge"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Niveles, experiencia e insignias</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Cada encargo cumplido suma experiencia, desbloquea insignias y mejora tu posicionamiento dentro de la comunidad.</p>
+      </div>
+
+      <div class="al-aparecer retraso-1 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-shield-check"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Perfiles verificados</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Un proceso de verificación da confianza a clientes y familias.</p>
+      </div>
+
+      <div class="al-aparecer retraso-2 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-lock"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Pagos seguros</h3>
+        <p class="text-white/65 text-sm leading-relaxed">El dinero queda protegido dentro de la plataforma hasta que el encargo se completa.</p>
+      </div>
+
+      <div class="al-aparecer retraso-3 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-star"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Reputación y calificaciones</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Cada cliente califica el trabajo entregado y construye tu historial.</p>
+      </div>
+
+      <div class="al-aparecer retraso-1 sm:col-span-2 bg-white/5 border border-white/10 rounded-2xl p-6 flex items-center gap-5">
+        <div class="chip-icono bg-purple/20 text-gold shrink-0"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-users"></use></svg></div>
+        <div>
+          <h3 class="font-display font-semibold text-base mb-1.5">Comunidades de talento</h3>
+          <p class="text-white/65 text-sm leading-relaxed">Espacios inspirados en Discord para conversar, colaborar y aprender junto a otros talentos, organizados por categoría.</p>
+        </div>
+      </div>
+
+      <div class="al-aparecer retraso-2 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-message-circle"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Chat directo</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Conversa con clientes y talentos dentro de un chat integrado y moderado.</p>
+      </div>
+
+      <div class="al-aparecer retraso-3 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-flag"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Reportes y moderación</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Un equipo revisa reportes de contenido para mantener el espacio seguro.</p>
+      </div>
+
+      <div class="al-aparecer retraso-1 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-sliders"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Personalización de perfil</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Decora tu perfil y tu portafolio con estilos e insignias propias.</p>
+      </div>
+
+      <div class="al-aparecer retraso-2 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-accessibility"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Accesibilidad</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Pensado para que usuarios con discapacidad puedan navegar sin barreras.</p>
+      </div>
+
+      <div class="al-aparecer retraso-3 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-play-circle"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Tutorial interactivo</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Una guía paso a paso recibe a cada nuevo usuario en su primera visita.</p>
+      </div>
+
+      <div class="al-aparecer retraso-1 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-building"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Panel para empresas</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Publica encargos, filtra talentos y gestiona postulantes desde un panel propio.</p>
+      </div>
+
+      <div class="al-aparecer retraso-2 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-search"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Explorador de talentos</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Busca y filtra talentos por categoría, experiencia y calificación.</p>
+      </div>
+
+      <div class="al-aparecer retraso-3 bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="chip-icono bg-purple/20 text-gold mb-4"><svg width="20" height="20"><use href="assets/icons/sprite.svg#icon-history"></use></svg></div>
+        <h3 class="font-display font-semibold text-base mb-1.5">Historial de proyectos</h3>
+        <p class="text-white/65 text-sm leading-relaxed">Un registro completo de cada encargo realizado, listo para mostrar a nuevos clientes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: EXPLORADOR DE TALENTOS
+     Demo interactiva con tarjetas de ejemplo y filtros por
+     categoría. Simula el funcionamiento real del buscador.
+     ========================================================= -->
+<section id="explorador" class="py-24 md:py-32 bg-grayxl">
+  <div class="contenedor">
+    <div class="max-w-2xl al-aparecer">
+      <span class="text-xs font-display uppercase tracking-wider text-purple">Explorador de talentos</span>
+      <h2 class="font-display font-bold text-3xl md:text-[2.4rem] leading-tight mt-4 text-balance">Así se ve buscar talento dentro de TalentHub.</h2>
+      <p class="mt-4 text-graytext">Prueba los filtros y descubre cómo las empresas encontrarán al talento perfecto para cada encargo.</p>
+    </div>
+
+    <!-- Filtros por categoría -->
+    <div class="mt-10 flex flex-wrap gap-3 al-aparecer" role="group" aria-label="Filtrar talentos por categoría">
+      <button class="filtro-categoría activo px-5 py-2.5 rounded-full border border-navy/15 text-sm font-medium bg-navy text-white" data-categoría="todos">Todos</button>
+      <button class="filtro-categoría px-5 py-2.5 rounded-full border border-navy/15 text-sm font-medium" data-categoría="Arte">Arte</button>
+      <button class="filtro-categoría px-5 py-2.5 rounded-full border border-navy/15 text-sm font-medium" data-categoría="Música">Música</button>
+      <button class="filtro-categoría px-5 py-2.5 rounded-full border border-navy/15 text-sm font-medium" data-categoría="Tecnología">Tecnología</button>
+      <button class="filtro-categoría px-5 py-2.5 rounded-full border border-navy/15 text-sm font-medium" data-categoría="Diseño">Diseño</button>
+      <button class="filtro-categoría px-5 py-2.5 rounded-full border border-navy/15 text-sm font-medium" data-categoría="Programación">Programación</button>
+      <button class="filtro-categoría px-5 py-2.5 rounded-full border border-navy/15 text-sm font-medium" data-categoría="Fotografía">Fotografía</button>
+      <button class="filtro-categoría px-5 py-2.5 rounded-full border border-navy/15 text-sm font-medium" data-categoría="Educación">Educación</button>
+    </div>
+
+    <!-- Grid de talentos de ejemplo -->
+    <div id="grid-talentos" class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <article class="tarjeta-talento tarjeta p-6" data-categoría="Diseño">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Camila&backgroundColor=f1eeff" alt="Avatar ilustrado de Camila" class="w-16 h-16 rounded-2xl bg-purple/10" loading="lazy">
+        <h3 class="font-display font-semibold mt-4">Camila R.</h3>
+        <p class="text-xs text-graytext">Diseño · 17 años · Trujillo</p>
+        <p class="text-sm text-graytext mt-3 leading-relaxed">Identidad visual y branding para pequeños negocios y emprendimientos.</p>
+        <div class="flex items-center gap-1 mt-4 text-gold">
+          <svg width="14" height="14"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
+          <span class="text-sm text-navy font-semibold">4.9</span>
+        </div>
+      </article>
+
+      <article class="tarjeta-talento tarjeta p-6" data-categoría="Programación">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Mateo&backgroundColor=f1eeff" alt="Avatar ilustrado de Mateo" class="w-16 h-16 rounded-2xl bg-purple/10" loading="lazy">
+        <h3 class="font-display font-semibold mt-4">Mateo K.</h3>
+        <p class="text-xs text-graytext">Programación · 17 años · Lima</p>
+        <p class="text-sm text-graytext mt-3 leading-relaxed">Landing pages y sitios sencillos en HTML, CSS y JavaScript.</p>
+        <div class="flex items-center gap-1 mt-4 text-gold">
+          <svg width="14" height="14"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
+          <span class="text-sm text-navy font-semibold">4.8</span>
+        </div>
+      </article>
+
+      <article class="tarjeta-talento tarjeta p-6" data-categoría="Música">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Valentina&backgroundColor=f1eeff" alt="Avatar ilustrado de Valentina" class="w-16 h-16 rounded-2xl bg-purple/10" loading="lazy">
+        <h3 class="font-display font-semibold mt-4">Valentina S.</h3>
+        <p class="text-xs text-graytext">Música · 16 años · Arequipa</p>
+        <p class="text-sm text-graytext mt-3 leading-relaxed">Producción de jingles y edición de audio para redes sociales.</p>
+        <div class="flex items-center gap-1 mt-4 text-gold">
+          <svg width="14" height="14"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
+          <span class="text-sm text-navy font-semibold">5.0</span>
+        </div>
+      </article>
+
+      <article class="tarjeta-talento tarjeta p-6" data-categoría="Fotografía">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Diego&backgroundColor=f1eeff" alt="Avatar ilustrado de Diego" class="w-16 h-16 rounded-2xl bg-purple/10" loading="lazy">
+        <h3 class="font-display font-semibold mt-4">Diego P.</h3>
+        <p class="text-xs text-graytext">Fotografía · 19 años · Cusco</p>
+        <p class="text-sm text-graytext mt-3 leading-relaxed">Cobertura fotográfica de eventos y sesiones de producto.</p>
+        <div class="flex items-center gap-1 mt-4 text-gold">
+          <svg width="14" height="14"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
+          <span class="text-sm text-navy font-semibold">4.7</span>
+        </div>
+      </article>
+
+      <article class="tarjeta-talento tarjeta p-6" data-categoría="Arte">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=f1eeff" alt="Avatar ilustrado de Sofía" class="w-16 h-16 rounded-2xl bg-purple/10" loading="lazy">
+        <h3 class="font-display font-semibold mt-4">Sofía M.</h3>
+        <p class="text-xs text-graytext">Arte · 16 años · Piura</p>
+        <p class="text-sm text-graytext mt-3 leading-relaxed">Ilustraciones digitales y retratos personalizados por encargo.</p>
+        <div class="flex items-center gap-1 mt-4 text-gold">
+          <svg width="14" height="14"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
+          <span class="text-sm text-navy font-semibold">5.0</span>
+        </div>
+      </article>
+
+      <article class="tarjeta-talento tarjeta p-6" data-categoría="Educación">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Rodrigo&backgroundColor=f1eeff" alt="Avatar ilustrado de Rodrigo" class="w-16 h-16 rounded-2xl bg-purple/10" loading="lazy">
+        <h3 class="font-display font-semibold mt-4">Rodrigo T.</h3>
+        <p class="text-xs text-graytext">Educación · 18 años · Chiclayo</p>
+        <p class="text-sm text-graytext mt-3 leading-relaxed">Clases particulares de matemática y física para secundaria.</p>
+        <div class="flex items-center gap-1 mt-4 text-gold">
+          <svg width="14" height="14"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
+          <span class="text-sm text-navy font-semibold">4.9</span>
+        </div>
+      </article>
+
+      <article class="tarjeta-talento tarjeta p-6" data-categoría="Tecnología">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ariana&backgroundColor=f1eeff" alt="Avatar ilustrado de Ariana" class="w-16 h-16 rounded-2xl bg-purple/10" loading="lazy">
+        <h3 class="font-display font-semibold mt-4">Ariana V.</h3>
+        <p class="text-xs text-graytext">Tecnología · 20 años · Lima</p>
+        <p class="text-sm text-graytext mt-3 leading-relaxed">Soporte técnico básico y automatización de tareas con hojas de cálculo.</p>
+        <div class="flex items-center gap-1 mt-4 text-gold">
+          <svg width="14" height="14"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
+          <span class="text-sm text-navy font-semibold">4.8</span>
+        </div>
+      </article>
+
+      <article class="tarjeta-talento tarjeta p-6" data-categoría="Diseño">
+        <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Fabrizio&backgroundColor=f1eeff" alt="Avatar ilustrado de Fabrizio" class="w-16 h-16 rounded-2xl bg-purple/10" loading="lazy">
+        <h3 class="font-display font-semibold mt-4">Fabrizio N.</h3>
+        <p class="text-xs text-graytext">Diseño · 21 años · Lima</p>
+        <p class="text-sm text-graytext mt-3 leading-relaxed">Diseño de empaques y catálogos para marcas emergentes.</p>
+        <div class="flex items-center gap-1 mt-4 text-gold">
+          <svg width="14" height="14"><use href="assets/icons/sprite.svg#icon-star"></use></svg>
+          <span class="text-sm text-navy font-semibold">4.6</span>
+        </div>
+      </article>
+    </div>
+
+    <p id="sin-resultados" class="hidden text-center text-graytext mt-10">No encontramos talentos en esta categoría todavía. Sé el primero en unirte.</p>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: PLANES Y PRECIOS
+     Tres planes en tarjetas comparativas, con el plan Plus
+     resaltado como recomendado.
+     ========================================================= -->
+<section id="planes" class="py-24 md:py-32 bg-white">
+  <div class="contenedor">
+    <div class="text-center max-w-2xl mx-auto al-aparecer">
+      <span class="text-xs font-display uppercase tracking-wider text-purple">Planes</span>
+      <h2 class="font-display font-bold text-3xl md:text-[2.4rem] leading-tight mt-4 text-balance">Un plan para cada etapa de tu talento.</h2>
+      <p class="mt-4 text-graytext">Empieza gratis. Sube de plan cuando tu talento empiece a generar más oportunidades.</p>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-3 gap-6 items-start">
+      <!-- Plan gratuito -->
+      <div class="tarjeta-plan al-aparecer retraso-1 rounded-2xl p-8 bg-white">
+        <h3 class="font-display font-semibold text-xl">Plan Gratuito</h3>
+        <p class="text-graytext text-sm mt-1">Para empezar a mostrar tu talento.</p>
+        <p class="mt-6"><span class="font-display font-bold text-4xl">S/ 0</span><span class="text-graytext text-sm"> / mes</span></p>
+        <a href="registro.html" class="mt-6 block text-center border-2 border-navy/15 rounded-full py-3 font-display text-sm font-semibold hover:border-navy/40 transition-colors duration-300">Empezar gratis</a>
+        <ul class="mt-8 space-y-3.5 text-sm">
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Crear portafolio</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Publicar proyectos</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Postular a encargos</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Personalización básica</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Ver anuncios para ganar puntos y decoraciones</li>
+        </ul>
+      </div>
+
+      <!-- Plan Plus (recomendado) -->
+      <div class="tarjeta-plan tarjeta-plan--destacada al-aparecer retraso-2 rounded-2xl p-8 bg-navy text-white relative md:-translate-y-4">
+        <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gold text-navy text-xs font-display font-semibold px-4 py-1.5 rounded-full">Recomendado</span>
+        <h3 class="font-display font-semibold text-xl">Plan Plus</h3>
+        <p class="text-white/70 text-sm mt-1">Para talentos que ya tienen movimiento.</p>
+        <p class="mt-6"><span class="font-display font-bold text-4xl">S/ 14.90</span><span class="text-white/70 text-sm"> / mes</span></p>
+        <a href="registro.html?plan=plus" class="mt-6 block text-center bg-gold text-navy rounded-full py-3 font-display text-sm font-semibold hover:bg-white transition-colors duration-300">Elegir Plus</a>
+        <ul class="mt-8 space-y-3.5 text-sm text-white/90">
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Sin anuncios</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Todas las decoraciones de perfil</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Mayor posicionamiento</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Insignia Premium</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Estadísticas del perfil</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Personalización avanzada</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-gold mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Acceso prioritario a nuevas funciones</li>
+        </ul>
+      </div>
+
+      <!-- Plan empresas -->
+      <div class="tarjeta-plan al-aparecer retraso-3 rounded-2xl p-8 bg-white">
+        <h3 class="font-display font-semibold text-xl">Plan Empresas</h3>
+        <p class="text-graytext text-sm mt-1">Para negocios que buscan talento joven.</p>
+        <p class="mt-6"><span class="font-display font-bold text-4xl">S/ 39.90</span><span class="text-graytext text-sm"> / mes</span></p>
+        <a href="registro.html?tipo=negocio" class="mt-6 block text-center border-2 border-navy/15 rounded-full py-3 font-display text-sm font-semibold hover:border-navy/40 transition-colors duration-300">Elegir Empresas</a>
+        <ul class="mt-8 space-y-3.5 text-sm">
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Publicaciones ilimitadas</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Talentos destacados</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Filtros avanzados</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Empresa verificada</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Gestión de postulantes</li>
+          <li class="flex items-start gap-2.5"><svg width="16" height="16" class="text-purple mt-1 shrink-0"><use href="assets/icons/sprite.svg#icon-check"></use></svg> Prioridad en soporte</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: TESTIMONIOS
+     Carrusel simple con tres tarjetas de usuarios satisfechos.
+     ========================================================= -->
+<section class="py-24 md:py-32 bg-grayxl overflow-hidden">
+  <div class="contenedor">
+    <div class="max-w-2xl al-aparecer">
+      <span class="text-xs font-display uppercase tracking-wider text-purple">Testimonios</span>
+      <h2 class="font-display font-bold text-3xl md:text-[2.4rem] leading-tight mt-4 text-balance">Lo que dicen quienes ya empezaron.</h2>
+    </div>
+
+    <div class="mt-14 relative">
+      <div class="overflow-hidden">
+        <div id="pista-testimonios" class="pista-testimonios flex gap-6">
+          <article class="tarjeta p-8 shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+            <svg width="30" height="30" class="text-gold"><use href="assets/icons/sprite.svg#icon-spark"></use></svg>
+            <p class="mt-5 text-graytext leading-relaxed">"Antes solo dibujaba para mí. Ahora tengo clientes fijos que me piden ilustraciones cada mes y estoy ahorrando para mi instituto de diseño."</p>
+            <div class="flex items-center gap-3 mt-6">
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia2&backgroundColor=f6f7fb" alt="Avatar ilustrado de Sofía" class="w-11 h-11 rounded-full">
+              <div>
+                <p class="font-display font-semibold text-sm">Sofía, 16 años</p>
+                <p class="text-graytext text-xs">Ilustradora digital, Piura</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="tarjeta p-8 shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+            <svg width="30" height="30" class="text-gold"><use href="assets/icons/sprite.svg#icon-spark"></use></svg>
+            <p class="mt-5 text-graytext leading-relaxed">"Encontré a un estudiante que me armó la web de mi bodega en una semana. Rapidísimo, buen precio y con muchas ganas de aprender."</p>
+            <div class="flex items-center gap-3 mt-6">
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=James&backgroundColor=f6f7fb" alt="Avatar ilustrado de James" class="w-11 h-11 rounded-full">
+              <div>
+                <p class="font-display font-semibold text-sm">James D.</p>
+                <p class="text-graytext text-xs">Dueño de cafetería, Lima</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="tarjeta p-8 shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+            <svg width="30" height="30" class="text-gold"><use href="assets/icons/sprite.svg#icon-spark"></use></svg>
+            <p class="mt-5 text-graytext leading-relaxed">"Empecé grabando jingles para mis amigos del colegio. Hoy produzco audio para tres negocios de mi distrito y sigo subiendo de nivel."</p>
+            <div class="flex items-center gap-3 mt-6">
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Valentina2&backgroundColor=f6f7fb" alt="Avatar ilustrado de Valentina" class="w-11 h-11 rounded-full">
+              <div>
+                <p class="font-display font-semibold text-sm">Valentina, 15 años</p>
+                <p class="text-graytext text-xs">Producción de audio, Arequipa</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="flex justify-center gap-2 mt-8" id="puntos-carrusel" role="tablist" aria-label="Seleccionar testimonio"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: IMPACTO SOCIAL Y ECONÓMICO
+     Estadísticas grandes con animación de conteo al hacer scroll.
+     ========================================================= -->
+<section id="impacto" class="py-24 md:py-32 bg-navy text-white relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.04]" aria-hidden="true" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 26px 26px;"></div>
+  <div class="contenedor relative">
+    <div class="max-w-2xl al-aparecer">
+      <span class="text-xs font-display uppercase tracking-wider text-gold">Impacto</span>
+      <h2 class="font-display font-bold text-3xl md:text-[2.4rem] leading-tight mt-4 text-balance">Un impacto que se mide en oportunidades reales.</h2>
+    </div>
+
+    <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="al-aparecer retraso-1 text-center sm:text-left">
+        <p class="font-display font-bold text-5xl md:text-6xl número-contador" data-contador="14" data-sufijo="–25">0</p>
+        <p class="text-white/65 text-sm mt-3">Rango de edad de los jóvenes talentos que impulsamos</p>
+      </div>
+      <div class="al-aparecer retraso-2 text-center sm:text-left">
+        <p class="font-display font-bold text-5xl md:text-6xl número-contador" data-contador="100" data-sufijo="%">0</p>
+        <p class="text-white/65 text-sm mt-3">De los pagos protegidos dentro de la plataforma</p>
+      </div>
+      <div class="al-aparecer retraso-3 text-center sm:text-left">
+        <p class="font-display font-bold text-5xl md:text-6xl número-contador" data-contador="10" data-sufijo="+">0</p>
+        <p class="text-white/65 text-sm mt-3">Categorías de talento disponibles para explorar</p>
+      </div>
+      <div class="al-aparecer retraso-4 text-center sm:text-left">
+        <p class="font-display font-bold text-5xl md:text-6xl número-contador" data-contador="24" data-sufijo="/7">0</p>
+        <p class="text-white/65 text-sm mt-3">Acceso a comunidades de talento y soporte</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: GALERIA DEL PRODUCTO
+     Vista previa de la futura aplicacion dentro de marcos de
+     laptop y móvil. Las pantallas mostradas aquí son maquetas
+     de referencia: reemplazar por capturas reales de la app
+     dentro de assets/img/ cuando esten disponibles.
+     ========================================================= -->
+<section id="galeria" class="py-24 md:py-32 bg-white">
+  <div class="contenedor">
+    <div class="max-w-2xl al-aparecer">
+      <span class="text-xs font-display uppercase tracking-wider text-purple">Un vistazo a la app</span>
+      <h2 class="font-display font-bold text-3xl md:text-[2.4rem] leading-tight mt-4 text-balance">Así se verá TalentHub por dentro.</h2>
+      <p class="mt-4 text-graytext">Maqueta de referencia del producto. Explora cada pantalla con las pestañas.</p>
+    </div>
+
+    <!-- Pestañas para cambiar de pantalla -->
+    <div class="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-b border-navy/10 al-aparecer" role="tablist" aria-label="Pantallas de la aplicación">
+      <button class="pestana-pantalla activa py-3 font-display text-sm font-medium" data-pantalla="inicio">Inicio</button>
+      <button class="pestana-pantalla py-3 font-display text-sm font-medium" data-pantalla="perfil">Perfil</button>
+      <button class="pestana-pantalla py-3 font-display text-sm font-medium" data-pantalla="portafolio">Portafolio</button>
+      <button class="pestana-pantalla py-3 font-display text-sm font-medium" data-pantalla="muro">Muro de Encargos</button>
+      <button class="pestana-pantalla py-3 font-display text-sm font-medium" data-pantalla="comunidades">Comunidades</button>
+      <button class="pestana-pantalla py-3 font-display text-sm font-medium" data-pantalla="chat">Chat</button>
+    </div>
+
+    <div class="mt-12 grid lg:grid-cols-[1fr_240px] gap-10 items-center">
+      <!-- Marco de laptop con las pantallas intercambiables -->
+      <div class="marco-laptop al-aparecer">
+        <div class="marco-laptop__camara"></div>
+        <div class="marco-laptop__pantalla">
+
+          <!-- Pantalla: Inicio -->
+          <div class="pantalla-app activa p-5" data-pantalla="inicio">
+            <div class="flex items-center justify-between mb-4">
+              <div class="h-3 w-24 bg-navy/80 rounded-full"></div>
+              <div class="flex gap-2"><div class="w-6 h-6 rounded-full bg-purple/20"></div><div class="w-6 h-6 rounded-full bg-gold/40"></div></div>
+            </div>
+            <div class="bg-purple text-white rounded-lg p-4 mb-4">
+              <div class="h-2.5 w-32 bg-white/80 rounded-full mb-2"></div>
+              <div class="h-2 w-44 bg-white/50 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="w-full h-10 bg-navy/10 rounded mb-2"></div><div class="h-2 w-3/4 bg-navy/20 rounded-full"></div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="w-full h-10 bg-gold/30 rounded mb-2"></div><div class="h-2 w-3/4 bg-navy/20 rounded-full"></div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm"><div class="w-full h-10 bg-purple/20 rounded mb-2"></div><div class="h-2 w-3/4 bg-navy/20 rounded-full"></div></div>
+            </div>
+          </div>
+
+          <!-- Pantalla: Perfil -->
+          <div class="pantalla-app p-5" data-pantalla="perfil">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-full bg-purple/20 border-2 border-purple"></div>
+              <div class="flex-1">
+                <div class="h-3 w-28 bg-navy/80 rounded-full mb-2"></div>
+                <div class="h-2 w-20 bg-navy/30 rounded-full"></div>
+              </div>
+              <div class="text-xs font-display bg-gold/30 text-navy px-3 py-1 rounded-full">Nivel 8</div>
+            </div>
+            <div class="mt-5 h-2.5 w-full bg-navy/10 rounded-full overflow-hidden"><div class="h-full w-2/3 bg-purple"></div></div>
+            <div class="grid grid-cols-3 gap-3 mt-5">
+              <div class="bg-white rounded-lg p-3 shadow-sm text-center"><div class="h-4 w-8 bg-navy/70 rounded-full mx-auto mb-1"></div><div class="h-1.5 w-10 bg-navy/20 rounded-full mx-auto"></div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm text-center"><div class="h-4 w-8 bg-navy/70 rounded-full mx-auto mb-1"></div><div class="h-1.5 w-10 bg-navy/20 rounded-full mx-auto"></div></div>
+              <div class="bg-white rounded-lg p-3 shadow-sm text-center"><div class="h-4 w-8 bg-navy/70 rounded-full mx-auto mb-1"></div><div class="h-1.5 w-10 bg-navy/20 rounded-full mx-auto"></div></div>
+            </div>
+          </div>
+
+          <!-- Pantalla: Portafolio -->
+          <div class="pantalla-app p-5" data-pantalla="portafolio">
+            <div class="h-3 w-36 bg-navy/80 rounded-full mb-4"></div>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="aspect-square bg-purple/25 rounded-lg"></div>
+              <div class="aspect-square bg-gold/35 rounded-lg"></div>
+              <div class="aspect-square bg-navy/15 rounded-lg"></div>
+              <div class="aspect-square bg-navy/15 rounded-lg"></div>
+              <div class="aspect-square bg-purple/25 rounded-lg"></div>
+              <div class="aspect-square bg-gold/35 rounded-lg"></div>
+            </div>
+          </div>
+
+          <!-- Pantalla: Muro de Encargos -->
+          <div class="pantalla-app p-5 space-y-3" data-pantalla="muro">
+            <div class="bg-white rounded-lg p-3 shadow-sm flex items-center justify-between">
+              <div><div class="h-2.5 w-28 bg-navy/70 rounded-full mb-1.5"></div><div class="h-2 w-16 bg-navy/25 rounded-full"></div></div>
+              <div class="h-6 w-14 bg-purple rounded-full"></div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm flex items-center justify-between">
+              <div><div class="h-2.5 w-32 bg-navy/70 rounded-full mb-1.5"></div><div class="h-2 w-20 bg-navy/25 rounded-full"></div></div>
+              <div class="h-6 w-14 bg-gold rounded-full"></div>
+            </div>
+            <div class="bg-white rounded-lg p-3 shadow-sm flex items-center justify-between">
+              <div><div class="h-2.5 w-24 bg-navy/70 rounded-full mb-1.5"></div><div class="h-2 w-16 bg-navy/25 rounded-full"></div></div>
+              <div class="h-6 w-14 bg-purple rounded-full"></div>
+            </div>
+          </div>
+
+          <!-- Pantalla: Comunidades -->
+          <div class="pantalla-app p-0 flex h-full" data-pantalla="comunidades">
+            <div class="bg-navy-soft w-1/4 h-full p-3 space-y-2">
+              <div class="w-8 h-8 rounded-full bg-purple/40"></div>
+              <div class="w-8 h-8 rounded-full bg-white/10"></div>
+              <div class="w-8 h-8 rounded-full bg-white/10"></div>
+            </div>
+            <div class="flex-1 p-4">
+              <div class="h-2.5 w-24 bg-navy/70 rounded-full mb-4"></div>
+              <div class="space-y-2.5">
+                <div class="h-2 w-3/4 bg-navy/15 rounded-full"></div>
+                <div class="h-2 w-1/2 bg-navy/15 rounded-full"></div>
+                <div class="h-2 w-2/3 bg-navy/15 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pantalla: Chat -->
+          <div class="pantalla-app p-5 flex flex-col justify-end h-full gap-2.5" data-pantalla="chat">
+            <div class="bg-white rounded-2xl rounded-bl-sm p-3 shadow-sm w-2/3"><div class="h-2 w-full bg-navy/20 rounded-full"></div></div>
+            <div class="bg-purple rounded-2xl rounded-br-sm p-3 w-2/3 self-end"><div class="h-2 w-full bg-white/70 rounded-full"></div></div>
+            <div class="bg-white rounded-2xl rounded-bl-sm p-3 shadow-sm w-1/2"><div class="h-2 w-full bg-navy/20 rounded-full"></div></div>
+          </div>
+
+        </div>
+        <div class="marco-laptop__base"></div>
+      </div>
+
+      <!-- Marco de móvil, muestra la vista de chat como complemento -->
+      <div class="marco-movil mx-auto al-aparecer-der">
+        <div class="marco-movil__notch"></div>
+        <div class="marco-movil__pantalla p-3.5 flex flex-col justify-end gap-2">
+          <div class="bg-white rounded-2xl rounded-bl-sm p-2.5 shadow-sm w-3/4 text-[10px]"><div class="h-1.5 w-full bg-navy/20 rounded-full"></div></div>
+          <div class="bg-purple rounded-2xl rounded-br-sm p-2.5 w-3/4 self-end"><div class="h-1.5 w-full bg-white/70 rounded-full"></div></div>
+          <div class="bg-white rounded-2xl rounded-bl-sm p-2.5 shadow-sm w-2/3 text-[10px]"><div class="h-1.5 w-full bg-navy/20 rounded-full"></div></div>
+          <div class="bg-purple rounded-2xl rounded-br-sm p-2.5 w-1/2 self-end"><div class="h-1.5 w-full bg-white/70 rounded-full"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: MAPA DE COBERTURA (Leaflet + OpenStreetMap)
+     Muestra el alcance nacional de TalentHub.
+     ========================================================= -->
+<section class="py-24 md:py-32 bg-grayxl">
+  <div class="contenedor grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center">
+    <div class="al-aparecer-izq">
+      <span class="text-xs font-display uppercase tracking-wider text-purple">Cobertura nacional</span>
+      <h2 class="font-display font-bold text-3xl md:text-[2.2rem] leading-tight mt-4 text-balance">Talento de todo el Perú, no solo de Lima.</h2>
+      <p class="mt-4 text-graytext leading-relaxed">TalentHub nace en el Perú y está pensado para llegar a jóvenes de cualquier región. Este es un mapa de referencia con algunas de las ciudades donde ya tenemos talentos activos.</p>
+      <ul class="mt-6 space-y-2 text-sm text-graytext">
+        <li class="flex items-center gap-2"><svg width="16" height="16" class="text-purple"><use href="assets/icons/sprite.svg#icon-map-pin"></use></svg> Lima, Arequipa, Trujillo, Cusco, Piura y Chiclayo</li>
+      </ul>
+    </div>
+    <div class="al-aparecer-der">
+      <div id="mapa-cobertura" role="img" aria-label="Mapa del Perú con la cobertura de TalentHub en distintas ciudades"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: PREGUNTAS FRECUENTES
+     Acordeon desplegable accesible (boton con aria-expanded).
+     ========================================================= -->
+<section id="preguntas-frecuentes" class="py-24 md:py-32 bg-white">
+  <div class="contenedor max-w-3xl">
+    <div class="al-aparecer">
+      <span class="text-xs font-display uppercase tracking-wider text-purple">Preguntas frecuentes</span>
+      <h2 class="font-display font-bold text-3xl md:text-[2.4rem] leading-tight mt-4 text-balance">Resolvemos tus dudas antes de empezar.</h2>
+    </div>
+
+    <div class="mt-12 al-aparecer" id="acordeon-faq">
+      <div class="acordeon-item">
+        <button class="acordeon-boton" aria-expanded="false">
+          <span class="text-base md:text-lg font-medium">¿Cómo puedo empezar a ofrecer mis servicios si aún no tengo experiencia?</span>
+          <svg width="20" height="20" class="acordeon-boton__icono shrink-0"><use href="assets/icons/sprite.svg#icon-chevron-down"></use></svg>
+        </button>
+        <div class="acordeon-contenido">
+          <p class="text-graytext leading-relaxed pr-8">No necesitas experiencia previa para comenzar. Puedes armar tu portafolio con proyectos personales, trabajos escolares o piezas que hayas hecho por gusto. Cada encargo que completes en TalentHub se convierte en tu primera experiencia comprobable.</p>
+        </div>
+      </div>
+
+      <div class="acordeon-item">
+        <button class="acordeon-boton" aria-expanded="false">
+          <span class="text-base md:text-lg font-medium">¿Es seguro para menores de edad utilizar TalentHub?</span>
+          <svg width="20" height="20" class="acordeon-boton__icono shrink-0"><use href="assets/icons/sprite.svg#icon-chevron-down"></use></svg>
+        </button>
+        <div class="acordeon-contenido">
+          <p class="text-graytext leading-relaxed pr-8">Sí. Contamos con verificación de perfiles, pagos protegidos, chat moderado y un equipo que revisa reportes de contenido. Además, recomendamos que los menores de edad usen la plataforma con la supervisión de un adulto responsable.</p>
+        </div>
+      </div>
+
+      <div class="acordeon-item">
+        <button class="acordeon-boton" aria-expanded="false">
+          <span class="text-base md:text-lg font-medium">¿Cómo funcionan los pagos dentro de la plataforma?</span>
+          <svg width="20" height="20" class="acordeon-boton__icono shrink-0"><use href="assets/icons/sprite.svg#icon-chevron-down"></use></svg>
+        </button>
+        <div class="acordeon-contenido">
+          <p class="text-graytext leading-relaxed pr-8">El cliente deposita el pago dentro de TalentHub antes de iniciar el encargo. El dinero queda protegido y se libera al talento una vez que el trabajo se entrega y se confirma como completado.</p>
+        </div>
+      </div>
+
+      <div class="acordeon-item">
+        <button class="acordeon-boton" aria-expanded="false">
+          <span class="text-base md:text-lg font-medium">¿Qué ocurre si un cliente incumple un acuerdo?</span>
+          <svg width="20" height="20" class="acordeon-boton__icono shrink-0"><use href="assets/icons/sprite.svg#icon-chevron-down"></use></svg>
+        </button>
+        <div class="acordeon-contenido">
+          <p class="text-graytext leading-relaxed pr-8">Puedes reportar el caso desde el mismo encargo. Nuestro equipo de moderación revisa la conversación y el acuerdo registrado en la plataforma para mediar y proteger tanto tu pago como tu reputación.</p>
+        </div>
+      </div>
+
+      <div class="acordeon-item">
+        <button class="acordeon-boton" aria-expanded="false">
+          <span class="text-base md:text-lg font-medium">¿Cómo puedo mejorar el posicionamiento de mi perfil?</span>
+          <svg width="20" height="20" class="acordeon-boton__icono shrink-0"><use href="assets/icons/sprite.svg#icon-chevron-down"></use></svg>
+        </button>
+        <div class="acordeon-contenido">
+          <p class="text-graytext leading-relaxed pr-8">Completa tu perfil al 100%, entrega tus encargos a tiempo, acumula buenas calificaciones y sube de nivel. Los planes Plus y Empresas también incluyen mayor visibilidad dentro del explorador de talentos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECCIÓN: LLAMADO A LA ACCION FINAL + FORMULARIO
+     Fondo solido, invita a registrarse. Formulario validado
+     con JavaScript, sin backend real (ver js/form.js).
+     ========================================================= -->
+<section id="contacto" class="py-24 md:py-32 bg-purple relative overflow-hidden">
+  <div class="absolute -top-16 -left-16 w-64 h-64 rounded-full bg-white/10" aria-hidden="true"></div>
+  <div class="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-navy/15 translate-x-1/4 translate-y-1/4" aria-hidden="true"></div>
+
+  <div class="contenedor relative grid lg:grid-cols-2 gap-14 items-center">
+    <div class="al-aparecer-izq text-white">
+      <h2 class="font-display font-bold text-3xl md:text-[2.6rem] leading-tight text-balance">Hagamos cosas increíbles juntos. Tu talento ya vale.</h2>
+      <p class="mt-5 text-white/85 leading-relaxed max-w-md">Regístrate gratis, arma tu portafolio y da el primer paso hacia tu independencia económica. Si representas a una empresa, escríbenos y te ayudamos a encontrar el talento que necesitas.</p>
+
+      <img src="assets/img/mascota-talenthub.png" alt="Mascota de TalentHub despidiendose con entusiasmo" class="mascota-flotante w-28 md:w-32 mt-10 hidden sm:block">
+    </div>
+
+    <form id="formulario-contacto" novalidate class="al-aparecer-der bg-navy/95 rounded-2xl p-8 md:p-10 backdrop-blur">
+      <h3 class="font-display font-semibold text-white text-lg mb-6">Escríbenos y te contactamos</h3>
+
+      <div class="mb-5">
+        <label for="campo-nombre" class="block text-white/80 text-sm mb-2">Nombre completo</label>
+        <input type="text" id="campo-nombre" name="nombre" class="campo-formulario w-full rounded-xl px-4 py-3 text-sm" placeholder="Escribe tu nombre">
+        <p class="mensaje-error text-xs mt-1.5" id="error-nombre">Ingresa tu nombre completo (mínimo 3 letras).</p>
+      </div>
+
+      <div class="mb-5">
+        <label for="campo-correo" class="block text-white/80 text-sm mb-2">Correo electrónico</label>
+        <input type="email" id="campo-correo" name="correo" class="campo-formulario w-full rounded-xl px-4 py-3 text-sm" placeholder="tucorreo@ejemplo.com">
+        <p class="mensaje-error text-xs mt-1.5" id="error-correo">Ingresa un correo electrónico válido.</p>
+      </div>
+
+      <div class="mb-6">
+        <label for="campo-mensaje" class="block text-white/80 text-sm mb-2">Mensaje</label>
+        <textarea id="campo-mensaje" name="mensaje" rows="4" class="campo-formulario w-full rounded-xl px-4 py-3 text-sm resize-none" placeholder="Cuéntanos brevemente qué necesitas"></textarea>
+        <p class="mensaje-error text-xs mt-1.5" id="error-mensaje">Escribe un mensaje de al menos 10 caracteres.</p>
+      </div>
+
+      <button type="submit" class="w-full inline-flex items-center justify-center gap-2 bg-gold text-navy font-display text-sm font-semibold py-3.5 rounded-full hover:bg-white transition-colors duration-300">
+        Enviar mensaje
+        <svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-send"></use></svg>
+      </button>
+
+      <p id="mensaje-éxito" class="hidden mt-4 text-sm text-center text-gold" role="status">¡Gracias! Recibimos tu mensaje y te contactaremos pronto.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- =========================================================
+     PIE DE PÁGINA
+     ========================================================= -->
+<footer class="bg-navy text-white pt-20 pb-8">
+  <div class="contenedor">
+    <div class="grid md:grid-cols-4 gap-10 pb-14 border-b border-white/10">
+      <div class="md:col-span-1">
+        <img src="assets/logo/logo-light.svg" alt="TalentHub" class="h-8 w-auto mb-4">
+        <p class="text-white/60 text-sm leading-relaxed">Conectamos el talento joven del Perú con oportunidades reales de estudio, trabajo y emprendimiento.</p>
+        <div class="flex items-center gap-3 mt-6">
+          <a href="https://www.instagram.com/talenthubb.26?igsh=MWVybmh2ZDAzczNhcw==" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-300" aria-label="Instagram de TalentHub"><svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-instagram"></use></svg></a>
+          <a href="https://www.tiktok.com/@talenthub_67" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-300" aria-label="TikTok de TalentHub"><svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-tiktok"></use></svg></a>
+          <a href="https://www.facebook.com/people/TalentHub/61592785239595/?mibextid=wwXIfr&rdid=19hO6eOTLBTqv9eV&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DrARKzJrZ%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-300" aria-label="Facebook de TalentHub"><svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-facebook"></use></svg></a>
+          <a href="https://www.youtube.com/@TalentHub.26" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors duration-300" aria-label="YouTube de TalentHub"><svg width="16" height="16"><use href="assets/icons/sprite.svg#icon-youtube"></use></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-display font-semibold text-sm mb-4">Navegación</h4>
+        <ul class="space-y-2.5 text-sm text-white/65">
+          <li><a href="#que-es" class="hover:text-white transition-colors duration-300">Qué es TalentHub</a></li>
+          <li><a href="#como-funciona" class="hover:text-white transition-colors duration-300">Cómo funciona</a></li>
+          <li><a href="#funcionalidades" class="hover:text-white transition-colors duration-300">Funcionalidades</a></li>
+          <li><a href="#planes" class="hover:text-white transition-colors duration-300">Planes</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-display font-semibold text-sm mb-4">Ayuda y soporte</h4>
+        <ul class="space-y-2.5 text-sm text-white/65">
+          <li><a href="#preguntas-frecuentes" class="hover:text-white transition-colors duration-300">Preguntas frecuentes</a></li>
+          <li><a href="#contacto" class="hover:text-white transition-colors duration-300">Contáctanos</a></li>
+          <li><a href="#" class="hover:text-white transition-colors duration-300">Políticas de seguridad para menores</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-display font-semibold text-sm mb-4">Contacto</h4>
+        <ul class="space-y-2.5 text-sm text-white/65">
+          <li class="flex items-center gap-2"><svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-mail"></use></svg> talenthubb.26@gmail.com</li>
+          <li class="flex items-center gap-2"><svg width="15" height="15"><use href="assets/icons/sprite.svg#icon-map-pin"></use></svg> Lima, Perú</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+      <p class="text-white/50 text-xs">© 2026 TalentHub. Todos los derechos reservados.</p>
+      <p class="text-white/50 text-xs">Proyecto desarrollado para el concurso Crea y Emprende 2026 del Ministerio de Educación del Perú.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Capa de datos compartida con la aplicacion (detecta si ya hay sesión activa) -->
+<script src="js/store.js"></script>
+
+<!-- Scripts propios del proyecto -->
+<script src="js/main.js"></script>
+<script src="js/form.js"></script>
+</body>
+</html>
